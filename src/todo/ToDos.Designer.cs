@@ -31,11 +31,6 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.issue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.project = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.todo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -43,6 +38,12 @@
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configurationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.onTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToDoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.issue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.project = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.todo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -66,56 +67,27 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ToDoID,
             this.date,
             this.issue,
             this.project,
             this.status,
             this.todo});
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToOrderColumns = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridView1.ShowEditingIcon = true;
             this.dataGridView1.Location = new System.Drawing.Point(12, 60);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(894, 574);
             this.dataGridView1.TabIndex = 2;
-            this.dataGridView1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridView1_KeyPressHandler);
-            // 
-            // date
-            // 
-            this.date.HeaderText = "Date and Time";
-            this.date.Name = "date";
-            this.date.Width = 110;
-            // 
-            // issue
-            // 
-            this.issue.HeaderText = "Issue #";
-            this.issue.Name = "issue";
-            this.issue.Width = 80;
-            // 
-            // project
-            // 
-            this.project.HeaderText = "Project";
-            this.project.Name = "project";
-            // 
-            // status
-            // 
-            this.status.HeaderText = "Status";
-            this.status.Name = "status";
-            this.status.Width = 90;
-            // 
-            // todo
-            // 
-            this.todo.HeaderText = "Todo Text";
-            this.todo.Name = "todo";
-            this.todo.Width = 450;
             // 
             // textBox1
             // 
@@ -175,7 +147,46 @@
             this.onTopToolStripMenuItem.Text = "✔ Always On Top";
             this.onTopToolStripMenuItem.Click += new System.EventHandler(this.onTopToolStripMenuItem_Click);
             // 
-            // Form1
+            // ToDoID
+            // 
+            this.ToDoID.Frozen = true;
+            this.ToDoID.HeaderText = "ToDo ID";
+            this.ToDoID.Name = "ToDoID";
+            this.ToDoID.ReadOnly = true;
+            this.ToDoID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ToDoID.Visible = false;
+            // 
+            // date
+            // 
+            this.date.HeaderText = "Date and Time";
+            this.date.Name = "date";
+            this.date.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.date.Width = 110;
+            // 
+            // issue
+            // 
+            this.issue.HeaderText = "Issue #";
+            this.issue.Name = "issue";
+            this.issue.Width = 80;
+            // 
+            // project
+            // 
+            this.project.HeaderText = "Project";
+            this.project.Name = "project";
+            // 
+            // status
+            // 
+            this.status.HeaderText = "Status";
+            this.status.Name = "status";
+            this.status.Width = 90;
+            // 
+            // todo
+            // 
+            this.todo.HeaderText = "Todo Text";
+            this.todo.Name = "todo";
+            this.todo.Width = 495;
+            // 
+            // ToDos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -193,7 +204,7 @@
             this.MaximumSize = new System.Drawing.Size(935, 685);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(935, 685);
-            this.Name = "Form1";
+            this.Name = "ToDos";
             this.ShowInTaskbar = false;
             this.Text = "ToDos";
             this.TopMost = true;
@@ -214,15 +225,16 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem configurationsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem onTopToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ToDoID;
         private System.Windows.Forms.DataGridViewTextBoxColumn date;
         private System.Windows.Forms.DataGridViewTextBoxColumn issue;
         private System.Windows.Forms.DataGridViewTextBoxColumn project;
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
         private System.Windows.Forms.DataGridViewTextBoxColumn todo;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem configurationsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem onTopToolStripMenuItem;
     }
 }
 

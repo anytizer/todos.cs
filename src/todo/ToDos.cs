@@ -55,7 +55,7 @@ namespace todo
                 // @xee http://stackoverflow.com/questions/10063770/how-to-add-a-new-row-to-datagridview-programmatically
                 // @see https://msdn.microsoft.com/en-us/library/system.windows.forms.datagridview.selectionchanged(v=vs.110).aspx
                 DataGridViewRow row = (DataGridViewRow)dataGridView1.RowTemplate.Clone();
-                row.CreateCells(dataGridView1, v.added_on, "", v.project_name, v.status_name, v.todo_text);
+                row.CreateCells(dataGridView1, v.todo_id, v.added_on, "", v.project_name, v.status_name, v.todo_text);
                 this.dataGridView1.Rows.Add(row);
 
                 // flickering
@@ -65,17 +65,35 @@ namespace todo
             this.ResumeLayout();
         }
 
-        private void dataGridView1_KeyPressHandler(object sender, KeyPressEventArgs e)
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (true)
+            // Delete Key - Delete Selected Row!
+            if (keyData == Keys.Delete)
             {
-                MessageBox.Show("Test");
+                // MessageBox.Show("Index: "+this.dataGridView1.SelectedRows[0].Index.ToString());
+                // MessageBox.Show("Index: " + this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString());
+
+                if (MessageBox.Show("Are you sure?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    // Do stuff after 'YES is clicked'
+                    todoer td = new todoer();
+                    if (td.delete(this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString()))
+                    {
+                        reload();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Did not delete.");
+                    }
+
+                }
+
+                //Guid todo = Guid.NewGuid();
+                //todoer td = new todoer();
+                //td.done(todo);
+                return true;
             }
-
-            Guid todo = Guid.NewGuid();
-
-            todoer td = new todoer();
-            td.done(todo);
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -105,10 +123,10 @@ namespace todo
         {
             ToolStripMenuItem menu = (sender as ToolStripMenuItem);
 
-            if (menu.Text!="")
+            if (menu.Text != "")
             {
                 this.TopMost = !this.TopMost;
-                if(this.TopMost)
+                if (this.TopMost)
                 {
                     menu.Text = "\u2714 Always On Top";
                 }

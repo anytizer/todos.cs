@@ -16,11 +16,10 @@ namespace database.mysql
     {
         public string todo_id { get; set; }
         public string project_id { get; set; }
-        public string status_id { get; set; }
-        public System.DateTime added_on { get; set; }
-        public string issue_number { get; set; }
         public string project_name { get; set; }
+        public string status_id { get; set; }
         public string status_name { get; set; }
+        public System.DateTime added_on { get; set; }
         public string todo_text { get; set; }
     }
 }

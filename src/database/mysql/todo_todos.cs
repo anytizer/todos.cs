@@ -20,6 +20,7 @@ namespace database.mysql
         public string issue_number { get; set; }
         public string todo_text { get; set; }
         public System.DateTime added_on { get; set; }
+        public string is_active { get; set; }
     
         public virtual todo_projects todo_projects { get; set; }
         public virtual todo_statuses todo_statuses { get; set; }

@@ -26,6 +26,7 @@ namespace libraries
             td.issue_number = "";
             td.todo_text = text;
             td.added_on = System.DateTime.Now;
+            td.is_active = "Y";
             te.todo_todos.Add(td);
 
             te.SaveChanges();
@@ -67,6 +68,22 @@ namespace libraries
             //ps.project_id = project_id;
             //te.todo_projects_statuses = new
             // todo_projects_statuses
+        }
+
+        public bool delete(string todo_id)
+        {
+            bool deleted = false;
+
+            todoEntities te = new todoEntities();
+            todo_todos todo = te.todo_todos.SingleOrDefault(x => x.todo_id == todo_id);
+            if(null != todo)
+            {
+                todo.is_active = "N";
+                deleted = true;
+            }
+
+            te.SaveChanges();
+            return deleted;
         }
     }
 }
