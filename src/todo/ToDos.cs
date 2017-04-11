@@ -85,6 +85,7 @@ namespace todo
 
         private void combo()
         {
+            this.SuspendLayout();
             this.comboBox1.Items.Clear();
 
             todoer t = new todoer();
@@ -96,6 +97,8 @@ namespace todo
                 pi.Value = p.project_name;
                 this.comboBox1.Items.Add(pi);
             };
+
+            this.ResumeLayout();
         }
 
         private void onTopToolStripMenuItem_Click(object sender, EventArgs e)
@@ -114,6 +117,7 @@ namespace todo
                     menu.Text = "Always On Top";
                 }
             }
+
         }
     }
 

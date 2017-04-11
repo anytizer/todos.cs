@@ -10,5 +10,10 @@ namespace libraries
     {
         public string Name;
         public string Value;
+
+        public override string ToString()
+        {
+            return this.Value;
+        }
     }
 }
