@@ -18,16 +18,17 @@ namespace libraries
 
             //MessageBox.Show("Load default");
             todoEntities te = new todoEntities();
-            database.mysql.todo_todos td = new database.mysql.todo_todos();
+            database.mysql.todo_todos todo = new database.mysql.todo_todos();
 
-            td.todo_id = Guid.NewGuid().ToString();
-            td.project_id = project_id.ToString();
-            td.status_id = status_id.ToString();
-            td.issue_number = "";
-            td.todo_text = text;
-            td.added_on = System.DateTime.Now;
-            td.is_active = "Y";
-            te.todo_todos.Add(td);
+            todo.todo_id = Guid.NewGuid().ToString();
+            todo.project_id = project_id.ToString();
+            todo.status_id = status_id.ToString();
+            todo.issue_number = "";
+            todo.todo_text = text;
+            todo.added_on = System.DateTime.Now;
+            todo.modified_on = System.DateTime.Now;
+            todo.is_active = "Y";
+            te.todo_todos.Add(todo);
 
             te.SaveChanges();
         }
@@ -60,17 +61,7 @@ namespace libraries
             return lp;
         }
 
-        public void done(Guid project_id)
-        {
-            todoEntities te = new todoEntities();
-            todo_projects_statuses ps = new todo_projects_statuses();
-            //ps.history_id = Guid.NewGuid();
-            //ps.project_id = project_id;
-            //te.todo_projects_statuses = new
-            // todo_projects_statuses
-        }
-
-        public bool delete(string todo_id)
+        public bool done(string todo_id, string status_id)
         {
             bool deleted = false;
 
@@ -78,8 +69,16 @@ namespace libraries
             todo_todos todo = te.todo_todos.SingleOrDefault(x => x.todo_id == todo_id);
             if(null != todo)
             {
+                todo.modified_on = System.DateTime.Now;
                 todo.is_active = "N";
                 deleted = true;
+
+                todo_projects_statuses history = new todo_projects_statuses();
+                history.history_id = Guid.NewGuid().ToString();
+                history.project_id = todo.project_id;
+                history.status_id = new Guid(status_id).ToString(); // temp deleted
+                history.status_on = System.DateTime.Now;
+                te.todo_projects_statuses.Add(history);
             }
 
             te.SaveChanges();

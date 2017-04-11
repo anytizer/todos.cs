@@ -27,7 +27,7 @@ namespace todo
             if (textBox1.Text.Length >= 1)
             {
                 todoer td = new todoer();
-                Guid project_id = new Guid("640BC432-CDFF-4B7D-8D04-C418CD989AA3");
+                Guid project_id = new Guid("640BC432-CDFF-4B7D-8D04-C418CD989AA3"); // @todo existing project
                 Guid status_id = new Guid("E827C910-5235-4C87-9F13-DAF960682D54");
                 td.add(project_id, status_id, textBox1.Text);
 
@@ -77,7 +77,9 @@ namespace todo
                 {
                     // Do stuff after 'YES is clicked'
                     todoer td = new todoer();
-                    if (td.delete(this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString()))
+                    string todo_id = this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString();
+                    string status_id = "E827C910-5235-4C87-9F13-DAF960682D59";
+                    if (td.done(todo_id, status_id))
                     {
                         reload();
                     }
@@ -136,6 +138,32 @@ namespace todo
                 }
             }
 
+        }
+
+        private void doneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            todoer td = new todoer();
+            string todo_id = this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString();
+            string status_id = "E827C910-5235-4C87-9F13-DAF960682D56";
+            if (td.done(todo_id, status_id))
+            {
+                reload();
+                //MessageBox.Show("Done");
+            }
+            else
+            {
+                MessageBox.Show("Did not delete.");
+            }
+        }
+
+        private void lowPriorityToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Low Priority");
+        }
+
+        private void doingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Doing");
         }
     }
 

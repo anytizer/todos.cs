@@ -41,6 +41,7 @@
           <Property Name="issue_number" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="todo_text" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="added_on" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="modified_on" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="is_active" Type="enum" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -169,6 +170,7 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           <Property Name="issue_number" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="todo_text" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="added_on" Type="DateTime" Nullable="false" />
+          <Property Name="modified_on" Type="DateTime" Nullable="false" />
           <Property Name="is_active" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="todo_projects" Relationship="todoModel.todo_todos_ibfk_1" FromRole="todo_todos" ToRole="todo_projects" />
           <NavigationProperty Name="todo_statuses" Relationship="todoModel.todo_todos_ibfk_2" FromRole="todo_todos" ToRole="todo_statuses" />
@@ -254,6 +256,7 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
             <EntityTypeMapping TypeName="todoModel.todo_todos">
               <MappingFragment StoreEntitySet="todo_todos">
                 <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="modified_on" ColumnName="modified_on" />
                 <ScalarProperty Name="added_on" ColumnName="added_on" />
                 <ScalarProperty Name="todo_text" ColumnName="todo_text" />
                 <ScalarProperty Name="issue_number" ColumnName="issue_number" />
