@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,6 +46,13 @@
   <ItemGroup>
     <Compile Include="ProjectItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="todoer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\database\database.csproj">
+      <Project>{7CB44C34-0271-4D9A-8810-94F31F9ED853}</Project>
+      <Name>database</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
