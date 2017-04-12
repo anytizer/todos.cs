@@ -41,9 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="defaults.cs" />
+    <Compile Include="defaults\statuses.cs" />
+    <Compile Include="defaults\projects.cs" />
     <Compile Include="ProjectItem.cs" />
-    <Compile Include="projects.cs" />
+    <Compile Include="projectsDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="todosDTO.cs" />
   </ItemGroup>

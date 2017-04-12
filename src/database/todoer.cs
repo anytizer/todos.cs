@@ -99,7 +99,7 @@ namespace database
             // First item with DELETE code name
             // return new Guid(this.te.todo_statuses.FirstOrDefault(x=>x.status_code== "DONE").status_code);
             //return "E827C910-5235-4C87-9F13-DAF960682D56";
-            return dtos.statuses.DONE;
+            return dtos.defaults.statuses.DONE;
         }
     }
 }

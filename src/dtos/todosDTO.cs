@@ -17,7 +17,6 @@ namespace dtos
         public System.DateTime modified_on { get; set; }
         public string is_active { get; set; }
 
-
         public string project_name;
         public string status_name;
     }

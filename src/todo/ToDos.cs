@@ -36,8 +36,8 @@ namespace todo
                 /**
                  * @todo Pickup from dropdown lists
                  */
-                Guid project_id = dtos.defaults.ProjectID;
-                Guid status_id = dtos.defaults.StatusID;
+                Guid project_id = dtos.defaults.projects.ProjectID;
+                Guid status_id = dtos.defaults.statuses.NEW;
                 //if (null != this.project_id)
                 //{
                 //    MessageBox.Show("Project: " + this.project_id);
@@ -177,7 +177,7 @@ namespace todo
 
             todoer td = new todoer();
             Guid todo_id = new Guid(this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString());
-            Guid status_id = dtos.statuses.LOWPRIORITY;
+            Guid status_id = dtos.defaults.statuses.LOWPRIORITY;
             if (td.done(todo_id, status_id))
             {
                 reload();
