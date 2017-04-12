@@ -53,6 +53,7 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(84, 29);
             this.comboBox1.Name = "comboBox1";
@@ -91,7 +92,6 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(894, 574);
             this.dataGridView1.TabIndex = 2;
-            this.dataGridView1.Columns[1].DefaultCellStyle.Format = "yyyy-MM-dd hh:mm:ss";
             // 
             // ToDoID
             // 
@@ -235,7 +235,6 @@
             this.Name = "ToDos";
             this.ShowInTaskbar = false;
             this.Text = "ToDos";
-            //this.TopMost = true;
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);

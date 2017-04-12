@@ -10,6 +10,8 @@ namespace todo
 {
     public partial class ToDos : Form
     {
+        private Guid? project_id = null;
+
         public ToDos()
         {
             InitializeComponent();
@@ -25,11 +27,21 @@ namespace todo
 
         private void button1_Click(object sender, EventArgs e)
         {
+            /**
+             * ToDo has something typed in
+             */
             if (textBox1.Text.Length >= 1)
             {
                 todoer td = new todoer();
-                Guid project_id = new Guid("640BC432-CDFF-4B7D-8D04-C418CD989AA3"); // @todo existing project
-                Guid status_id = new Guid("E827C910-5235-4C87-9F13-DAF960682D54");
+                /**
+                 * @todo Pickup from dropdown lists
+                 */
+                Guid project_id = dtos.defaults.ProjectID;
+                Guid status_id = dtos.defaults.StatusID;
+                //if (null != this.project_id)
+                //{
+                //    MessageBox.Show("Project: " + this.project_id);
+                //}
                 td.add(project_id, status_id, textBox1.Text);
 
                 reload();
@@ -51,6 +63,8 @@ namespace todo
 
             foreach (todosDTO v in lv)
             {
+
+
                 // add to grid
                 //dataGridView1.row
                 // @xee http://stackoverflow.com/questions/10063770/how-to-add-a-new-row-to-datagridview-programmatically
@@ -107,7 +121,6 @@ namespace todo
 
         private void combo()
         {
-            this.SuspendLayout();
             this.comboBox1.Items.Clear();
 
             todoer t = new todoer();
@@ -115,12 +128,14 @@ namespace todo
             foreach (projectsDTO p in lp)
             {
                 ProjectItem pi = new ProjectItem();
+                pi.ProjectID = new Guid(p.project_id);
                 pi.Name = p.project_name;
                 pi.Value = p.project_name;
                 this.comboBox1.Items.Add(pi);
             };
 
-            this.ResumeLayout();
+            //this.SuspendLayout();
+            //this.ResumeLayout();
         }
 
         private void onTopToolStripMenuItem_Click(object sender, EventArgs e)
@@ -136,7 +151,7 @@ namespace todo
                 }
                 else
                 {
-                    menu.Text = "Always On Top";
+                    menu.Text = "\u2000 Always On Top";
                 }
             }
         }
@@ -149,7 +164,6 @@ namespace todo
             if (td.done(todo_id, status_id))
             {
                 reload();
-                //MessageBox.Show("Done");
             }
             else
             {
@@ -159,7 +173,15 @@ namespace todo
 
         private void lowPriorityToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Low Priority");
+            //MessageBox.Show("Low Priority");
+
+            todoer td = new todoer();
+            Guid todo_id = new Guid(this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString());
+            Guid status_id = dtos.statuses.LOWPRIORITY;
+            if (td.done(todo_id, status_id))
+            {
+                reload();
+            }
         }
 
         private void doingToolStripMenuItem_Click(object sender, EventArgs e)

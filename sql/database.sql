@@ -67,5 +67,7 @@ INNER JOIN todo_projects p ON p.project_id = t.project_id
 INNER JOIN todo_statuses s ON s.status_id = t.status_id
 WHERE
 	t.is_active='Y'
+ORDER BY
+	s.status_priority
 ;
 -- SELECT * FROM v_todos;

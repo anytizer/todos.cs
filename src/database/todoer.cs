@@ -17,11 +17,9 @@ namespace database
 
         public void add(Guid project_id, Guid status_id, string text)
         {
-            string pid = new Guid("6F39DA75-EE09-44EA-80DB-23087F0C555D").ToString();
-
             database.mysql.todo_todos todo = new database.mysql.todo_todos();
             todo.todo_id = Guid.NewGuid().ToString();
-            todo.project_id = pid; //  project_id.ToString();
+            todo.project_id = project_id.ToString();
             todo.status_id = status_id.ToString();
             todo.issue_number = "";
             todo.todo_text = text;
@@ -87,7 +85,7 @@ namespace database
                 todo_projects_statuses history = new todo_projects_statuses();
                 history.history_id = Guid.NewGuid().ToString();
                 history.project_id = todo.project_id;
-                history.status_id = status_id.ToString(); //  new Guid(status_id).ToString(); // temp deleted
+                history.status_id = status_id.ToString(); // new Guid(status_id).ToString(); // temp deleted
                 history.modified_on = System.DateTime.Now;
                 te.todo_projects_statuses.Add(history);
             }
@@ -99,8 +97,9 @@ namespace database
         public Guid delete_status()
         {
             // First item with DELETE code name
-            return new Guid(this.te.todo_statuses.FirstOrDefault(x=>x.status_code=="DELETE").status_code);
+            // return new Guid(this.te.todo_statuses.FirstOrDefault(x=>x.status_code== "DONE").status_code);
             //return "E827C910-5235-4C87-9F13-DAF960682D56";
+            return dtos.statuses.DONE;
         }
     }
 }

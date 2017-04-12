@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace libraries
+namespace dtos
 {
     /**
      * Generic purpose name/value pair
@@ -12,6 +12,7 @@ namespace libraries
      */
     public class ProjectItem
     {
+        public Guid ProjectID;
         public string Name;
         public string Value;
 
