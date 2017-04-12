@@ -41,6 +41,7 @@
           <Property Name="issue_number" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="todo_text" Type="text" Nullable="false" />
           <Property Name="added_on" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="modified_on" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="is_active" Type="enum" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -154,21 +155,21 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           <EntitySet Name="todo_statuses" EntityType="todoModel.todo_statuses" />
           <EntitySet Name="todo_todos" EntityType="todoModel.todo_todos" />
           <EntitySet Name="v_todos" EntityType="todoModel.v_todos" />
-          <AssociationSet Name="todo_todos_ibfk_1" Association="todoModel.todo_todos_ibfk_1">
-            <End Role="todo_projects" EntitySet="todo_projects" />
-            <End Role="todo_todos" EntitySet="todo_todos" />
-          </AssociationSet>
-          <AssociationSet Name="todo_todos_ibfk_2" Association="todoModel.todo_todos_ibfk_2">
-            <End Role="todo_statuses" EntitySet="todo_statuses" />
-            <End Role="todo_todos" EntitySet="todo_todos" />
-          </AssociationSet>
           <AssociationSet Name="todo_projects_statuses_ibfk_1" Association="todoModel.todo_projects_statuses_ibfk_1">
             <End Role="todo_projects" EntitySet="todo_projects" />
             <End Role="todo_projects_statuses" EntitySet="todo_projects_statuses" />
           </AssociationSet>
+          <AssociationSet Name="todo_todos_ibfk_1" Association="todoModel.todo_todos_ibfk_1">
+            <End Role="todo_projects" EntitySet="todo_projects" />
+            <End Role="todo_todos" EntitySet="todo_todos" />
+          </AssociationSet>
           <AssociationSet Name="todo_projects_statuses_ibfk_2" Association="todoModel.todo_projects_statuses_ibfk_2">
             <End Role="todo_statuses" EntitySet="todo_statuses" />
             <End Role="todo_projects_statuses" EntitySet="todo_projects_statuses" />
+          </AssociationSet>
+          <AssociationSet Name="todo_todos_ibfk_2" Association="todoModel.todo_todos_ibfk_2">
+            <End Role="todo_statuses" EntitySet="todo_statuses" />
+            <End Role="todo_todos" EntitySet="todo_todos" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="todo_projects">
@@ -178,8 +179,8 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           <Property Name="project_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="project_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="is_active" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="todo_todos" Relationship="todoModel.todo_todos_ibfk_1" FromRole="todo_projects" ToRole="todo_todos" />
           <NavigationProperty Name="todo_projects_statuses" Relationship="todoModel.todo_projects_statuses_ibfk_1" FromRole="todo_projects" ToRole="todo_projects_statuses" />
+          <NavigationProperty Name="todo_todos" Relationship="todoModel.todo_todos_ibfk_1" FromRole="todo_projects" ToRole="todo_todos" />
         </EntityType>
         <EntityType Name="todo_projects_statuses">
           <Key>
@@ -200,8 +201,8 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           <Property Name="status_code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="status_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="status_priority" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="todo_todos" Relationship="todoModel.todo_todos_ibfk_2" FromRole="todo_statuses" ToRole="todo_todos" />
           <NavigationProperty Name="todo_projects_statuses" Relationship="todoModel.todo_projects_statuses_ibfk_2" FromRole="todo_statuses" ToRole="todo_projects_statuses" />
+          <NavigationProperty Name="todo_todos" Relationship="todoModel.todo_todos_ibfk_2" FromRole="todo_statuses" ToRole="todo_todos" />
         </EntityType>
         <EntityType Name="todo_todos">
           <Key>
@@ -213,6 +214,7 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           <Property Name="issue_number" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="todo_text" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="added_on" Type="DateTime" Nullable="false" />
+          <Property Name="modified_on" Type="DateTime" Nullable="false" />
           <Property Name="is_active" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="todo_projects" Relationship="todoModel.todo_todos_ibfk_1" FromRole="todo_todos" ToRole="todo_projects" />
           <NavigationProperty Name="todo_statuses" Relationship="todoModel.todo_todos_ibfk_2" FromRole="todo_todos" ToRole="todo_statuses" />
@@ -235,30 +237,6 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           <Property Name="added_on" Type="DateTime" Nullable="false" />
           <Property Name="todo_text" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
         </EntityType>
-        <Association Name="todo_todos_ibfk_1">
-          <End Type="todoModel.todo_projects" Role="todo_projects" Multiplicity="1" />
-          <End Type="todoModel.todo_todos" Role="todo_todos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="todo_projects">
-              <PropertyRef Name="project_id" />
-            </Principal>
-            <Dependent Role="todo_todos">
-              <PropertyRef Name="project_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="todo_todos_ibfk_2">
-          <End Type="todoModel.todo_statuses" Role="todo_statuses" Multiplicity="1" />
-          <End Type="todoModel.todo_todos" Role="todo_todos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="todo_statuses">
-              <PropertyRef Name="status_id" />
-            </Principal>
-            <Dependent Role="todo_todos">
-              <PropertyRef Name="status_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="todo_projects_statuses_ibfk_1">
           <End Type="todoModel.todo_projects" Role="todo_projects" Multiplicity="1" />
           <End Type="todoModel.todo_projects_statuses" Role="todo_projects_statuses" Multiplicity="*" />
@@ -271,6 +249,18 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="todo_todos_ibfk_1">
+          <End Type="todoModel.todo_projects" Role="todo_projects" Multiplicity="1" />
+          <End Type="todoModel.todo_todos" Role="todo_todos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="todo_projects">
+              <PropertyRef Name="project_id" />
+            </Principal>
+            <Dependent Role="todo_todos">
+              <PropertyRef Name="project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="todo_projects_statuses_ibfk_2">
           <End Type="todoModel.todo_statuses" Role="todo_statuses" Multiplicity="1" />
           <End Type="todoModel.todo_projects_statuses" Role="todo_projects_statuses" Multiplicity="*" />
@@ -279,6 +269,18 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
               <PropertyRef Name="status_id" />
             </Principal>
             <Dependent Role="todo_projects_statuses">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="todo_todos_ibfk_2">
+          <End Type="todoModel.todo_statuses" Role="todo_statuses" Multiplicity="1" />
+          <End Type="todoModel.todo_todos" Role="todo_todos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="todo_statuses">
+              <PropertyRef Name="status_id" />
+            </Principal>
+            <Dependent Role="todo_todos">
               <PropertyRef Name="status_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -322,6 +324,7 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
             <EntityTypeMapping TypeName="todoModel.todo_todos">
               <MappingFragment StoreEntitySet="todo_todos">
                 <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="modified_on" ColumnName="modified_on" />
                 <ScalarProperty Name="added_on" ColumnName="added_on" />
                 <ScalarProperty Name="todo_text" ColumnName="todo_text" />
                 <ScalarProperty Name="issue_number" ColumnName="issue_number" />

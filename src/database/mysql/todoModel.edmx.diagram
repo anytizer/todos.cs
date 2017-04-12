@@ -5,15 +5,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="5be25ba212a3415180f870d49e86379e" Name="Diagram1">
-        <EntityTypeShape EntityType="todoModel.todo_projects" Width="1.75" PointX="4.625" PointY="4" />
-        <EntityTypeShape EntityType="todoModel.todo_projects_statuses" Width="2" PointX="1.75" PointY="3.875" />
-        <EntityTypeShape EntityType="todoModel.todo_statuses" Width="1.625" PointX="2" PointY="0.5" />
-        <EntityTypeShape EntityType="todoModel.todo_todos" Width="1.75" PointX="4.5" PointY="0.5" />
-        <EntityTypeShape EntityType="todoModel.v_todos" Width="2" PointX="7.125" PointY="3.5" />
-        <AssociationConnector Association="todoModel.todo_todos_ibfk_1" />
-        <AssociationConnector Association="todoModel.todo_todos_ibfk_2" />
+        <EntityTypeShape EntityType="todoModel.todo_projects" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="todoModel.todo_projects_statuses" Width="1.5" PointX="3" PointY="3.625" />
+        <EntityTypeShape EntityType="todoModel.todo_statuses" Width="1.5" PointX="0.75" PointY="3.625" />
+        <EntityTypeShape EntityType="todoModel.todo_todos" Width="1.5" PointX="6" PointY="3.25" />
+        <EntityTypeShape EntityType="todoModel.v_todos" Width="1.5" PointX="0.75" PointY="7.5" />
         <AssociationConnector Association="todoModel.todo_projects_statuses_ibfk_1" />
+        <AssociationConnector Association="todoModel.todo_todos_ibfk_1" />
         <AssociationConnector Association="todoModel.todo_projects_statuses_ibfk_2" />
+        <AssociationConnector Association="todoModel.todo_todos_ibfk_2" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

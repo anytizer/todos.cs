@@ -16,8 +16,8 @@ namespace database.mysql
     {
         public todo_statuses()
         {
-            this.todo_todos = new HashSet<todo_todos>();
             this.todo_projects_statuses = new HashSet<todo_projects_statuses>();
+            this.todo_todos = new HashSet<todo_todos>();
         }
     
         public string status_id { get; set; }
@@ -25,7 +25,7 @@ namespace database.mysql
         public string status_name { get; set; }
         public int status_priority { get; set; }
     
-        public virtual ICollection<todo_todos> todo_todos { get; set; }
         public virtual ICollection<todo_projects_statuses> todo_projects_statuses { get; set; }
+        public virtual ICollection<todo_todos> todo_todos { get; set; }
     }
 }

@@ -30,6 +30,7 @@ CREATE TABLE todo_todos (
   issue_number VARCHAR(255) NOT NULL DEFAULT '',
   todo_text TEXT NOT NULL,
   added_on DATETIME NOT NULL,
+  modified_on DATETIME NOT NULL,
   is_active ENUM('N','Y') NOT NULL DEFAULT 'N',
   PRIMARY KEY (todo_id),
   KEY project_id (project_id),
