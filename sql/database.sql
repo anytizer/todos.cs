@@ -89,3 +89,12 @@ INNER JOIN todo_statuses s ON s.status_id = t.status_id
 WHERE
 	t.is_active='Y'
 ;
+
+SHOW CREATE TABLE todo_projects_statuses;
+CREATE TABLE `todo_projects_statuses` (
+  `history_id` VARCHAR(255) NOT NULL DEFAULT '',
+  `project_id` VARCHAR(255) NOT NULL DEFAULT '',
+  `status_id` VARCHAR(255) NOT NULL DEFAULT '',
+  `status_on` DATETIME NOT NULL,
+  PRIMARY KEY (`history_id`)
+);
