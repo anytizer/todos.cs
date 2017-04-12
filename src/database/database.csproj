@@ -96,7 +96,12 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\dtos\dtos.csproj">
+      <Project>{B0A21E12-1844-4A03-BBDD-1E4869404A7A}</Project>
+      <Name>dtos</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="mysql\todoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

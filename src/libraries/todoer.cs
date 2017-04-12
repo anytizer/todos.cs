@@ -12,8 +12,10 @@ namespace libraries
         public void add(Guid project_id, Guid status_id, string text) { }
         public List<projectsDTO> projects()
         {
-            List<projectsDTO> projects = new List<projectsDTO>();
-            return projects;
+            database.todoer td = new database.todoer();
+            return td.projects();
+            
+            
         }
         public List<todosDTO> todos()
         {

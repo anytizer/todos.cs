@@ -1,4 +1,5 @@
 ﻿using database.mysql;
+using dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,32 +26,44 @@ namespace database
             te.SaveChanges();
         }
 
-        public List<v_todos> todos()
+        public List<todosDTO> todos()
         {
             // @todo read from api, instead of sql
 
-            List<v_todos> lv = new List<v_todos>();
+            List<todosDTO> lv = new List<todosDTO>();
             todosEntities te = new todosEntities();
             foreach (v_todos t in te.v_todos.OrderByDescending(x => x.added_on))
             {
-                lv.Add(t);
+                todosDTO todo = new todosDTO();
+
+                todo.project_id = t.project_id;
+                todo.project_name = t.project_name;
+                todo.status_id = t.status_id;
+                todo.status_name = t.status_name;
+                todo.todo_id = t.todo_id;
+                todo.todo_text = t.todo_text;
+
+                lv.Add(todo);
             }
 
             return lv;
         }
 
-        public List<todo_projects> projects()
+        public List<projectsDTO> projects()
         {
             // @todo read from api, instead of sql
-
-            List<todo_projects> lp = new List<todo_projects>();
+            List<projectsDTO> projects = new List<projectsDTO>();
+            
             todosEntities te = new todosEntities();
             foreach (todo_projects p in te.todo_projects)
             {
-                lp.Add(p);
+                projectsDTO pd = new projectsDTO();
+                pd.project_id = p.project_id;
+                pd.project_name = p.project_name;
+                projects.Add(pd);
             }
 
-            return lp;
+            return projects;
         }
 
         public bool done(string todo_id, string status_id)
