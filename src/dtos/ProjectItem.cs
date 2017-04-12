@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace libraries
 {
+    /**
+     * Generic purpose name/value pair
+     * Known usage: Combo Box Dropdown
+     */
     public class ProjectItem
     {
         public string Name;

@@ -13,10 +13,11 @@ namespace database.mysql
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class todoEntities : DbContext
+    public partial class todosEntities : DbContext
     {
-        public todoEntities()
-            : base("name=todoEntities")
+        public todosEntities()
+            : base("name=todosEntities")
+           // : base("server=localhost;user id=root;database=awesome_todos")
         {
         }
     

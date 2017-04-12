@@ -1,4 +1,5 @@
 ﻿using database.mysql;
+using dtos;
 using libraries;
 using System;
 using System.Collections.Generic;
@@ -42,13 +43,14 @@ namespace todo
             // row level selection
 
             this.SuspendLayout();
+            this.dataGridView1.Rows.Clear();
 
             textBox1.Text = "";
             todoer t = new todoer();
-            List<v_todos> lv = t.todos();
+            List<todosDTO> lv = t.todos();
 
-            this.dataGridView1.Rows.Clear();
-            foreach (v_todos v in lv)
+            
+            foreach (todosDTO v in lv)
             {
                 // add to grid
                 //dataGridView1.row
@@ -109,8 +111,8 @@ namespace todo
             this.comboBox1.Items.Clear();
 
             todoer t = new todoer();
-            List<todo_projects> lp = t.projects();
-            foreach (todo_projects p in lp)
+            List<projectsDTO> lp = t.projects();
+            foreach (projectsDTO p in lp)
             {
                 ProjectItem pi = new ProjectItem();
                 pi.Name = p.project_name;

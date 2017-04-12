@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="todoModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="todosModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="todo_projects">
           <Key>
             <PropertyRef Name="project_id" />
@@ -112,7 +112,7 @@ warning 6002: The table/view 'def.awesome_todos.v_todos' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="todoModelStoreContainer">
+        <EntityContainer Name="todosModelStoreContainer">
           <EntitySet Name="todo_projects" EntityType="Self.todo_projects" Schema="awesome_todos" store:Type="Tables" />
           <EntitySet Name="todo_projects_statuses" EntityType="Self.todo_projects_statuses" Schema="awesome_todos" store:Type="Tables" />
           <EntitySet Name="todo_statuses" EntityType="Self.todo_statuses" Schema="awesome_todos" store:Type="Tables" />
@@ -145,79 +145,57 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
             <End Role="todo_todos" EntitySet="todo_todos" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="todoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="todoEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="todo_projects" EntityType="todoModel.todo_projects" />
-          <EntitySet Name="todo_projects_statuses" EntityType="todoModel.todo_projects_statuses" />
-          <EntitySet Name="todo_statuses" EntityType="todoModel.todo_statuses" />
-          <EntitySet Name="todo_todos" EntityType="todoModel.todo_todos" />
-          <EntitySet Name="v_todos" EntityType="todoModel.v_todos" />
-          <AssociationSet Name="todo_projects_statuses_ibfk_1" Association="todoModel.todo_projects_statuses_ibfk_1">
-            <End Role="todo_projects" EntitySet="todo_projects" />
-            <End Role="todo_projects_statuses" EntitySet="todo_projects_statuses" />
-          </AssociationSet>
-          <AssociationSet Name="todo_todos_ibfk_1" Association="todoModel.todo_todos_ibfk_1">
-            <End Role="todo_projects" EntitySet="todo_projects" />
-            <End Role="todo_todos" EntitySet="todo_todos" />
-          </AssociationSet>
-          <AssociationSet Name="todo_projects_statuses_ibfk_2" Association="todoModel.todo_projects_statuses_ibfk_2">
-            <End Role="todo_statuses" EntitySet="todo_statuses" />
-            <End Role="todo_projects_statuses" EntitySet="todo_projects_statuses" />
-          </AssociationSet>
-          <AssociationSet Name="todo_todos_ibfk_2" Association="todoModel.todo_todos_ibfk_2">
-            <End Role="todo_statuses" EntitySet="todo_statuses" />
-            <End Role="todo_todos" EntitySet="todo_todos" />
-          </AssociationSet>
-        </EntityContainer>
+      <Schema Namespace="todosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="todo_projects">
           <Key>
             <PropertyRef Name="project_id" />
           </Key>
-          <Property Name="project_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="project_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="project_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="project_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="is_active" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="todo_projects_statuses" Relationship="todoModel.todo_projects_statuses_ibfk_1" FromRole="todo_projects" ToRole="todo_projects_statuses" />
-          <NavigationProperty Name="todo_todos" Relationship="todoModel.todo_todos_ibfk_1" FromRole="todo_projects" ToRole="todo_todos" />
+          <NavigationProperty Name="todo_projects_statuses" Relationship="Self.todo_projects_statuses_ibfk_1" FromRole="todo_projects" ToRole="todo_projects_statuses" />
+          <NavigationProperty Name="todo_todos" Relationship="Self.todo_todos_ibfk_1" FromRole="todo_projects" ToRole="todo_todos" />
         </EntityType>
         <EntityType Name="todo_projects_statuses">
           <Key>
             <PropertyRef Name="history_id" />
           </Key>
-          <Property Name="history_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="project_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="status_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="history_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="project_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="status_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="status_on" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="todo_projects" Relationship="todoModel.todo_projects_statuses_ibfk_1" FromRole="todo_projects_statuses" ToRole="todo_projects" />
-          <NavigationProperty Name="todo_statuses" Relationship="todoModel.todo_projects_statuses_ibfk_2" FromRole="todo_projects_statuses" ToRole="todo_statuses" />
+          <NavigationProperty Name="todo_projects" Relationship="Self.todo_projects_statuses_ibfk_1" FromRole="todo_projects_statuses" ToRole="todo_projects" />
+          <NavigationProperty Name="todo_statuses" Relationship="Self.todo_projects_statuses_ibfk_2" FromRole="todo_projects_statuses" ToRole="todo_statuses" />
         </EntityType>
         <EntityType Name="todo_statuses">
           <Key>
             <PropertyRef Name="status_id" />
           </Key>
-          <Property Name="status_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="status_code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="status_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="status_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="status_code" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="status_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="status_priority" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="todo_projects_statuses" Relationship="todoModel.todo_projects_statuses_ibfk_2" FromRole="todo_statuses" ToRole="todo_projects_statuses" />
-          <NavigationProperty Name="todo_todos" Relationship="todoModel.todo_todos_ibfk_2" FromRole="todo_statuses" ToRole="todo_todos" />
+          <NavigationProperty Name="todo_projects_statuses" Relationship="Self.todo_projects_statuses_ibfk_2" FromRole="todo_statuses" ToRole="todo_projects_statuses" />
+          <NavigationProperty Name="todo_todos" Relationship="Self.todo_todos_ibfk_2" FromRole="todo_statuses" ToRole="todo_todos" />
         </EntityType>
         <EntityType Name="todo_todos">
           <Key>
             <PropertyRef Name="todo_id" />
           </Key>
-          <Property Name="todo_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="project_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="status_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="issue_number" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="todo_text" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="todo_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="project_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="status_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="issue_number" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="todo_text" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="added_on" Type="DateTime" Nullable="false" />
           <Property Name="modified_on" Type="DateTime" Nullable="false" />
-          <Property Name="is_active" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="todo_projects" Relationship="todoModel.todo_todos_ibfk_1" FromRole="todo_todos" ToRole="todo_projects" />
-          <NavigationProperty Name="todo_statuses" Relationship="todoModel.todo_todos_ibfk_2" FromRole="todo_todos" ToRole="todo_statuses" />
+          <Property Name="is_active" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="todo_projects" Relationship="Self.todo_todos_ibfk_1" FromRole="todo_todos" ToRole="todo_projects" />
+          <NavigationProperty Name="todo_statuses" Relationship="Self.todo_todos_ibfk_2" FromRole="todo_todos" ToRole="todo_statuses" />
         </EntityType>
         <EntityType Name="v_todos">
           <Key>
@@ -229,17 +207,17 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
             <PropertyRef Name="added_on" />
             <PropertyRef Name="todo_text" />
           </Key>
-          <Property Name="todo_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="project_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="project_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="status_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="status_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="todo_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="project_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="project_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="status_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="status_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="added_on" Type="DateTime" Nullable="false" />
-          <Property Name="todo_text" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="todo_text" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <Association Name="todo_projects_statuses_ibfk_1">
-          <End Type="todoModel.todo_projects" Role="todo_projects" Multiplicity="1" />
-          <End Type="todoModel.todo_projects_statuses" Role="todo_projects_statuses" Multiplicity="*" />
+          <End Role="todo_projects" Type="Self.todo_projects" Multiplicity="1" />
+          <End Role="todo_projects_statuses" Type="Self.todo_projects_statuses" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="todo_projects">
               <PropertyRef Name="project_id" />
@@ -250,8 +228,8 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="todo_todos_ibfk_1">
-          <End Type="todoModel.todo_projects" Role="todo_projects" Multiplicity="1" />
-          <End Type="todoModel.todo_todos" Role="todo_todos" Multiplicity="*" />
+          <End Role="todo_projects" Type="Self.todo_projects" Multiplicity="1" />
+          <End Role="todo_todos" Type="Self.todo_todos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="todo_projects">
               <PropertyRef Name="project_id" />
@@ -262,8 +240,8 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="todo_projects_statuses_ibfk_2">
-          <End Type="todoModel.todo_statuses" Role="todo_statuses" Multiplicity="1" />
-          <End Type="todoModel.todo_projects_statuses" Role="todo_projects_statuses" Multiplicity="*" />
+          <End Role="todo_statuses" Type="Self.todo_statuses" Multiplicity="1" />
+          <End Role="todo_projects_statuses" Type="Self.todo_projects_statuses" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="todo_statuses">
               <PropertyRef Name="status_id" />
@@ -274,8 +252,8 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="todo_todos_ibfk_2">
-          <End Type="todoModel.todo_statuses" Role="todo_statuses" Multiplicity="1" />
-          <End Type="todoModel.todo_todos" Role="todo_todos" Multiplicity="*" />
+          <End Role="todo_statuses" Type="Self.todo_statuses" Multiplicity="1" />
+          <End Role="todo_todos" Type="Self.todo_todos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="todo_statuses">
               <PropertyRef Name="status_id" />
@@ -285,65 +263,88 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+        <EntityContainer Name="todosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="todo_projects" EntityType="Self.todo_projects" />
+          <EntitySet Name="todo_projects_statuses" EntityType="Self.todo_projects_statuses" />
+          <EntitySet Name="todo_statuses" EntityType="Self.todo_statuses" />
+          <EntitySet Name="todo_todos" EntityType="Self.todo_todos" />
+          <EntitySet Name="v_todos" EntityType="Self.v_todos" />
+          <AssociationSet Name="todo_projects_statuses_ibfk_1" Association="Self.todo_projects_statuses_ibfk_1">
+            <End Role="todo_projects" EntitySet="todo_projects" />
+            <End Role="todo_projects_statuses" EntitySet="todo_projects_statuses" />
+          </AssociationSet>
+          <AssociationSet Name="todo_todos_ibfk_1" Association="Self.todo_todos_ibfk_1">
+            <End Role="todo_projects" EntitySet="todo_projects" />
+            <End Role="todo_todos" EntitySet="todo_todos" />
+          </AssociationSet>
+          <AssociationSet Name="todo_projects_statuses_ibfk_2" Association="Self.todo_projects_statuses_ibfk_2">
+            <End Role="todo_statuses" EntitySet="todo_statuses" />
+            <End Role="todo_projects_statuses" EntitySet="todo_projects_statuses" />
+          </AssociationSet>
+          <AssociationSet Name="todo_todos_ibfk_2" Association="Self.todo_todos_ibfk_2">
+            <End Role="todo_statuses" EntitySet="todo_statuses" />
+            <End Role="todo_todos" EntitySet="todo_todos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="todoModelStoreContainer" CdmEntityContainer="todoEntities">
+        <EntityContainerMapping StorageEntityContainer="todosModelStoreContainer" CdmEntityContainer="todosEntities">
           <EntitySetMapping Name="todo_projects">
-            <EntityTypeMapping TypeName="todoModel.todo_projects">
+            <EntityTypeMapping TypeName="todosModel.todo_projects">
               <MappingFragment StoreEntitySet="todo_projects">
-                <ScalarProperty Name="is_active" ColumnName="is_active" />
-                <ScalarProperty Name="project_name" ColumnName="project_name" />
                 <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="project_name" ColumnName="project_name" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="todo_projects_statuses">
-            <EntityTypeMapping TypeName="todoModel.todo_projects_statuses">
+            <EntityTypeMapping TypeName="todosModel.todo_projects_statuses">
               <MappingFragment StoreEntitySet="todo_projects_statuses">
-                <ScalarProperty Name="status_on" ColumnName="status_on" />
-                <ScalarProperty Name="status_id" ColumnName="status_id" />
-                <ScalarProperty Name="project_id" ColumnName="project_id" />
                 <ScalarProperty Name="history_id" ColumnName="history_id" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="status_on" ColumnName="status_on" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="todo_statuses">
-            <EntityTypeMapping TypeName="todoModel.todo_statuses">
+            <EntityTypeMapping TypeName="todosModel.todo_statuses">
               <MappingFragment StoreEntitySet="todo_statuses">
-                <ScalarProperty Name="status_priority" ColumnName="status_priority" />
-                <ScalarProperty Name="status_name" ColumnName="status_name" />
-                <ScalarProperty Name="status_code" ColumnName="status_code" />
                 <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="status_code" ColumnName="status_code" />
+                <ScalarProperty Name="status_name" ColumnName="status_name" />
+                <ScalarProperty Name="status_priority" ColumnName="status_priority" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="todo_todos">
-            <EntityTypeMapping TypeName="todoModel.todo_todos">
+            <EntityTypeMapping TypeName="todosModel.todo_todos">
               <MappingFragment StoreEntitySet="todo_todos">
-                <ScalarProperty Name="is_active" ColumnName="is_active" />
-                <ScalarProperty Name="modified_on" ColumnName="modified_on" />
-                <ScalarProperty Name="added_on" ColumnName="added_on" />
-                <ScalarProperty Name="todo_text" ColumnName="todo_text" />
-                <ScalarProperty Name="issue_number" ColumnName="issue_number" />
-                <ScalarProperty Name="status_id" ColumnName="status_id" />
-                <ScalarProperty Name="project_id" ColumnName="project_id" />
                 <ScalarProperty Name="todo_id" ColumnName="todo_id" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="issue_number" ColumnName="issue_number" />
+                <ScalarProperty Name="todo_text" ColumnName="todo_text" />
+                <ScalarProperty Name="added_on" ColumnName="added_on" />
+                <ScalarProperty Name="modified_on" ColumnName="modified_on" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="v_todos">
-            <EntityTypeMapping TypeName="todoModel.v_todos">
+            <EntityTypeMapping TypeName="todosModel.v_todos">
               <MappingFragment StoreEntitySet="v_todos">
-                <ScalarProperty Name="todo_text" ColumnName="todo_text" />
-                <ScalarProperty Name="added_on" ColumnName="added_on" />
-                <ScalarProperty Name="status_name" ColumnName="status_name" />
-                <ScalarProperty Name="status_id" ColumnName="status_id" />
-                <ScalarProperty Name="project_name" ColumnName="project_name" />
-                <ScalarProperty Name="project_id" ColumnName="project_id" />
                 <ScalarProperty Name="todo_id" ColumnName="todo_id" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="project_name" ColumnName="project_name" />
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="status_name" ColumnName="status_name" />
+                <ScalarProperty Name="added_on" ColumnName="added_on" />
+                <ScalarProperty Name="todo_text" ColumnName="todo_text" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
