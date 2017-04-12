@@ -53,15 +53,3 @@ WHERE
 	t.is_active='Y'
 ;
 -- SELECT * FROM v_todos;
-
--- SHOW CREATE TABLE todo_projects_statuses;
-DROP TABLE IF EXISTS todo_projects_statuses;
-CREATE TABLE todo_projects_statuses (
-  history_id VARCHAR(255) NOT NULL DEFAULT '',
-  project_id VARCHAR(255) NOT NULL DEFAULT '',
-  status_id VARCHAR(255) NOT NULL DEFAULT '',
-  status_on DATETIME NOT NULL,
-  PRIMARY KEY (history_id),
-  FOREIGN KEY (project_id) REFERENCES todo_projects (project_id),
-  FOREIGN KEY (status_id) REFERENCES todo_statuses (status_id)
-);
