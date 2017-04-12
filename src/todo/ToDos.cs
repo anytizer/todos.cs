@@ -49,7 +49,6 @@ namespace todo
             todoer t = new todoer();
             List<todosDTO> lv = t.todos();
 
-            
             foreach (todosDTO v in lv)
             {
                 // add to grid
@@ -79,8 +78,9 @@ namespace todo
                 {
                     // Do stuff after 'YES is clicked'
                     todoer td = new todoer();
-                    string todo_id = this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString();
-                    string status_id = "E827C910-5235-4C87-9F13-DAF960682D59";
+                    // @todo There may not be a selection or wrong entry pre-selected
+                    Guid todo_id = new Guid(this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString());
+                    Guid status_id = new Guid("E827C910-5235-4C87-9F13-DAF960682D59");
                     if (td.done(todo_id, status_id))
                     {
                         reload();
@@ -139,15 +139,13 @@ namespace todo
                     menu.Text = "Always On Top";
                 }
             }
-
         }
-
 
         private void doneToolStripMenuItem_Click(object sender, EventArgs e)
         {
             todoer td = new todoer();
-            string todo_id = this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString();
-            string status_id = td.delete_status();
+            Guid todo_id = new Guid(this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString());
+            Guid status_id = td.delete_status();
             if (td.done(todo_id, status_id))
             {
                 reload();
@@ -155,7 +153,7 @@ namespace todo
             }
             else
             {
-                MessageBox.Show("Did not delete.");
+                MessageBox.Show("Error: Could NOT delete.");
             }
         }
 
@@ -169,5 +167,4 @@ namespace todo
             MessageBox.Show("Doing");
         }
     }
-
 }

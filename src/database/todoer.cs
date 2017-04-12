@@ -72,11 +72,11 @@ namespace database
             return projects;
         }
 
-        public bool done(string todo_id, string status_id)
+        public bool done(Guid todo_id, Guid status_id)
         {
             bool deleted = false;
             
-            todo_todos todo = te.todo_todos.SingleOrDefault(x => x.todo_id == todo_id);
+            todo_todos todo = te.todo_todos.SingleOrDefault(x => x.todo_id == todo_id.ToString());
             if(null != todo)
             {
                 todo.modified_on = System.DateTime.Now;
@@ -86,13 +86,20 @@ namespace database
                 todo_projects_statuses history = new todo_projects_statuses();
                 history.history_id = Guid.NewGuid().ToString();
                 history.project_id = todo.project_id;
-                history.status_id = new Guid(status_id).ToString(); // temp deleted
+                history.status_id = status_id.ToString(); //  new Guid(status_id).ToString(); // temp deleted
                 history.modified_on = System.DateTime.Now;
                 te.todo_projects_statuses.Add(history);
             }
 
             te.SaveChanges();
             return deleted;
+        }
+
+        public Guid delete_status()
+        {
+            // First item with DELETE code name
+            return new Guid(this.te.todo_statuses.FirstOrDefault(x=>x.status_code=="DELETE").status_code);
+            //return "E827C910-5235-4C87-9F13-DAF960682D56";
         }
     }
 }

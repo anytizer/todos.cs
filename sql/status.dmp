@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.19-MariaDB, for Win32 (AMD64)
+-- MySQL dump 10.16  Distrib 10.1.13-MariaDB, for Win32 (AMD64)
 --
--- Host: localhost    Database: localhost
+-- Host: localhost    Database: awesome_todos
 -- ------------------------------------------------------
--- Server version	10.1.19-MariaDB
+-- Server version	10.1.13-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,10 +23,11 @@ DROP TABLE IF EXISTS `todo_statuses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `todo_statuses` (
-  `status_id` varchar(255) NOT NULL DEFAULT '' COMMENT 'GUID',
-  `status_code` varchar(255) NOT NULL DEFAULT '' COMMENT 'Status Code',
-  `status_name` varchar(255) NOT NULL DEFAULT '' COMMENT 'Status Name',
-  `status_priority` int(10) NOT NULL DEFAULT '0' COMMENT 'Sorting Priority',
+  `status_id` varchar(255) NOT NULL DEFAULT '' COMMENT 'GUID Value',
+  `status_code` varchar(255) NOT NULL DEFAULT '' COMMENT 'Status Code (Used Programatically)',
+  `status_shortname` varchar(255) NOT NULL DEFAULT '' COMMENT 'Short Name',
+  `status_name` varchar(255) NOT NULL DEFAULT '' COMMENT 'Status Full Name',
+  `status_priority` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Sorting Priority',
   PRIMARY KEY (`status_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -37,7 +38,7 @@ CREATE TABLE `todo_statuses` (
 
 LOCK TABLES `todo_statuses` WRITE;
 /*!40000 ALTER TABLE `todo_statuses` DISABLE KEYS */;
-INSERT INTO `todo_statuses` VALUES ('E827C910-5235-4C87-9F13-DAF960682D54','New','Newly added',0),('E827C910-5235-4C87-9F13-DAF960682D55','Doing','Task picked up',0),('E827C910-5235-4C87-9F13-DAF960682D56','Done','Task completed',0),('E827C910-5235-4C87-9F13-DAF960682D57','Not needed','No longer needed to complete',0),('E827C910-5235-4C87-9F13-DAF960682D58','Cannot be done','More info needed',0),('E827C910-5235-4C87-9F13-DAF960682D59','Deleted','Temorarily deleted',0);
+INSERT INTO `todo_statuses` VALUES ('E827C910-5235-4C87-9F13-DAF960682D54','NEW','New','Newly added',10),('E827C910-5235-4C87-9F13-DAF960682D55','DOING','Doing','Task picked up for working',20),('E827C910-5235-4C87-9F13-DAF960682D56','DONE','Done','Task completed successfully',30),('E827C910-5235-4C87-9F13-DAF960682D57','NOTNEEDED','Not needed','No longer needed to complete',40),('E827C910-5235-4C87-9F13-DAF960682D58','CANNOTBEDONE','Cannot be done','More info needed to proceed',50),('E827C910-5235-4C87-9F13-DAF960682D59','DELETED','Deleted','Soft deleted',60);
 /*!40000 ALTER TABLE `todo_statuses` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-11 12:51:30
+-- Dump completed on 2017-04-12  0:38:47

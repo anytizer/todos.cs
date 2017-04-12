@@ -33,14 +33,14 @@ namespace libraries
             return db.todos();
         }
 
-        public bool done(string todo_id, string status_id)
+        public bool done(Guid todo_id, Guid status_id)
         {
             return db.done(todo_id, status_id);
         }
 
-        public string delete_status()
+        public Guid delete_status()
         {
-            return "E827C910-5235-4C87-9F13-DAF960682D56";
+            return db.delete_status();
         }
     }
 }
