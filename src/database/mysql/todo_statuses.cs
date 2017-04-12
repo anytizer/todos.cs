@@ -22,8 +22,9 @@ namespace database.mysql
     
         public string status_id { get; set; }
         public string status_code { get; set; }
+        public string status_shortname { get; set; }
         public string status_name { get; set; }
-        public int status_priority { get; set; }
+        public long status_priority { get; set; }
     
         public virtual ICollection<todo_projects_statuses> todo_projects_statuses { get; set; }
         public virtual ICollection<todo_todos> todo_todos { get; set; }

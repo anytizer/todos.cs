@@ -17,7 +17,6 @@ namespace database.mysql
     {
         public todosEntities()
             : base("name=todosEntities")
-           // : base("server=localhost;user id=root;database=awesome_todos")
         {
         }
     

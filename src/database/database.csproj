@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -45,48 +48,49 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="mysql\todoModel.Context.cs">
+    <Compile Include="mysql\todosModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>todoModel.Context.tt</DependentUpon>
+      <DependentUpon>todosModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="mysql\todoModel.cs">
+    <Compile Include="mysql\todosModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>todoModel.tt</DependentUpon>
+      <DependentUpon>todosModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="mysql\todoModel.Designer.cs">
+    <Compile Include="mysql\todosModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>todoModel.edmx</DependentUpon>
+      <DependentUpon>todosModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="mysql\todo_projects.cs">
-      <DependentUpon>todoModel.tt</DependentUpon>
+      <DependentUpon>todosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="mysql\todo_projects_statuses.cs">
-      <DependentUpon>todoModel.tt</DependentUpon>
+      <DependentUpon>todosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="mysql\todo_statuses.cs">
-      <DependentUpon>todoModel.tt</DependentUpon>
+      <DependentUpon>todosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="mysql\todo_todos.cs">
-      <DependentUpon>todoModel.tt</DependentUpon>
+      <DependentUpon>todosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="mysql\v_todos.cs">
-      <DependentUpon>todoModel.tt</DependentUpon>
+      <DependentUpon>todosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="todoer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="mysql\todoModel.edmx">
+    <EntityDeploy Include="mysql\todosModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>todoModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>todosModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="mysql\todoModel.edmx.diagram">
-      <DependentUpon>todoModel.edmx</DependentUpon>
+    <None Include="mysql\todosModel.edmx.diagram">
+      <DependentUpon>todosModel.edmx</DependentUpon>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -98,15 +102,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="mysql\todoModel.Context.tt">
+    <Content Include="mysql\todosModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>todoModel.edmx</DependentUpon>
-      <LastGenOutput>todoModel.Context.cs</LastGenOutput>
+      <DependentUpon>todosModel.edmx</DependentUpon>
+      <LastGenOutput>todosModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="mysql\todoModel.tt">
+    <Content Include="mysql\todosModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>todoModel.edmx</DependentUpon>
-      <LastGenOutput>todoModel.cs</LastGenOutput>
+      <DependentUpon>todosModel.edmx</DependentUpon>
+      <LastGenOutput>todosModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

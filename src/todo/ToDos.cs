@@ -147,7 +147,7 @@ namespace todo
         {
             todoer td = new todoer();
             string todo_id = this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString();
-            string status_id = "E827C910-5235-4C87-9F13-DAF960682D56";
+            string status_id = td.delete_status();
             if (td.done(todo_id, status_id))
             {
                 reload();

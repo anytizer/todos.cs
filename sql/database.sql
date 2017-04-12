@@ -4,39 +4,54 @@
 
 -- SHOW CREATE TABLE todo_statuses;
 DROP TABLE IF EXISTS todo_statuses;
-CREATE TABLE todo_statuses (
-  status_id VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'GUID',
-  status_code VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'Status Code',
-  status_name VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'Status Name',
-  status_priority INT(10) NOT NULL DEFAULT '0' COMMENT 'Sorting Priority',
-  PRIMARY KEY (status_id)
+CREATE TABLE `todo_statuses` (
+  `status_id` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'GUID Value',
+  `status_code` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'Status Code',
+  `status_shortname` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'Short Name',
+  `status_name` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'Status Full Name',
+  `status_priority` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Sorting Priority',
+  PRIMARY KEY (`status_id`)
 );
 
 -- SHOW CREATE TABLE todo_projects;
 DROP TABLE IF EXISTS todo_projects;
-CREATE TABLE todo_projects (
-  project_id VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'GUID',
-  project_name VARCHAR(255) NOT NULL DEFAULT '',
-  is_active ENUM('N','Y') DEFAULT 'N',
-  PRIMARY KEY (project_id)
+CREATE TABLE `todo_projects` (
+  `project_id` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'GUID Value',
+  `project_name` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'Project Name',
+  `is_active` ENUM('N','Y') DEFAULT 'N' COMMENT 'Is active?',
+  PRIMARY KEY (`project_id`)
 );
 
 -- SHOW CREATE TABLE todo_todos;
 DROP TABLE IF EXISTS todo_todos;
-CREATE TABLE todo_todos (
-  todo_id VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'GUID',
-  project_id VARCHAR(255) NOT NULL DEFAULT '',
-  status_id VARCHAR(255) NOT NULL DEFAULT '',
-  issue_number VARCHAR(255) NOT NULL DEFAULT '',
-  todo_text TEXT NOT NULL,
-  added_on DATETIME NOT NULL,
-  modified_on DATETIME NOT NULL,
-  is_active ENUM('N','Y') NOT NULL DEFAULT 'N',
-  PRIMARY KEY (todo_id),
-  KEY project_id (project_id),
-  KEY status_id (status_id),
-  CONSTRAINT todo_todos_ibfk_1 FOREIGN KEY (project_id) REFERENCES todo_projects (project_id),
-  CONSTRAINT todo_todos_ibfk_2 FOREIGN KEY (status_id) REFERENCES todo_statuses (status_id)
+CREATE TABLE `todo_todos` (
+  `todo_id` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'GUID Value',
+  `project_id` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'Project ID',
+  `status_id` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'Status ID',
+  `issue_number` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'Issue Number',
+  `todo_text` TEXT NOT NULL COMMENT 'Todo Text',
+  `added_on` DATETIME NOT NULL COMMENT 'Added On',
+  `modified_on` DATETIME NOT NULL COMMENT 'Modified On',
+  `is_active` ENUM('N','Y') NOT NULL DEFAULT 'N' COMMENT 'Active?',
+  PRIMARY KEY (`todo_id`),
+  KEY `project_id` (`project_id`),
+  KEY `status_id` (`status_id`),
+  CONSTRAINT `todo_todos_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `todo_projects` (`project_id`),
+  CONSTRAINT `todo_todos_ibfk_2` FOREIGN KEY (`status_id`) REFERENCES `todo_statuses` (`status_id`)
+);
+
+-- SHOW CREATE TABLE todo_projects_statuses;
+DROP TABLE IF EXISTS todo_projects_statuses;
+CREATE TABLE `todo_projects_statuses` (
+  `history_id` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'History ID',
+  `project_id` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'Project ID',
+  `status_id` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'Status ID',
+  `modified_on` DATETIME NOT NULL COMMENT 'Modified On',
+  PRIMARY KEY (`history_id`),
+  KEY `project_id` (`project_id`),
+  KEY `status_id` (`status_id`),
+  CONSTRAINT `todo_projects_statuses_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `todo_projects` (`project_id`),
+  CONSTRAINT `todo_projects_statuses_ibfk_2` FOREIGN KEY (`status_id`) REFERENCES `todo_statuses` (`status_id`)
 );
 
 -- SHOW CREATE VIEW v_todos;

@@ -8,13 +8,20 @@ namespace database
 {
     public class todoer
     {
+        private todosEntities te;
+
+        public todoer()
+        {
+             this.te = new todosEntities();
+        }
+
         public void add(Guid project_id, Guid status_id, string text)
         {
-            todosEntities te = new todosEntities();
-            database.mysql.todo_todos todo = new database.mysql.todo_todos();
+            string pid = new Guid("6F39DA75-EE09-44EA-80DB-23087F0C555D").ToString();
 
+            database.mysql.todo_todos todo = new database.mysql.todo_todos();
             todo.todo_id = Guid.NewGuid().ToString();
-            todo.project_id = project_id.ToString();
+            todo.project_id = pid; //  project_id.ToString();
             todo.status_id = status_id.ToString();
             todo.issue_number = "";
             todo.todo_text = text;
@@ -53,7 +60,6 @@ namespace database
         {
             // @todo read from api, instead of sql
             List<projectsDTO> projects = new List<projectsDTO>();
-            
             todosEntities te = new todosEntities();
             foreach (todo_projects p in te.todo_projects)
             {
@@ -69,7 +75,7 @@ namespace database
         public bool done(string todo_id, string status_id)
         {
             bool deleted = false;
-            todosEntities te = new todosEntities();
+            
             todo_todos todo = te.todo_todos.SingleOrDefault(x => x.todo_id == todo_id);
             if(null != todo)
             {
@@ -81,7 +87,7 @@ namespace database
                 history.history_id = Guid.NewGuid().ToString();
                 history.project_id = todo.project_id;
                 history.status_id = new Guid(status_id).ToString(); // temp deleted
-                history.status_on = System.DateTime.Now;
+                history.modified_on = System.DateTime.Now;
                 te.todo_projects_statuses.Add(history);
             }
 

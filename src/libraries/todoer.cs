@@ -9,22 +9,38 @@ namespace libraries
 {
     public class todoer
     {
-        public void add(Guid project_id, Guid status_id, string text) { }
+        private database.todoer db;
+
+        public todoer()
+        {
+            db = new database.todoer();
+        }
+
+        public void add(Guid project_id, Guid status_id, string text)
+        {
+            db.add(project_id, status_id, text);
+        }
+
         public List<projectsDTO> projects()
         {
-            database.todoer td = new database.todoer();
-            return td.projects();
-            
-            
+            return db.projects();
         }
+
         public List<todosDTO> todos()
         {
-            List<todosDTO> todos = new List<todosDTO>();
-            return todos;
+            //List<todosDTO> todos = new List<todosDTO>();
+            //return todos;
+            return db.todos();
         }
+
         public bool done(string todo_id, string status_id)
         {
-            return false;
+            return db.done(todo_id, status_id);
+        }
+
+        public string delete_status()
+        {
+            return "E827C910-5235-4C87-9F13-DAF960682D56";
         }
     }
 }
