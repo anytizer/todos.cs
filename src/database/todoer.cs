@@ -75,8 +75,9 @@ namespace database
         public bool done(Guid todo_id, Guid status_id)
         {
             bool deleted = false;
-            
-            todo_todos todo = te.todo_todos.SingleOrDefault(x => x.todo_id == todo_id.ToString());
+
+            string todo_id_string = todo_id.ToString();
+            todo_todos todo = te.todo_todos.SingleOrDefault(x => x.todo_id == todo_id_string);
             if(null != todo)
             {
                 todo.modified_on = System.DateTime.Now;
