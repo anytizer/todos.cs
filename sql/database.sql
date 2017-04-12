@@ -61,5 +61,7 @@ CREATE TABLE todo_projects_statuses (
   project_id VARCHAR(255) NOT NULL DEFAULT '',
   status_id VARCHAR(255) NOT NULL DEFAULT '',
   status_on DATETIME NOT NULL,
-  PRIMARY KEY (history_id)
+  PRIMARY KEY (history_id),
+  FOREIGN KEY (project_id) REFERENCES todo_projects (project_id),
+  FOREIGN KEY (status_id) REFERENCES todo_statuses (status_id)
 );

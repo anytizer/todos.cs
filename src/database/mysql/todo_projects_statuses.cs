@@ -18,5 +18,8 @@ namespace database.mysql
         public string project_id { get; set; }
         public string status_id { get; set; }
         public System.DateTime status_on { get; set; }
+    
+        public virtual todo_projects todo_projects { get; set; }
+        public virtual todo_statuses todo_statuses { get; set; }
     }
 }
