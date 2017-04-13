@@ -6,29 +6,64 @@ using System.Linq;
 
 namespace database
 {
-    public class todoer
+    public class api
     {
         private todosEntities te;
 
-        public todoer()
+        public api()
         {
              this.te = new todosEntities();
         }
 
+        private bool project_exists(Guid project_id)
+        {
+            bool success = false;
+            string _project_id = project_id.ToString();
+            if (null != this.te.todo_projects.SingleOrDefault(x=>x.project_id == _project_id))
+            {
+                success = true;
+            }
+
+            return success;
+        }
+
+        private bool status_exists(Guid status_id)
+        {
+            bool success = false;
+            string _status_id = status_id.ToString();
+            if (null != this.te.todo_statuses.SingleOrDefault(x => x.status_id == _status_id))
+            {
+                success = true;
+            }
+
+            return success;
+        }
+
         public void add(Guid project_id, Guid status_id, string text)
         {
-            database.mysql.todo_todos todo = new database.mysql.todo_todos();
-            todo.todo_id = Guid.NewGuid().ToString();
-            todo.project_id = project_id.ToString();
-            todo.status_id = status_id.ToString();
-            todo.issue_number = "";
-            todo.todo_text = text;
-            todo.added_on = System.DateTime.Now;
-            todo.modified_on = System.DateTime.Now;
-            todo.is_active = "Y";
-            te.todo_todos.Add(todo);
+            /**
+             * Pre-verify that the project id and status id exist
+             */
+            if(this.project_exists(project_id) && this.status_exists(status_id))
+            {
+                database.mysql.todo_todos todo = new database.mysql.todo_todos();
+                todo.todo_id = Guid.NewGuid().ToString();
+                todo.project_id = project_id.ToString();
+                todo.status_id = status_id.ToString();
+                todo.issue_number = "";
+                todo.todo_text = text;
+                todo.added_on = System.DateTime.Now;
+                todo.modified_on = System.DateTime.Now;
+                todo.is_active = "Y";
+                te.todo_todos.Add(todo);
 
-            te.SaveChanges();
+                te.SaveChanges();
+            }
+            else
+            {
+                // invalid status
+                // FK invalid
+            }
         }
 
         public List<todosDTO> todos()
@@ -70,6 +105,9 @@ namespace database
             return projects;
         }
 
+        /**
+         * Mark the item as completed
+         */
         public bool done(Guid todo_id, Guid status_id)
         {
             bool deleted = false;
@@ -92,14 +130,6 @@ namespace database
 
             te.SaveChanges();
             return deleted;
-        }
-
-        public Guid delete_status()
-        {
-            // First item with DELETE code name
-            // return new Guid(this.te.todo_statuses.FirstOrDefault(x=>x.status_code== "DONE").status_code);
-            //return "E827C910-5235-4C87-9F13-DAF960682D56";
-            return dtos.defaults.statuses.DONE;
-        }
+        }       
     }
 }

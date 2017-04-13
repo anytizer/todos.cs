@@ -79,7 +79,8 @@
       <DependentUpon>todosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="todoer.cs" />
+    <Compile Include="statuses.cs" />
+    <Compile Include="api.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

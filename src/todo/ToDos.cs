@@ -1,4 +1,5 @@
-﻿using database.mysql;
+﻿using database;
+using database.mysql;
 using dtos;
 using libraries;
 using System;
@@ -32,7 +33,7 @@ namespace todo
              */
             if (textBox1.Text.Length >= 1)
             {
-                todoer td = new todoer();
+                database.api td = new database.api();
                 /**
                  * @todo Pickup from dropdown lists
                  */
@@ -58,15 +59,13 @@ namespace todo
             this.dataGridView1.Rows.Clear();
 
             textBox1.Text = "";
-            todoer t = new todoer();
+            database.api t = new database.api();
             List<todosDTO> lv = t.todos();
 
             foreach (todosDTO v in lv)
             {
-
-
                 // add to grid
-                //dataGridView1.row
+                // dataGridView1.row
                 // @xee http://stackoverflow.com/questions/10063770/how-to-add-a-new-row-to-datagridview-programmatically
                 // @see https://msdn.microsoft.com/en-us/library/system.windows.forms.datagridview.selectionchanged(v=vs.110).aspx
                 DataGridViewRow row = (DataGridViewRow)dataGridView1.RowTemplate.Clone();
@@ -91,7 +90,7 @@ namespace todo
                 if (MessageBox.Show("Are you sure?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     // Do stuff after 'YES is clicked'
-                    todoer td = new todoer();
+                    database.api td = new database.api();
                     // @todo There may not be a selection or wrong entry pre-selected
                     Guid todo_id = new Guid(this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString());
                     Guid status_id = new Guid("E827C910-5235-4C87-9F13-DAF960682D59");
@@ -123,7 +122,7 @@ namespace todo
         {
             this.comboBox1.Items.Clear();
 
-            todoer t = new todoer();
+            database.api t = new database.api();
             List<projectsDTO> lp = t.projects();
             foreach (projectsDTO p in lp)
             {
@@ -158,9 +157,10 @@ namespace todo
 
         private void doneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            todoer td = new todoer();
+            statuses s = new statuses();
+            database.api td = new database.api();
             Guid todo_id = new Guid(this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString());
-            Guid status_id = td.delete_status();
+            Guid status_id = s.delete_status();
             if (td.done(todo_id, status_id))
             {
                 reload();
@@ -175,7 +175,7 @@ namespace todo
         {
             //MessageBox.Show("Low Priority");
 
-            todoer td = new todoer();
+            database.api td = new database.api();
             Guid todo_id = new Guid(this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString());
             Guid status_id = dtos.defaults.statuses.LOWPRIORITY;
             if (td.done(todo_id, status_id))
