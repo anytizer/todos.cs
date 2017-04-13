@@ -1,6 +1,11 @@
 # todo.net
 Sticky notes like todo lists using C# and MySQL
-One-Use based ToDo management for single project at once.
+One-User/One-Project based ToDo management list
+
+## Installation
+ - Install MySQL Server
+ - Define connection parameters
+ - Install sample data
 
 ## Features
  - DBMS (MySQL) based ToDo list
