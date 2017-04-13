@@ -6,15 +6,8 @@ using System.Linq;
 
 namespace database
 {
-    public class api
+    public partial class api: BaseAPI
     {
-        private todosEntities te;
-
-        public api()
-        {
-             this.te = new todosEntities();
-        }
-
         private bool project_exists(Guid project_id)
         {
             bool success = false;
