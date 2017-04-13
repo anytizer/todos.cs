@@ -82,6 +82,11 @@ namespace todo
             this.ResumeLayout();
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            reload();
+        }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             // Delete Key - Delete Selected Row!
@@ -116,11 +121,6 @@ namespace todo
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            reload();
-        }
-
         private void combo()
         {
             this.comboBox1.Items.Clear();
@@ -139,7 +139,5 @@ namespace todo
             //this.SuspendLayout();
             //this.ResumeLayout();
         }
-
- 
     }
 }

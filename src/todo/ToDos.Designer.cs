@@ -1,6 +1,8 @@
-﻿namespace todo
+﻿using System.Windows.Forms;
+
+namespace todo
 {
-    partial class ToDos
+    public partial class ToDos : Form
     {
         /// <summary>
         /// Required designer variable.

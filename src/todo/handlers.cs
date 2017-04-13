@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace todo
 {
-    partial class ToDos
+    public partial class ToDos
     {
         private int currentContextRow = 0;
         private void onTopToolStripMenuItem_Click(object sender, EventArgs e)
