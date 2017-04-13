@@ -57,6 +57,11 @@ namespace todo
             // alternate color
             // little padding
             // row level selection
+            int selectedIndex = 0;
+            if (this.dataGridView1.SelectedRows.Count >= 1)
+            {
+                selectedIndex = this.dataGridView1.SelectedRows[0].Index;
+            }
 
             this.SuspendLayout();
             this.dataGridView1.Rows.Clear();
@@ -77,6 +82,11 @@ namespace todo
 
                 // flickering
                 // http://stackoverflow.com/questions/2041782/how-to-prevent-rows-in-datagrid-from-flickering-while-application-is-running
+            }
+
+            if (selectedIndex <= this.dataGridView1.Rows.Count)
+            {
+                this.dataGridView1.Rows[selectedIndex].Selected = true;
             }
 
             this.ResumeLayout();

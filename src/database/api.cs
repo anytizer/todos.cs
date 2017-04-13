@@ -6,13 +6,13 @@ using System.Linq;
 
 namespace database
 {
-    public partial class api: BaseAPI
+    public partial class api : BaseAPI
     {
         private bool project_exists(Guid project_id)
         {
             bool success = false;
             string _project_id = project_id.ToString();
-            if (null != this.te.todo_projects.SingleOrDefault(x=>x.project_id == _project_id))
+            if (null != this.te.todo_projects.SingleOrDefault(x => x.project_id == _project_id))
             {
                 success = true;
             }
@@ -37,7 +37,7 @@ namespace database
             /**
              * Pre-verify that the project id and status id exist
              */
-            if(this.project_exists(project_id) && this.status_exists(status_id))
+            if (this.project_exists(project_id) && this.status_exists(status_id))
             {
                 database.mysql.todo_todos todo = new database.mysql.todo_todos();
                 todo.todo_id = Guid.NewGuid().ToString();
@@ -64,7 +64,6 @@ namespace database
             // @todo read from api, instead of sql
 
             List<todosDTO> lv = new List<todosDTO>();
-            todosEntities te = new todosEntities();
             foreach (v_todos t in te.v_todos.OrderByDescending(x => x.added_on))
             {
                 todosDTO todo = new todosDTO();
@@ -86,7 +85,6 @@ namespace database
         {
             // @todo read from api, instead of sql
             List<projectsDTO> projects = new List<projectsDTO>();
-            todosEntities te = new todosEntities();
             foreach (todo_projects p in te.todo_projects)
             {
                 projectsDTO pd = new projectsDTO();
@@ -103,15 +101,15 @@ namespace database
          */
         public bool done(Guid todo_id, Guid status_id)
         {
-            bool deleted = false;
+            bool found = false;
 
             string todo_id_string = todo_id.ToString();
             todo_todos todo = te.todo_todos.SingleOrDefault(x => x.todo_id == todo_id_string);
-            if(null != todo)
+            if (null != todo)
             {
                 todo.modified_on = System.DateTime.Now;
-                todo.is_active = "N";
-                deleted = true;
+                //todo.is_active = "N";
+                found = true;
 
                 todo_projects_statuses history = new todo_projects_statuses();
                 history.history_id = Guid.NewGuid().ToString();
@@ -122,7 +120,7 @@ namespace database
             }
 
             te.SaveChanges();
-            return deleted;
-        }       
+            return found;
+        }
     }
 }

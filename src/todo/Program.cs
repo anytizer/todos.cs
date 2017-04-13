@@ -30,6 +30,9 @@ namespace todo
         }
     }
 
+    /**
+     * @see http://stackoverflow.com/questions/19147/what-is-the-correct-way-to-create-a-single-instance-application
+     */
     internal class NativeMethods
     {
         public const int HWND_BROADCAST = 0xffff;

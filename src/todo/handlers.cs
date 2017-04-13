@@ -1,4 +1,6 @@
-﻿using System;
+﻿using dtos;
+using libraries;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -10,7 +12,7 @@ namespace todo
 {
     public partial class ToDos
     {
-        private int currentContextRow = 0;
+        private int currentContextRowIndex = 0;
         private void onTopToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem menu = (sender as ToolStripMenuItem);
@@ -67,12 +69,12 @@ namespace todo
         {
             if (e.Button == MouseButtons.Right)
             {
-                int currentContextRowIndex = dataGridView1.HitTest(e.X, e.Y).RowIndex;
+                this.currentContextRowIndex = dataGridView1.HitTest(e.X, e.Y).RowIndex;
                 dataGridView1.ClearSelection();
-                
+
 
                 ContextMenu m = new ContextMenu();
-                if (currentContextRowIndex >=1 )
+                if (currentContextRowIndex >= 0)
                 {
                     // highlight selected row
                     dataGridView1.Rows[currentContextRowIndex].Selected = true;
@@ -80,10 +82,11 @@ namespace todo
                     // skip header columns
                     // disabled menu if status matches
 
-                    foreach (var s in this.statuses)
+                    foreach (NameValueDTO s in this.statuses)
                     {
                         MenuItem mi = new MenuItem(s.name);
-                        string current_status = dataGridView1.Rows[currentContextRowIndex].Cells[0].ToString();
+                        int status_index = this.status.Index;
+                        string current_status = dataGridView1.Rows[currentContextRowIndex].Cells[status_index].Value.ToString();
                         if (current_status == s.name)
                         {
                             // @todo skipped re-selecting on current status
@@ -92,19 +95,32 @@ namespace todo
                         mi.Click += new EventHandler(this.menu_selected);
                         m.MenuItems.Add(mi);
                     }
+
+                    // todo auto adjust menu location
+                    m.Show(dataGridView1, new Point(e.X, e.Y));
                 }
-                else
-                {
-                    m.MenuItems.Add(new MenuItem(string.Format("Do nothing at {0}", currentContextRowIndex.ToString())) { Enabled = false, });
-                }
-                m.Show(dataGridView1, new Point(e.X, e.Y));
             }
         }
 
         void menu_selected(object sender, System.EventArgs e)
         {
             MenuItem mi = sender as MenuItem;
-            MessageBox.Show(mi.ToString());
+            string new_staus_name = mi.Text;
+            //MessageBox.Show(new_staus_name);
+            Guid todo_id = new Guid(dataGridView1.Rows[currentContextRowIndex].Cells[this.ToDoID.Index].Value.ToString());
+            //Guid todo_id = new Guid(dataGridView1.Rows[currentContextRowIndex].Cells[this.ToDoID.Index].Value.ToString());
+            foreach (NameValueDTO s in this.statuses)
+            {
+                if(s.name.Equals(new_staus_name))
+                {
+                    todoer td = new todoer();
+                    td.done(todo_id, s.id);
+                    //break;
+                }
+            }
+
+            reload();
+           // MessageBox.Show(todo_id.ToString());
         }
     }
 }
