@@ -23,7 +23,7 @@ namespace database
             {
                 NameValueDTO st = new NameValueDTO();
                 st.id = new Guid(status.status_id);
-                st.name = status.status_name;
+                st.name = status.status_shortname;
                 st.value = status.status_code;
 
                 l.Add(st);

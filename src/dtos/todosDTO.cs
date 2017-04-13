@@ -1,4 +1,6 @@
-﻿namespace dtos
+﻿using System;
+
+namespace dtos
 {
     public class todosDTO
     {
@@ -12,6 +14,6 @@
         public string status_name;
 
         public string issue_number { get; set; }
-        public System.DateTime added_on { get; set; }
+        public DateTime added_on { get; set; }
     }
 }

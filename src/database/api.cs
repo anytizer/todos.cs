@@ -74,6 +74,7 @@ namespace database
                 todo.status_name = t.status_name;
                 todo.todo_id = t.todo_id;
                 todo.todo_text = t.todo_text;
+                todo.added_on = t.added_on;
 
                 lv.Add(todo);
             }
