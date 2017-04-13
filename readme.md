@@ -20,3 +20,10 @@ One-User/One-Project based ToDo management list
 
 ## Status
  - unfinished
+
+Thanks to:
+	- [Entity Framework](https://msdn.microsoft.com/en-us/library/aa937723(v=vs.113).aspx)
+	- [Visual Studio](https://www.visualstudio.com/)
+	- [MySQL](https://www.mysql.com/) / [MariaDB](https://mariadb.org/)
+	- [Connector/Net ADO.NET driver for MySQL](https://dev.mysql.com/downloads/connector/net/)
+	- [Favicon.cc](http://www.favicon.cc/)
