@@ -11,13 +11,16 @@ namespace todo
 {
     public partial class ToDos : Form
     {
-        private Guid? project_id = null;
+        private List<NameValueDTO> statuses;
 
         public ToDos()
         {
             InitializeComponent();
             dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
             dataGridView1.AreAllCellsSelected(false);
+
+            libraries.todoer td = new libraries.todoer();
+            this.statuses = td.all_statuses();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -126,10 +129,10 @@ namespace todo
             List<projectsDTO> lp = t.projects();
             foreach (projectsDTO p in lp)
             {
-                ProjectItem pi = new ProjectItem();
-                pi.ProjectID = new Guid(p.project_id);
-                pi.Name = p.project_name;
-                pi.Value = p.project_name;
+                NameValueDTO pi = new NameValueDTO();
+                pi.id = new Guid(p.project_id);
+                pi.name = p.project_name;
+                pi.value = p.project_name;
                 this.comboBox1.Items.Add(pi);
             };
 
@@ -157,10 +160,10 @@ namespace todo
 
         private void doneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            statuses s = new statuses();
+            //statuses s = new statuses();
             database.api td = new database.api();
             Guid todo_id = new Guid(this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString());
-            Guid status_id = s.delete_status();
+            Guid status_id = td.delete_status();
             if (td.done(todo_id, status_id))
             {
                 reload();
@@ -187,6 +190,37 @@ namespace todo
         private void doingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Doing");
+        }
+
+        private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {               
+
+                int currentMouseOverRow = dataGridView1.HitTest(e.X, e.Y).RowIndex;
+
+                if (currentMouseOverRow >= 1)
+                {
+                    // skip header columns
+                    // disabled menu if status matches
+                    ContextMenu m = new ContextMenu();
+                    foreach(var s in this.statuses)
+                    {
+                        MenuItem mi = new MenuItem(s.name);
+                        mi.Click += new EventHandler(this.menu_selected);
+                        m.MenuItems.Add(mi);
+                    }
+
+                    m.MenuItems.Add(new MenuItem(string.Format("Do nothing at {0}", currentMouseOverRow.ToString())) { Enabled = false, });
+                    m.Show(dataGridView1, new Point(e.X, e.Y));
+                }
+            }
+        }
+
+        void menu_selected(object sender, System.EventArgs e)
+        {
+            MenuItem mi = sender as MenuItem;
+            MessageBox.Show(mi.ToString());
         }
     }
 }
