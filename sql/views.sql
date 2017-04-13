@@ -1,21 +1,22 @@
+-- SHOW CREATE VIEW v_todos;
 DROP VIEW IF EXISTS v_todos;
 CREATE VIEW v_todos AS
 SELECT
 	t.todo_id,
-	p.project_id,
-	s.status_id,
-	t.added_on,
-	
-	t.issue_number,
-	p.project_name,
-	s.status_name,
-	t.todo_text
+	p.project_id, p.project_name,
+	s.status_id, s.status_shortname status_name,
+	t.added_on, t.issue_number, t.todo_text
 FROM todo_todos t
-INNER JOIN todo_projects p ON t.project_id = p.project_id
-INNER JOIN todo_statuses s ON t.status_id = s.status_id
+INNER JOIN todo_projects p ON p.project_id = t.project_id
+INNER JOIN todo_statuses s ON s.status_id = t.status_id
+WHERE
+	t.is_active='Y'
+	AND s.is_active='Y'
+	AND s.in_list='Y'
 ORDER BY
-	s.status_priority DESC
+	s.status_priority
 ;
+-- SELECT * FROM v_todos;
 
 SELECT * FROM v_todos v
 WHERE
@@ -24,5 +25,6 @@ WHERE
 ORDER BY
 	added_on DESC
 ;
+UPDATE todo_todos SET is_active='Y';
 
 SELECT * FROM todo_todos WHERE todo_id='24a93e76-a675-4ad4-9d8f-0bc975249cae';

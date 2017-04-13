@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace database
 {
-    public partial class api: BaseAPI
+    public partial class api: BaseAPI // , contract
     {
         /**
          * Status repository

@@ -42,10 +42,6 @@ namespace todo
                  */
                 Guid project_id = dtos.defaults.projects.ProjectID;
                 Guid status_id = dtos.defaults.statuses.NEW;
-                //if (null != this.project_id)
-                //{
-                //    MessageBox.Show("Project: " + this.project_id);
-                //}
                 td.add(project_id, status_id, textBox1.Text);
 
                 reload();
@@ -84,7 +80,7 @@ namespace todo
                 // http://stackoverflow.com/questions/2041782/how-to-prevent-rows-in-datagrid-from-flickering-while-application-is-running
             }
 
-            if (selectedIndex <= this.dataGridView1.Rows.Count)
+            if (selectedIndex >=0 && this.dataGridView1.Rows.Count >= 1)
             {
                 this.dataGridView1.Rows[selectedIndex].Selected = true;
             }
@@ -105,13 +101,13 @@ namespace todo
                 // MessageBox.Show("Index: "+this.dataGridView1.SelectedRows[0].Index.ToString());
                 // MessageBox.Show("Index: " + this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString());
 
-                if (MessageBox.Show("Are you sure?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Are you sure DELETE this item?", "Delete?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     // Do stuff after 'YES is clicked'
                     database.api td = new database.api();
                     // @todo There may not be a selection or wrong entry pre-selected
                     Guid todo_id = new Guid(this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString());
-                    Guid status_id = new Guid("E827C910-5235-4C87-9F13-DAF960682D59");
+                    Guid status_id = dtos.defaults.statuses.DELETED;
                     if (td.done(todo_id, status_id))
                     {
                         reload();

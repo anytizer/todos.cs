@@ -55,21 +55,3 @@ CREATE TABLE `todo_projects_statuses` (
   CONSTRAINT `todo_projects_statuses_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `todo_projects` (`project_id`),
   CONSTRAINT `todo_projects_statuses_ibfk_2` FOREIGN KEY (`status_id`) REFERENCES `todo_statuses` (`status_id`)
 );
-
--- SHOW CREATE VIEW v_todos;
-DROP VIEW IF EXISTS v_todos;
-CREATE VIEW v_todos AS
-SELECT
-	t.todo_id,
-	p.project_id, p.project_name,
-	s.status_id, s.status_name,
-	t.added_on, t.todo_text
-FROM todo_todos t
-INNER JOIN todo_projects p ON p.project_id = t.project_id
-INNER JOIN todo_statuses s ON s.status_id = t.status_id
-WHERE
-	t.is_active='Y'
-ORDER BY
-	s.status_priority
-;
--- SELECT * FROM v_todos;

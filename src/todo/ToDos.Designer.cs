@@ -47,9 +47,6 @@ namespace todo
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configurationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.onTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.doingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lowPriorityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.doneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -174,10 +171,7 @@ namespace todo
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.logoutToolStripMenuItem,
             this.configurationsToolStripMenuItem,
-            this.onTopToolStripMenuItem,
-            this.doingToolStripMenuItem,
-            this.lowPriorityToolStripMenuItem,
-            this.doneToolStripMenuItem});
+            this.onTopToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(919, 24);
@@ -202,27 +196,6 @@ namespace todo
             this.onTopToolStripMenuItem.Size = new System.Drawing.Size(106, 20);
             this.onTopToolStripMenuItem.Text = "? Always On Top";
             this.onTopToolStripMenuItem.Click += new System.EventHandler(this.onTopToolStripMenuItem_Click);
-            // 
-            // doingToolStripMenuItem
-            // 
-            this.doingToolStripMenuItem.Name = "doingToolStripMenuItem";
-            this.doingToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
-            this.doingToolStripMenuItem.Text = "Doing";
-            this.doingToolStripMenuItem.Click += new System.EventHandler(this.doingToolStripMenuItem_Click);
-            // 
-            // lowPriorityToolStripMenuItem
-            // 
-            this.lowPriorityToolStripMenuItem.Name = "lowPriorityToolStripMenuItem";
-            this.lowPriorityToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
-            this.lowPriorityToolStripMenuItem.Text = "Low Priority";
-            this.lowPriorityToolStripMenuItem.Click += new System.EventHandler(this.lowPriorityToolStripMenuItem_Click);
-            // 
-            // doneToolStripMenuItem
-            // 
-            this.doneToolStripMenuItem.Name = "doneToolStripMenuItem";
-            this.doneToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
-            this.doneToolStripMenuItem.Text = "Done";
-            this.doneToolStripMenuItem.Click += new System.EventHandler(this.doneToolStripMenuItem_Click);
             // 
             // ToDos
             // 
@@ -273,9 +246,6 @@ namespace todo
         private System.Windows.Forms.DataGridViewTextBoxColumn project;
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
         private System.Windows.Forms.DataGridViewTextBoxColumn todo;
-        private System.Windows.Forms.ToolStripMenuItem doingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem lowPriorityToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem doneToolStripMenuItem;
     }
 }
 

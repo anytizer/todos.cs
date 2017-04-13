@@ -57,6 +57,7 @@ warning 6002: The table/view 'def.awesome_todos.v_todos' does not have a primary
             <PropertyRef Name="status_id" />
             <PropertyRef Name="status_name" />
             <PropertyRef Name="added_on" />
+            <PropertyRef Name="issue_number" />
             <PropertyRef Name="todo_text" />
           </Key>
           <Property Name="todo_id" Type="varchar" MaxLength="255" Nullable="false" />
@@ -65,6 +66,7 @@ warning 6002: The table/view 'def.awesome_todos.v_todos' does not have a primary
           <Property Name="status_id" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="status_name" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="added_on" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="issue_number" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="todo_text" Type="text" Nullable="false" />
         </EntityType>
         <Association Name="todo_projects_statuses_ibfk_1">
@@ -128,6 +130,7 @@ warning 6002: The table/view 'def.awesome_todos.v_todos' does not have a primary
 `v_todos`.`status_id`, 
 `v_todos`.`status_name`, 
 `v_todos`.`added_on`, 
+`v_todos`.`issue_number`, 
 `v_todos`.`todo_text`
 FROM `v_todos` AS `v_todos`</DefiningQuery>
           </EntitySet>
@@ -233,6 +236,7 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
             <PropertyRef Name="status_id" />
             <PropertyRef Name="status_name" />
             <PropertyRef Name="added_on" />
+            <PropertyRef Name="issue_number" />
             <PropertyRef Name="todo_text" />
           </Key>
           <Property Name="todo_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -241,6 +245,7 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           <Property Name="status_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="status_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="added_on" Type="DateTime" Nullable="false" />
+          <Property Name="issue_number" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="todo_text" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="todo_projects_statuses_ibfk_1">
@@ -347,6 +352,7 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
             <EntityTypeMapping TypeName="todosModel.v_todos">
               <MappingFragment StoreEntitySet="v_todos">
                 <ScalarProperty Name="todo_text" ColumnName="todo_text" />
+                <ScalarProperty Name="issue_number" ColumnName="issue_number" />
                 <ScalarProperty Name="added_on" ColumnName="added_on" />
                 <ScalarProperty Name="status_name" ColumnName="status_name" />
                 <ScalarProperty Name="status_id" ColumnName="status_id" />

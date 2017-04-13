@@ -107,9 +107,9 @@ namespace database
             todo_todos todo = te.todo_todos.SingleOrDefault(x => x.todo_id == todo_id_string);
             if (null != todo)
             {
+                todo.status_id = status_id.ToString();
                 todo.modified_on = System.DateTime.Now;
                 //todo.is_active = "N";
-                found = true;
 
                 todo_projects_statuses history = new todo_projects_statuses();
                 history.history_id = Guid.NewGuid().ToString();
@@ -117,10 +117,12 @@ namespace database
                 history.status_id = status_id.ToString(); // new Guid(status_id).ToString(); // temp deleted
                 history.modified_on = System.DateTime.Now;
                 te.todo_projects_statuses.Add(history);
+
+                found = true;
             }
 
-            te.SaveChanges();
-            return found;
+            int total = te.SaveChanges();
+            return found && total >= 1;
         }
     }
 }

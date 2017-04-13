@@ -1,10 +1,11 @@
 ﻿using dtos;
+using dtos.contracts;
 using System;
 using System.Collections.Generic;
 
 namespace libraries
 {
-    public class todoer
+    public class todoer: api_contract
     {
         private database.api api;
 

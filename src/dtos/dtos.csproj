@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="contracts\api_contract.cs" />
     <Compile Include="defaults\statuses.cs" />
     <Compile Include="defaults\projects.cs" />
     <Compile Include="NameValueDTO.cs" />

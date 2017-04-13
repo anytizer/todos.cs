@@ -20,6 +20,7 @@ namespace database.mysql
         public string status_id { get; set; }
         public string status_name { get; set; }
         public System.DateTime added_on { get; set; }
+        public string issue_number { get; set; }
         public string todo_text { get; set; }
     }
 }

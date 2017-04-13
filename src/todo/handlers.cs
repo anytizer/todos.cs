@@ -111,16 +111,17 @@ namespace todo
             //Guid todo_id = new Guid(dataGridView1.Rows[currentContextRowIndex].Cells[this.ToDoID.Index].Value.ToString());
             foreach (NameValueDTO s in this.statuses)
             {
-                if(s.name.Equals(new_staus_name))
+                if (s.name.Equals(new_staus_name))
                 {
                     todoer td = new todoer();
                     td.done(todo_id, s.id);
+                    // MessageBox.Show(string.Format("{0} @ {1}", todo_id, new_staus_name));
                     //break;
                 }
             }
 
             reload();
-           // MessageBox.Show(todo_id.ToString());
+            // MessageBox.Show(todo_id.ToString());
         }
     }
 }
