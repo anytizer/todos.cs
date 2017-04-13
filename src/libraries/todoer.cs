@@ -6,32 +6,35 @@ namespace libraries
 {
     public class todoer
     {
-        private database.api db;
+        private database.api api;
 
         public todoer()
         {
-            db = new database.api();
+            this.api = new database.api();
         }
 
         public void add(Guid project_id, Guid status_id, string text)
         {
-            db.add(project_id, status_id, text);
+            this.api.add(project_id, status_id, text);
         }
 
         public List<projectsDTO> projects()
         {
-            return db.projects();
+            return this.api.projects();
         }
 
         public List<todosDTO> todos()
         {
-            //List<todosDTO> todos = new List<todosDTO>();
-            //return todos;
-            return db.todos();
+            return this.api.todos();
         }
         public bool done(Guid todo_id, Guid status_id)
         {
-            return db.done(todo_id, status_id);
+            return this.api.done(todo_id, status_id);
+        }
+
+        public List<NameValueDTO> all_statuses()
+        {
+            return this.api.all_statuses();
         }
     }
 }

@@ -54,6 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="handlers.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ToDos.cs">
       <SubType>Form</SubType>
     </Compile>

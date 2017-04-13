@@ -10,6 +10,7 @@ CREATE TABLE `todo_statuses` (
   `status_shortname` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'Short Name',
   `status_name` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'Status Full Name',
   `is_active` ENUM('N','Y') NOT NULL DEFAULT 'N' COMMENT 'Is Active?',
+  `in_menu` ENUM('N','Y') NOT NULL DEFAULT 'N' COMMENT 'Show in Menu?',
   `status_priority` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Sorting Priority',
   PRIMARY KEY (`status_id`)
 );

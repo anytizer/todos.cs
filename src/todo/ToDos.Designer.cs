@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ToDos));
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -50,27 +51,27 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            //
+            // 
             // comboBox1
-            //
+            // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(84, 29);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 0;
-            //
+            // 
             // label1
-            //
+            // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Project";
-            //
+            // 
             // dataGridView1
-            //
+            // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeColumns = false;
@@ -92,61 +93,62 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(894, 574);
             this.dataGridView1.TabIndex = 2;
-            //
+            this.dataGridView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseClick);
+            // 
             // ToDoID
-            //
+            // 
             this.ToDoID.Frozen = true;
             this.ToDoID.HeaderText = "ToDo ID";
             this.ToDoID.Name = "ToDoID";
             this.ToDoID.ReadOnly = true;
             this.ToDoID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ToDoID.Visible = false;
             this.ToDoID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            //
+            this.ToDoID.Visible = false;
+            // 
             // date
-            //
-            this.date.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             this.date.HeaderText = "Date and Time";
             this.date.Name = "date";
             this.date.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.date.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.date.Width = 110;
-            //
+            // 
             // issue
-            //
-            this.issue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             this.issue.HeaderText = "Issue #";
             this.issue.Name = "issue";
+            this.issue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.issue.Width = 80;
-            //
+            // 
             // project
-            //
-            this.project.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             this.project.HeaderText = "Project";
             this.project.Name = "project";
-            //
+            this.project.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // status
-            //
-            this.status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             this.status.HeaderText = "Status";
             this.status.Name = "status";
+            this.status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.status.Width = 90;
-            //
+            // 
             // todo
-            //
-            this.todo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             this.todo.HeaderText = "Todo Text";
             this.todo.Name = "todo";
+            this.todo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.todo.Width = 495;
-            //
+            // 
             // textBox1
-            //
+            // 
             this.textBox1.Location = new System.Drawing.Point(211, 30);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(533, 20);
             this.textBox1.TabIndex = 3;
-            //
+            // 
             // button1
-            //
+            // 
             this.button1.Location = new System.Drawing.Point(750, 27);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
@@ -154,9 +156,9 @@
             this.button1.Text = "Save";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            //
+            // 
             // button2
-            //
+            // 
             this.button2.Location = new System.Drawing.Point(831, 27);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
@@ -164,9 +166,9 @@
             this.button2.Text = "Refresh";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            //
+            // 
             // menuStrip1
-            //
+            // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.logoutToolStripMenuItem,
             this.configurationsToolStripMenuItem,
@@ -179,49 +181,49 @@
             this.menuStrip1.Size = new System.Drawing.Size(919, 24);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
-            //
+            // 
             // logoutToolStripMenuItem
-            //
+            // 
             this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
             this.logoutToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.logoutToolStripMenuItem.Text = "Logout";
-            //
+            // 
             // configurationsToolStripMenuItem
-            //
+            // 
             this.configurationsToolStripMenuItem.Name = "configurationsToolStripMenuItem";
             this.configurationsToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
             this.configurationsToolStripMenuItem.Text = "Configurations";
-            //
+            // 
             // onTopToolStripMenuItem
-            //
+            // 
             this.onTopToolStripMenuItem.Name = "onTopToolStripMenuItem";
-            this.onTopToolStripMenuItem.Size = new System.Drawing.Size(111, 20);
+            this.onTopToolStripMenuItem.Size = new System.Drawing.Size(106, 20);
             this.onTopToolStripMenuItem.Text = "? Always On Top";
             this.onTopToolStripMenuItem.Click += new System.EventHandler(this.onTopToolStripMenuItem_Click);
-            //
+            // 
             // doingToolStripMenuItem
-            //
+            // 
             this.doingToolStripMenuItem.Name = "doingToolStripMenuItem";
             this.doingToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
             this.doingToolStripMenuItem.Text = "Doing";
             this.doingToolStripMenuItem.Click += new System.EventHandler(this.doingToolStripMenuItem_Click);
-            //
+            // 
             // lowPriorityToolStripMenuItem
-            //
+            // 
             this.lowPriorityToolStripMenuItem.Name = "lowPriorityToolStripMenuItem";
             this.lowPriorityToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
             this.lowPriorityToolStripMenuItem.Text = "Low Priority";
             this.lowPriorityToolStripMenuItem.Click += new System.EventHandler(this.lowPriorityToolStripMenuItem_Click);
-            //
+            // 
             // doneToolStripMenuItem
-            //
+            // 
             this.doneToolStripMenuItem.Name = "doneToolStripMenuItem";
             this.doneToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.doneToolStripMenuItem.Text = "Done";
             this.doneToolStripMenuItem.Click += new System.EventHandler(this.doneToolStripMenuItem_Click);
-            //
+            // 
             // ToDos
-            //
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -233,6 +235,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(935, 685);
