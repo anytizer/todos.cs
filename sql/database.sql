@@ -9,6 +9,7 @@ CREATE TABLE `todo_statuses` (
   `status_code` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'Status Code',
   `status_shortname` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'Short Name',
   `status_name` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'Status Full Name',
+  `is_active` ENUM('N','Y') NOT NULL DEFAULT 'N' COMMENT 'Is Active?',
   `status_priority` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Sorting Priority',
   PRIMARY KEY (`status_id`)
 );
