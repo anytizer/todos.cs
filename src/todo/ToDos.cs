@@ -96,6 +96,8 @@ namespace todo
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
+            // @todo Make sure the row was selected in the grid
+
             // Delete Key - Delete Selected Row!
             if (keyData == Keys.Delete)
             {
@@ -117,14 +119,9 @@ namespace todo
                     {
                         MessageBox.Show("Did not delete.");
                     }
-
                 }
-
-                //Guid todo = Guid.NewGuid();
-                //todoer td = new todoer();
-                //td.done(todo);
-                return true;
             }
+
             return base.ProcessCmdKey(ref msg, keyData);
         }
 

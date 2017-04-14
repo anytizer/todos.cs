@@ -106,6 +106,7 @@ namespace todo
             // 
             // date
             // 
+            this.date.DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";
             this.date.HeaderText = "Date and Time";
             this.date.Name = "date";
             this.date.Resizable = System.Windows.Forms.DataGridViewTriState.False;

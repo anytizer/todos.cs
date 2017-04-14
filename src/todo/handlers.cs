@@ -72,7 +72,6 @@ namespace todo
                 this.currentContextRowIndex = dataGridView1.HitTest(e.X, e.Y).RowIndex;
                 dataGridView1.ClearSelection();
 
-
                 ContextMenu m = new ContextMenu();
                 if (currentContextRowIndex >= 0)
                 {
