@@ -1,12 +1,13 @@
 ﻿using database.mysql;
 using dtos;
+using dtos.contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace database
 {
-    public partial class api: BaseAPI // , contract
+    public partial class api: BaseAPI, api_contract // , contract
     {
         /**
          * Status repository
