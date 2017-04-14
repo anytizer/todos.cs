@@ -37,36 +37,37 @@ namespace database
             /**
              * Pre-verify that the project id and status id exist
              */
-            if (this.project_exists(project_id) && this.status_exists(status_id))
+            if (this.project_exists(project_id))
             {
-                database.mysql.todo_todos todo = new database.mysql.todo_todos();
-                todo.todo_id = Guid.NewGuid().ToString();
-                todo.project_id = project_id.ToString();
-                todo.status_id = status_id.ToString();
-                todo.issue_number = "";
-                todo.todo_text = text;
-                todo.added_on = System.DateTime.Now;
-                todo.modified_on = System.DateTime.Now;
-                todo.is_active = "Y";
-                te.todo_todos.Add(todo);
+                if (this.status_exists(status_id))
+                {
+                    database.mysql.todo_todos todo = new database.mysql.todo_todos();
+                    todo.todo_id = Guid.NewGuid().ToString();
+                    todo.project_id = project_id.ToString();
+                    todo.status_id = status_id.ToString();
+                    todo.issue_number = "";
+                    todo.todo_text = text;
+                    todo.added_on = System.DateTime.Now;
+                    todo.modified_on = System.DateTime.Now;
+                    todo.is_active = "Y";
 
-                te.SaveChanges();
-            }
-            else
-            {
-                // invalid status
-                // FK invalid
+                    todo_statuses status = te.todo_statuses.SingleOrDefault(x=>x.status_id == status_id.ToString());
+
+                    te.todo_todos.Add(todo);
+                    te.todo_statuses.Add(status);
+                    te.SaveChanges();
+                }
             }
         }
 
-        public List<todosDTO> todos()
+        public List<TodosDTO> todos()
         {
             // @todo read from api, instead of sql
 
-            List<todosDTO> lv = new List<todosDTO>();
+            List<TodosDTO> lv = new List<TodosDTO>();
             foreach (v_todos t in te.v_todos.OrderByDescending(x => x.added_on))
             {
-                todosDTO todo = new todosDTO();
+                TodosDTO todo = new TodosDTO();
 
                 todo.project_id = t.project_id;
                 todo.project_name = t.project_name;
@@ -82,13 +83,13 @@ namespace database
             return lv;
         }
 
-        public List<projectsDTO> projects()
+        public List<ProjectsDTO> projects()
         {
             // @todo read from api, instead of sql
-            List<projectsDTO> projects = new List<projectsDTO>();
+            List<ProjectsDTO> projects = new List<ProjectsDTO>();
             foreach (todo_projects p in te.todo_projects)
             {
-                projectsDTO pd = new projectsDTO();
+                ProjectsDTO pd = new ProjectsDTO();
                 pd.project_id = p.project_id;
                 pd.project_name = p.project_name;
                 projects.Add(pd);
@@ -114,6 +115,7 @@ namespace database
 
                 todo_projects_statuses history = new todo_projects_statuses();
                 history.history_id = Guid.NewGuid().ToString();
+                history.user_id = dtos.defaults.users.UserID.ToString();
                 history.project_id = todo.project_id;
                 history.status_id = status_id.ToString(); // new Guid(status_id).ToString(); // temp deleted
                 history.modified_on = System.DateTime.Now;

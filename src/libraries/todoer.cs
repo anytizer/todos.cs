@@ -19,12 +19,12 @@ namespace libraries
             this.api.add(project_id, status_id, text);
         }
 
-        public List<projectsDTO> projects()
+        public List<ProjectsDTO> projects()
         {
             return this.api.projects();
         }
 
-        public List<todosDTO> todos()
+        public List<TodosDTO> todos()
         {
             return this.api.todos();
         }

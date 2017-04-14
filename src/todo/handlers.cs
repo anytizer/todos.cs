@@ -101,6 +101,9 @@ namespace todo
             }
         }
 
+        /**
+         * Right click context menu on toto items.
+         */
         void menu_selected(object sender, System.EventArgs e)
         {
             MenuItem mi = sender as MenuItem;

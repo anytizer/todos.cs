@@ -26,8 +26,27 @@ namespace todo
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            reload();
-            combo();
+            //reloadProjects(); // list of projects
+            reload(); // reload list of todos
+            //combo(); // list of projects, ... remove
+            /*
+            // https://msdn.microsoft.com/en-us/library/ms229625(v=vs.110).aspx
+            foreach (NameValueDTO s in this.statuses)
+            {
+                MenuItem mi = new MenuItem(s.name);
+                int status_index = this.status.Index;
+                string current_status = dataGridView1.Rows[currentContextRowIndex].Cells[status_index].Value.ToString();
+                if (current_status == s.name)
+                {
+                    // @todo skipped re-selecting on current status
+                    mi.Enabled = false;
+                }
+                mi.Click += new EventHandler(this.menu_selected);
+                //toolStripMenuItem1.Add(mi);
+
+                ToolStripDropDownButton fruitToolStripDropDownButton = new ToolStripDropDownButton("Fruit", null, null, "Fruit");
+                //toolStripMenuItem1.Items.Add(fruitToolStripDropDownButton);
+            }*/
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -65,9 +84,9 @@ namespace todo
 
             textBox1.Text = "";
             database.api t = new database.api();
-            List<todosDTO> lv = t.todos();
+            List<TodosDTO> lv = t.todos();
 
-            foreach (todosDTO v in lv)
+            foreach (TodosDTO v in lv)
             {
                 // add to grid
                 // dataGridView1.row
@@ -127,17 +146,17 @@ namespace todo
 
         private void combo()
         {
-            this.comboBox1.Items.Clear();
+            //this.comboBox1.Items.Clear();
 
             database.api t = new database.api();
-            List<projectsDTO> lp = t.projects();
-            foreach (projectsDTO p in lp)
+            List<ProjectsDTO> lp = t.projects();
+            foreach (ProjectsDTO p in lp)
             {
                 NameValueDTO pi = new NameValueDTO();
                 pi.id = new Guid(p.project_id);
                 pi.name = p.project_name;
                 pi.value = p.project_name;
-                this.comboBox1.Items.Add(pi);
+                //this.comboBox1.Items.Add(pi);
             };
 
             //this.SuspendLayout();

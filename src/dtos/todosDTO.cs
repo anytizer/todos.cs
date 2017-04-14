@@ -2,7 +2,7 @@
 
 namespace dtos
 {
-    public class todosDTO
+    public class TodosDTO
     {
         public string todo_id { get; set; }
         public string todo_text { get; set; }

@@ -55,3 +55,13 @@ CREATE TABLE `todo_projects_statuses` (
   CONSTRAINT `todo_projects_statuses_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `todo_projects` (`project_id`),
   CONSTRAINT `todo_projects_statuses_ibfk_2` FOREIGN KEY (`status_id`) REFERENCES `todo_statuses` (`status_id`)
 );
+
+-- SHOW CREATE TABLE todo_messages;
+DROP TABLE IF EXISTS todo_messages;
+CREATE TABLE `todo_messages` (
+  `message_id` VARCHAR(255) NOT NULL,
+  `message_category` VARCHAR(255) NOT NULL,
+  `message_code` VARCHAR(255) NOT NULL,
+  `message_text` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`message_id`)
+);
