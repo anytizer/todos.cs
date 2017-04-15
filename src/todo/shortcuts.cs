@@ -11,6 +11,9 @@ namespace todo
     {
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
+            return false;
+
+            /*
             // @todo Make sure the row was selected in the grid
             // @todo Proceed why when there are records
             // @todo Delete only if item is pre selected
@@ -42,6 +45,7 @@ namespace todo
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
+            */
         }
 
     }

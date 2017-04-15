@@ -117,7 +117,7 @@ namespace todo
 
         private void button2_Click(object sender, EventArgs e)
         {
-            reload();
+            
         }
 
         private void combo()
@@ -143,6 +143,42 @@ namespace todo
         {
             // nothing
             // do not entertain DELETE key
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            // nothing
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            /*
+            this.Visible = !this.Visible;
+            if (this.Visible == false)
+            {
+                //this.Hide();
+                this.TopMost = true;
+                this.WindowState = FormWindowState.Minimized;
+                notifyIcon1.Visible = true;
+            }
+            else
+            {
+                this.Show();
+                //this.TopMost = true;
+                this.WindowState = FormWindowState.Normal;
+                notifyIcon1.Visible = false;
+            }
+            */
+        }
+
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            reload();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

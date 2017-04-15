@@ -23,10 +23,12 @@ namespace todo
                 if (this.TopMost)
                 {
                     menu.Text = "\u2714 Always On Top";
+                    menu.ForeColor = Color.Red;
                 }
                 else
                 {
-                    menu.Text = "\u2000 Always On Top";
+                    menu.Text = "x Always On Top";
+                    menu.ForeColor = Color.Green;
                 }
             }
         }
