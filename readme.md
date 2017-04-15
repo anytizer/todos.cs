@@ -38,3 +38,7 @@ ToDo list manager using C# and MySQL
 ## Screenshot
 
  ![Screenshot](/documents/screenshot.png)
+ 
+ The context menu is a database-driven option.
+   ![Context Menu](/documents/right-click.png)
+ 
