@@ -57,6 +57,9 @@
     <Compile Include="handlers.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="shortcuts.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ToDos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +99,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\configurations\configurations.csproj">
+      <Project>{F80B785D-61AE-40DC-AC48-1BA78E1EB766}</Project>
+      <Name>configurations</Name>
+    </ProjectReference>
     <ProjectReference Include="..\database\database.csproj">
       <Project>{7CB44C34-0271-4D9A-8810-94F31F9ED853}</Project>
       <Name>database</Name>

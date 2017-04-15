@@ -23,6 +23,7 @@ namespace database.mysql
         public string project_id { get; set; }
         public string project_name { get; set; }
         public string is_active { get; set; }
+        public System.DateTime added_on { get; set; }
     
         public virtual ICollection<todo_projects_todos> todo_projects_todos { get; set; }
         public virtual ICollection<todo_users_projects> todo_users_projects { get; set; }

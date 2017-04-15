@@ -1,4 +1,5 @@
-﻿using database;
+﻿using configurations.defaults;
+using database;
 using database.mysql;
 using dtos;
 using libraries;
@@ -17,8 +18,9 @@ namespace todo
         public ToDos()
         {
             InitializeComponent();
-            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
+            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.MistyRose; // Color.Beige;
             dataGridView1.AreAllCellsSelected(false);
+            // row.DefaultCellStyle.BackColor = Color.Red;
 
             libraries.todoer td = new libraries.todoer();
             this.statuses = td.all_statuses();
@@ -26,8 +28,11 @@ namespace todo
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //reloadProjects(); // list of projects
             reload(); // reload list of todos
+
+            // combo projects
+
+            //reloadProjects(); // list of projects
             //combo(); // list of projects, ... remove
             /*
             // https://msdn.microsoft.com/en-us/library/ms229625(v=vs.110).aspx
@@ -60,8 +65,8 @@ namespace todo
                 /**
                  * @todo Pickup from dropdown lists
                  */
-                Guid project_id = dtos.defaults.projects.ProjectID;
-                Guid status_id = dtos.defaults.statuses.NEW;
+                Guid project_id = configurations.defaults.projects.ProjectID;
+                Guid status_id = configurations.defaults.statuses.NEW;
                 td.add(project_id, status_id, textBox1.Text);
 
                 reload();
@@ -70,6 +75,10 @@ namespace todo
 
         private void reload()
         {
+            this.SuspendLayout();
+            this.dataGridView1.Rows.Clear();
+            this.dataGridView1.Enabled = false;
+
             // alternate color
             // little padding
             // row level selection
@@ -78,9 +87,6 @@ namespace todo
             {
                 selectedIndex = this.dataGridView1.SelectedRows[0].Index;
             }
-
-            this.SuspendLayout();
-            this.dataGridView1.Rows.Clear();
 
             textBox1.Text = "";
             database.api t = new database.api();
@@ -106,46 +112,12 @@ namespace todo
             }
 
             this.ResumeLayout();
+            this.dataGridView1.Enabled = true;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             reload();
-        }
-
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            // @todo Make sure the row was selected in the grid
-            // @todo Proceed why when there are records
-            // @todo Delete only if item is pre selected
-            if (this.dataGridView1.SelectedRows.Count <= 0)
-                return false;
-
-            // Delete Key - Delete Selected Row!
-            if (keyData == Keys.Delete)
-            {
-                // MessageBox.Show("Index: "+this.dataGridView1.SelectedRows[0].Index.ToString());
-                // MessageBox.Show("Index: " + this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString());
-
-                if (MessageBox.Show("Are you sure DELETE this item?", "Delete?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    // Do stuff after 'YES is clicked'
-                    database.api td = new database.api();
-                    // @todo There may not be a selection or wrong entry pre-selected
-                    Guid todo_id = new Guid(this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString());
-                    Guid status_id = dtos.defaults.statuses.DELETED;
-                    if (td.done(todo_id, status_id))
-                    {
-                        reload();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Did not delete.");
-                    }
-                }
-            }
-
-            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private void combo()
@@ -165,6 +137,11 @@ namespace todo
 
             //this.SuspendLayout();
             //this.ResumeLayout();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            // nothing
         }
     }
 }

@@ -11,7 +11,8 @@
           </Key>
           <Property Name="project_id" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="project_name" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="is_active" Type="enum" />
+          <Property Name="is_active" Type="enum" Nullable="false" />
+          <Property Name="added_on" Type="datetime" Precision="0" Nullable="false" />
         </EntityType>
         <EntityType Name="todo_projects_todos">
           <Key>
@@ -34,6 +35,7 @@
           <Property Name="in_menu" Type="enum" Nullable="false" />
           <Property Name="in_list" Type="enum" Nullable="false" />
           <Property Name="status_priority" Type="uint" Nullable="false" />
+          <Property Name="status_color" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="todo_todos">
           <Key>
@@ -62,6 +64,8 @@
           <Property Name="user_username" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="user_password" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="user_fullname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="is_active" Type="enum" Nullable="false" />
+          <Property Name="added_on" Type="datetime" Precision="0" Nullable="false" />
         </EntityType>
         <EntityType Name="todo_users_projects">
           <Key>
@@ -267,7 +271,8 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           </Key>
           <Property Name="project_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="project_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="is_active" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+          <Property Name="is_active" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
+          <Property Name="added_on" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="todo_projects_todos" Relationship="todosModel.FK_todo_projects_todos_project_id" FromRole="todo_projects" ToRole="todo_projects_todos" />
           <NavigationProperty Name="todo_users_projects" Relationship="todosModel.todo_users_projects_ibfk_2" FromRole="todo_projects" ToRole="todo_users_projects" />
         </EntityType>
@@ -294,6 +299,7 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           <Property Name="in_menu" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
           <Property Name="in_list" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
           <Property Name="status_priority" Type="Int64" Nullable="false" />
+          <Property Name="status_color" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="todo_todos_statuses" Relationship="todosModel.todo_todos_statuses_ibfk_2" FromRole="todo_statuses" ToRole="todo_todos_statuses" />
         </EntityType>
         <EntityType Name="todo_todos">
@@ -327,6 +333,8 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           <Property Name="user_username" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="user_password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="user_fullname" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="is_active" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
+          <Property Name="added_on" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="todo_users_projects" Relationship="todosModel.todo_users_projects_ibfk_1" FromRole="todo_users" ToRole="todo_users_projects" />
         </EntityType>
         <EntityType Name="todo_users_projects">
@@ -453,6 +461,7 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           <EntitySetMapping Name="todo_projects">
             <EntityTypeMapping TypeName="todosModel.todo_projects">
               <MappingFragment StoreEntitySet="todo_projects">
+                <ScalarProperty Name="added_on" ColumnName="added_on" />
                 <ScalarProperty Name="is_active" ColumnName="is_active" />
                 <ScalarProperty Name="project_name" ColumnName="project_name" />
                 <ScalarProperty Name="project_id" ColumnName="project_id" />
@@ -471,6 +480,7 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           <EntitySetMapping Name="todo_statuses">
             <EntityTypeMapping TypeName="todosModel.todo_statuses">
               <MappingFragment StoreEntitySet="todo_statuses">
+                <ScalarProperty Name="status_color" ColumnName="status_color" />
                 <ScalarProperty Name="status_priority" ColumnName="status_priority" />
                 <ScalarProperty Name="in_list" ColumnName="in_list" />
                 <ScalarProperty Name="in_menu" ColumnName="in_menu" />
@@ -506,6 +516,8 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           <EntitySetMapping Name="todo_users">
             <EntityTypeMapping TypeName="todosModel.todo_users">
               <MappingFragment StoreEntitySet="todo_users">
+                <ScalarProperty Name="added_on" ColumnName="added_on" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
                 <ScalarProperty Name="user_fullname" ColumnName="user_fullname" />
                 <ScalarProperty Name="user_password" ColumnName="user_password" />
                 <ScalarProperty Name="user_username" ColumnName="user_username" />

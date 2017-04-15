@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B0A21E12-1844-4A03-BBDD-1E4869404A7A}</ProjectGuid>
+    <ProjectGuid>{F80B785D-61AE-40DC-AC48-1BA78E1EB766}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>dtos</RootNamespace>
-    <AssemblyName>dtos</AssemblyName>
+    <RootNamespace>configurations</RootNamespace>
+    <AssemblyName>configurations</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,9 +29,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,15 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="contracts\api_contract.cs" />
-    <Compile Include="NameValueDTO.cs" />
-    <Compile Include="ErrorCodeDTO.cs" />
-    <Compile Include="ProjectsDTO.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="defaults\projects.cs" />
+    <Compile Include="defaults\statuses.cs" />
+    <Compile Include="defaults\users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TodosDTO.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="favicon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

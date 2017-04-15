@@ -23,6 +23,8 @@ namespace database.mysql
         public string user_username { get; set; }
         public string user_password { get; set; }
         public string user_fullname { get; set; }
+        public string is_active { get; set; }
+        public System.DateTime added_on { get; set; }
     
         public virtual ICollection<todo_users_projects> todo_users_projects { get; set; }
     }

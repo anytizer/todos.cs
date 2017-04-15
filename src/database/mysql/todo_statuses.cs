@@ -27,6 +27,7 @@ namespace database.mysql
         public string in_menu { get; set; }
         public string in_list { get; set; }
         public long status_priority { get; set; }
+        public string status_color { get; set; }
     
         public virtual ICollection<todo_todos_statuses> todo_todos_statuses { get; set; }
     }

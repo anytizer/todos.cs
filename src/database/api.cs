@@ -1,4 +1,5 @@
-﻿using database.mysql;
+﻿using configurations.defaults;
+using database.mysql;
 using dtos;
 using System;
 using System.Collections.Generic;
@@ -62,7 +63,7 @@ namespace database
                     todo_todos_statuses ts = new todo_todos_statuses();
                     ts.todo_status_id = Guid.NewGuid().ToString();
                     ts.todo_id = todo.todo_id;
-                    ts.status_id = dtos.defaults.statuses.NEW.ToString();
+                    ts.status_id = statuses.NEW.ToString();
                     ts.added_on = System.DateTime.Now;
                     ts.is_latest = "Y";
 

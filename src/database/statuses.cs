@@ -1,4 +1,5 @@
-﻿using database.mysql;
+﻿using configurations.defaults;
+using database.mysql;
 using dtos;
 using dtos.contracts;
 using System;
@@ -14,7 +15,7 @@ namespace database
          */
         public Guid delete_status()
         {
-            return dtos.defaults.statuses.DELETED;
+            return statuses.DELETED;
         }
 
         public List<NameValueDTO> all_statuses()

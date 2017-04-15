@@ -36,6 +36,6 @@ WHERE
 ORDER BY
 	added_on DESC
 ;
-UPDATE todo_todos SET is_active='Y';
+-- UPDATE todo_todos SET is_active='Y';
 
 SELECT * FROM todo_todos WHERE todo_id='24a93e76-a675-4ad4-9d8f-0bc975249cae';

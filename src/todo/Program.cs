@@ -11,6 +11,7 @@ namespace todo
         /// The main entry point for the application.
         /// </summary>
         static Mutex mutex = new Mutex(true, "C1A6CB3E-3444-46D6-815D-DBE7EF2CBA35");
+
         [STAThread]
         static void Main()
         {
@@ -33,13 +34,13 @@ namespace todo
     /**
      * @see http://stackoverflow.com/questions/19147/what-is-the-correct-way-to-create-a-single-instance-application
      */
-    internal class NativeMethods
-    {
-        public const int HWND_BROADCAST = 0xffff;
-        public static readonly int WM_SHOWME = RegisterWindowMessage("WM_SHOWME");
-        [DllImport("user32")]
-        public static extern bool PostMessage(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam);
-        [DllImport("user32")]
-        public static extern int RegisterWindowMessage(string message);
-    }
+    //internal class NativeMethods
+    //{
+    //    public const int HWND_BROADCAST = 0xffff;
+    //    public static readonly int WM_SHOWME = RegisterWindowMessage("WM_SHOWME");
+    //    [DllImport("user32")]
+    //    public static extern bool PostMessage(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam);
+    //    [DllImport("user32")]
+    //    public static extern int RegisterWindowMessage(string message);
+    //}
 }

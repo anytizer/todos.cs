@@ -110,6 +110,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\configurations\configurations.csproj">
+      <Project>{F80B785D-61AE-40DC-AC48-1BA78E1EB766}</Project>
+      <Name>configurations</Name>
+    </ProjectReference>
     <ProjectReference Include="..\dtos\dtos.csproj">
       <Project>{B0A21E12-1844-4A03-BBDD-1E4869404A7A}</Project>
       <Name>dtos</Name>

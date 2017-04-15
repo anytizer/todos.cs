@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace todo
 {
-    public partial class ToDos
+    public partial class ToDos : Form
     {
         private int currentContextRowIndex = 0;
         private void onTopToolStripMenuItem_Click(object sender, EventArgs e)
@@ -53,7 +53,7 @@ namespace todo
 
             database.api td = new database.api();
             Guid todo_id = new Guid(this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString());
-            Guid status_id = dtos.defaults.statuses.LOWPRIORITY;
+            Guid status_id = configurations.defaults.statuses.LOWPRIORITY;
             if (td.done(todo_id, status_id))
             {
                 reload();
@@ -118,7 +118,8 @@ namespace todo
                     todoer td = new todoer();
                     td.done(todo_id, s.id);
                     // MessageBox.Show(string.Format("{0} @ {1}", todo_id, new_staus_name));
-                    //break;
+
+                    break;
                 }
             }
 

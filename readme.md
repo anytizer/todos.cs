@@ -18,6 +18,7 @@ ToDo list manager using C# and MySQL
  - Color banded display
  - Date time format to YYYY-MM-DD HH:MM:SS
  - ~~Single instance only~~ Window opening
+ - Suitable for dual-screen display
 
 
 ## Status
