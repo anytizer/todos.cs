@@ -1,0 +1,199 @@
+-- MySQL dump 10.16  Distrib 10.1.13-MariaDB, for Win32 (AMD64)
+--
+-- Host: localhost    Database: awesome_todos
+-- ------------------------------------------------------
+-- Server version	10.1.13-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `todo_projects`
+--
+
+DROP TABLE IF EXISTS `todo_projects`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `todo_projects` (
+  `project_id` varchar(255) NOT NULL DEFAULT '' COMMENT 'GUID Value',
+  `project_name` varchar(255) NOT NULL DEFAULT '' COMMENT 'Project Name',
+  `is_active` enum('N','Y') NOT NULL DEFAULT 'N' COMMENT 'Is active?',
+  `added_on` datetime NOT NULL COMMENT 'Added On',
+  PRIMARY KEY (`project_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `todo_projects_todos`
+--
+
+DROP TABLE IF EXISTS `todo_projects_todos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `todo_projects_todos` (
+  `project_id` varchar(255) NOT NULL COMMENT 'Project ID',
+  `todo_id` varchar(255) NOT NULL COMMENT 'Todo ID',
+  `added_on` datetime NOT NULL COMMENT 'Added On',
+  PRIMARY KEY (`project_id`,`todo_id`),
+  KEY `FK_todo_projects_todos_todo_id` (`todo_id`),
+  CONSTRAINT `FK_todo_projects_todos_project_id` FOREIGN KEY (`project_id`) REFERENCES `todo_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_todo_projects_todos_todo_id` FOREIGN KEY (`todo_id`) REFERENCES `todo_todos` (`todo_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `todo_statuses`
+--
+
+DROP TABLE IF EXISTS `todo_statuses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `todo_statuses` (
+  `status_id` varchar(255) NOT NULL DEFAULT '' COMMENT 'GUID Value',
+  `status_code` varchar(255) NOT NULL DEFAULT '' COMMENT 'Status Code',
+  `status_shortname` varchar(255) NOT NULL DEFAULT '' COMMENT 'Short Name',
+  `status_name` varchar(255) NOT NULL DEFAULT '' COMMENT 'Status Full Name',
+  `is_active` enum('N','Y') NOT NULL DEFAULT 'N' COMMENT 'Is Active?',
+  `in_menu` enum('N','Y') NOT NULL DEFAULT 'N' COMMENT 'Show in Context Menu?',
+  `in_list` enum('N','Y') NOT NULL DEFAULT 'N' COMMENT 'Show in List?',
+  `status_priority` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Sorting Priority',
+  `status_color` varchar(255) NOT NULL DEFAULT '' COMMENT 'Banding Color',
+  PRIMARY KEY (`status_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `todo_todos`
+--
+
+DROP TABLE IF EXISTS `todo_todos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `todo_todos` (
+  `todo_id` varchar(255) NOT NULL DEFAULT '' COMMENT 'GUID Value',
+  `issue_number` varchar(255) NOT NULL DEFAULT '' COMMENT 'Issue Number',
+  `todo_text` text NOT NULL COMMENT 'Todo Text',
+  `is_active` enum('N','Y') NOT NULL DEFAULT 'N' COMMENT 'Active?',
+  PRIMARY KEY (`todo_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `todo_todos_statuses`
+--
+
+DROP TABLE IF EXISTS `todo_todos_statuses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `todo_todos_statuses` (
+  `todo_status_id` varchar(255) NOT NULL COMMENT 'ToDo Status ID',
+  `todo_id` varchar(255) NOT NULL COMMENT 'ToDo ID',
+  `status_id` varchar(255) NOT NULL COMMENT 'Status ID',
+  `added_on` datetime NOT NULL COMMENT 'Added On',
+  `is_latest` enum('N','Y') NOT NULL COMMENT 'Only one per ToDo',
+  PRIMARY KEY (`todo_status_id`),
+  KEY `todo_id` (`todo_id`),
+  KEY `status_id` (`status_id`),
+  CONSTRAINT `todo_todos_statuses_ibfk_1` FOREIGN KEY (`todo_id`) REFERENCES `todo_todos` (`todo_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `todo_todos_statuses_ibfk_2` FOREIGN KEY (`status_id`) REFERENCES `todo_statuses` (`status_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `todo_users`
+--
+
+DROP TABLE IF EXISTS `todo_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `todo_users` (
+  `user_id` varchar(255) NOT NULL COMMENT 'User ID',
+  `user_username` varchar(255) NOT NULL DEFAULT '' COMMENT 'User Name',
+  `user_password` varchar(255) NOT NULL DEFAULT '' COMMENT 'User Password',
+  `user_fullname` varchar(255) NOT NULL DEFAULT '' COMMENT 'Full name',
+  `is_active` enum('N','Y') NOT NULL DEFAULT 'N' COMMENT 'Active user?',
+  `added_on` datetime NOT NULL COMMENT 'Added On',
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `username_key` (`user_username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `todo_users_projects`
+--
+
+DROP TABLE IF EXISTS `todo_users_projects`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `todo_users_projects` (
+  `user_id` varchar(255) NOT NULL DEFAULT '' COMMENT 'User ID',
+  `project_id` varchar(255) NOT NULL DEFAULT '' COMMENT 'Project ID',
+  `added_on` datetime NOT NULL COMMENT 'Added On',
+  PRIMARY KEY (`user_id`,`project_id`),
+  KEY `project_id` (`project_id`),
+  CONSTRAINT `todo_users_projects_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `todo_users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `todo_users_projects_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `todo_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Temporary table structure for view `v_todos`
+--
+
+DROP TABLE IF EXISTS `v_todos`;
+/*!50001 DROP VIEW IF EXISTS `v_todos`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `v_todos` (
+  `todo_id` tinyint NOT NULL,
+  `project_id` tinyint NOT NULL,
+  `project_name` tinyint NOT NULL,
+  `status_id` tinyint NOT NULL,
+  `status_name` tinyint NOT NULL,
+  `added_on` tinyint NOT NULL,
+  `issue_number` tinyint NOT NULL,
+  `todo_text` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping routines for database 'awesome_todos'
+--
+
+--
+-- Final view structure for view `v_todos`
+--
+
+/*!50001 DROP TABLE IF EXISTS `v_todos`*/;
+/*!50001 DROP VIEW IF EXISTS `v_todos`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `v_todos` AS select `t`.`todo_id` AS `todo_id`,`p`.`project_id` AS `project_id`,`p`.`project_name` AS `project_name`,`s`.`status_id` AS `status_id`,`s`.`status_shortname` AS `status_name`,`ts`.`added_on` AS `added_on`,`t`.`issue_number` AS `issue_number`,`t`.`todo_text` AS `todo_text` from ((((((`todo_todos` `t` join `todo_todos_statuses` `ts` on((`ts`.`todo_id` = `t`.`todo_id`))) join `todo_statuses` `s` on((`s`.`status_id` = `ts`.`status_id`))) join `todo_projects_todos` `pd` on((`pd`.`todo_id` = `t`.`todo_id`))) join `todo_projects` `p` on((`p`.`project_id` = `pd`.`project_id`))) join `todo_users_projects` `up` on((`p`.`project_id` = `up`.`project_id`))) join `todo_users` `u` on((`u`.`user_id` = `up`.`user_id`))) where ((`t`.`is_active` = 'Y') and (`s`.`is_active` = 'Y') and (`s`.`in_list` = 'Y') and (`ts`.`is_latest` = 'Y')) order by `ts`.`added_on` desc */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2017-04-15 13:44:42

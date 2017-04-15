@@ -31,6 +31,7 @@ CREATE TABLE `todo_statuses` (
   `in_menu` enum('N','Y') NOT NULL DEFAULT 'N' COMMENT 'Show in Context Menu?',
   `in_list` enum('N','Y') NOT NULL DEFAULT 'N' COMMENT 'Show in List?',
   `status_priority` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Sorting Priority',
+  `status_color` varchar(255) NOT NULL DEFAULT '' COMMENT 'Banding Color',
   PRIMARY KEY (`status_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -41,7 +42,7 @@ CREATE TABLE `todo_statuses` (
 
 LOCK TABLES `todo_statuses` WRITE;
 /*!40000 ALTER TABLE `todo_statuses` DISABLE KEYS */;
-INSERT INTO `todo_statuses` VALUES ('E827C910-5235-4C87-9F13-DAF960682D51','NEW','New','Newly added','Y','Y','Y',10),('E827C910-5235-4C87-9F13-DAF960682D52','DOING','Doing','Task picked up for working','Y','N','Y',20),('E827C910-5235-4C87-9F13-DAF960682D53','LOWPRIORITY','Low Priority','Do at later time','Y','Y','Y',30),('E827C910-5235-4C87-9F13-DAF960682D54','DONE','Done','Task completed successfully','Y','Y','N',40),('E827C910-5235-4C87-9F13-DAF960682D55','NOTNEEDED','Not needed','No longer needed to complete','Y','Y','Y',50),('E827C910-5235-4C87-9F13-DAF960682D56','CANNOTBEDONE','Cannot be done','More info needed to proceed','Y','Y','Y',60),('E827C910-5235-4C87-9F13-DAF960682D57','DELETED','Deleted','Soft deleted','Y','N','N',70);
+INSERT INTO `todo_statuses` VALUES ('E827C910-5235-4C87-9F13-DAF960682D51','NEW','New','Newly added','Y','N','Y',10,'Blue'),('E827C910-5235-4C87-9F13-DAF960682D52','DOING','Doing','Task picked up for working','Y','Y','Y',20,'Blue'),('E827C910-5235-4C87-9F13-DAF960682D53','LOWPRIORITY','Low Priority','Do at later time','Y','Y','Y',30,''),('E827C910-5235-4C87-9F13-DAF960682D54','DONE','Done','Task completed successfully','Y','N','N',40,''),('E827C910-5235-4C87-9F13-DAF960682D55','NOTNEEDED','Not needed','No longer needed to complete','Y','Y','Y',50,''),('E827C910-5235-4C87-9F13-DAF960682D56','CANNOTBEDONE','Cannot be done','More info needed to proceed','Y','Y','Y',60,'Black'),('E827C910-5235-4C87-9F13-DAF960682D57','FEEDBACK','Ask Feedback','Ask details from Submitter','Y','Y','Y',70,'Pink'),('E827C910-5235-4C87-9F13-DAF960682D58','DELETED','Delete','Soft deleted (Hidden Permanently)','Y','Y','N',80,'Grey');
 /*!40000 ALTER TABLE `todo_statuses` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-14 21:10:46
+-- Dump completed on 2017-04-15 13:44:42
