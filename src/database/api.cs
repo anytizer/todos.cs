@@ -1,6 +1,7 @@
-﻿using configurations.defaults;
+﻿using configurations;
 using database.mysql;
 using dtos;
+using identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,7 +64,9 @@ namespace database
                     todo_todos_statuses ts = new todo_todos_statuses();
                     ts.todo_status_id = Guid.NewGuid().ToString();
                     ts.todo_id = todo.todo_id;
-                    ts.status_id = statuses.NEW.ToString();
+
+                    StatusIDs s = new StatusIDs();
+                    ts.status_id = s.NEW.ToString();
                     ts.added_on = System.DateTime.Now;
                     ts.is_latest = "Y";
 

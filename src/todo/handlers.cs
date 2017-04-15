@@ -1,4 +1,6 @@
-﻿using dtos;
+﻿using configurations;
+using dtos;
+using identity;
 using libraries;
 using System;
 using System.Collections.Generic;
@@ -55,7 +57,9 @@ namespace todo
 
             database.api td = new database.api();
             Guid todo_id = new Guid(this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString());
-            Guid status_id = configurations.defaults.statuses.LOWPRIORITY;
+
+            StatusIDs ts = new StatusIDs();
+            Guid status_id = ts.LOWPRIORITY;
             if (td.done(todo_id, status_id))
             {
                 reload();

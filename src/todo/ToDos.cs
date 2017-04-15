@@ -1,7 +1,8 @@
-﻿using configurations.defaults;
+﻿using configurations;
 using database;
 using database.mysql;
 using dtos;
+using identity;
 using libraries;
 using System;
 using System.Collections.Generic;
@@ -65,8 +66,11 @@ namespace todo
                 /**
                  * @todo Pickup from dropdown lists
                  */
-                Guid project_id = configurations.defaults.projects.ProjectID;
-                Guid status_id = configurations.defaults.statuses.NEW;
+                identity.ids id = new identity.ids();
+                Guid project_id = id.ProjectID;
+
+                StatusIDs s = new StatusIDs();
+                Guid status_id = s.NEW;
                 td.add(project_id, status_id, textBox1.Text);
 
                 reload();
