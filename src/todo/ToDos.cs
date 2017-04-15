@@ -142,6 +142,7 @@ namespace todo
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             // nothing
+            // do not entertain DELETE key
         }
     }
 }

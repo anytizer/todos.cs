@@ -245,3 +245,4 @@ ModelManifest.xml
 .fake/
 /todo.net/packages
 /src/packages
+/sql/full.dmp
