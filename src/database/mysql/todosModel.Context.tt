@@ -58,6 +58,7 @@ using System.Linq;
 {
     public <#=code.Escape(container)#>()
         : base("name=<#=container.Name#>")
+        //: base("server=localhost;user id=root;database=awesome_todos")
     {
 <#
 if (!loader.IsLazyLoadingEnabled(container))
