@@ -44,9 +44,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\settings\settings.csproj">
+    <ProjectReference Include="..\settings\settingsmanager.csproj">
       <Project>{CA8F300C-719A-4B05-B507-68453A435138}</Project>
-      <Name>settings</Name>
+      <Name>settingsmanager</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

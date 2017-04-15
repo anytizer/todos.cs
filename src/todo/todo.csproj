@@ -86,15 +86,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="diagrams.cd" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -118,6 +109,10 @@
     <ProjectReference Include="..\libraries\libraries.csproj">
       <Project>{8E8A0CAE-A318-489F-B134-06C5ABC1C530}</Project>
       <Name>libraries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\settings\settingsmanager.csproj">
+      <Project>{CA8F300C-719A-4B05-B507-68453A435138}</Project>
+      <Name>settingsmanager</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

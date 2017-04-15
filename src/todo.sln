@@ -18,7 +18,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dtos", "dtos\dtos.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "configurations", "configurations\configurations.csproj", "{F80B785D-61AE-40DC-AC48-1BA78E1EB766}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "settings", "settings\settings.csproj", "{CA8F300C-719A-4B05-B507-68453A435138}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "settingsmanager", "settings\settingsmanager.csproj", "{CA8F300C-719A-4B05-B507-68453A435138}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,7 +1,7 @@
 ﻿using configurations;
 using dtos;
-using identity;
 using libraries;
+using settingsmanager;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

@@ -2,7 +2,7 @@
 using database;
 using database.mysql;
 using dtos;
-using identity;
+using settingsmanager;
 using libraries;
 using System;
 using System.Collections.Generic;
@@ -66,7 +66,7 @@ namespace todo
                 /**
                  * @todo Pickup from dropdown lists
                  */
-                identity.ids id = new identity.ids();
+                settingsmanager.ids id = new settingsmanager.ids();
                 Guid project_id = id.ProjectID;
 
                 StatusIDs s = new StatusIDs();

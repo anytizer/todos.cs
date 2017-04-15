@@ -1,7 +1,6 @@
-﻿using configurations;
-using database.mysql;
+﻿using database.mysql;
 using dtos;
-using identity;
+using settingsmanager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
