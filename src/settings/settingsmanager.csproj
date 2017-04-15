@@ -7,8 +7,8 @@
     <ProjectGuid>{CA8F300C-719A-4B05-B507-68453A435138}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SettingsManager</RootNamespace>
-    <AssemblyName>SettingsManager</AssemblyName>
+    <RootNamespace>settingsmanager</RootNamespace>
+    <AssemblyName>settingsmanager</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
