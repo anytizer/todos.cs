@@ -16,15 +16,15 @@ namespace database.mysql
     {
         public todo_projects()
         {
-            this.todo_todos = new HashSet<todo_todos>();
-            this.todo_users = new HashSet<todo_users>();
+            this.todo_projects_todos = new HashSet<todo_projects_todos>();
+            this.todo_users_projects = new HashSet<todo_users_projects>();
         }
     
         public string project_id { get; set; }
         public string project_name { get; set; }
         public string is_active { get; set; }
     
-        public virtual ICollection<todo_todos> todo_todos { get; set; }
-        public virtual ICollection<todo_users> todo_users { get; set; }
+        public virtual ICollection<todo_projects_todos> todo_projects_todos { get; set; }
+        public virtual ICollection<todo_users_projects> todo_users_projects { get; set; }
     }
 }

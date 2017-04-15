@@ -12,18 +12,15 @@ namespace database.mysql
     using System;
     using System.Collections.Generic;
     
-    public partial class todo_users
+    public partial class todo_todos_statuses
     {
-        public todo_users()
-        {
-            this.todo_users_projects = new HashSet<todo_users_projects>();
-        }
+        public string todo_status_id { get; set; }
+        public string todo_id { get; set; }
+        public string status_id { get; set; }
+        public System.DateTime added_on { get; set; }
+        public string is_latest { get; set; }
     
-        public string user_id { get; set; }
-        public string user_username { get; set; }
-        public string user_password { get; set; }
-        public string user_fullname { get; set; }
-    
-        public virtual ICollection<todo_users_projects> todo_users_projects { get; set; }
+        public virtual todo_statuses todo_statuses { get; set; }
+        public virtual todo_todos todo_todos { get; set; }
     }
 }

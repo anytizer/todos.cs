@@ -43,18 +43,33 @@ namespace database
                 {
                     database.mysql.todo_todos todo = new database.mysql.todo_todos();
                     todo.todo_id = Guid.NewGuid().ToString();
-                    todo.project_id = project_id.ToString();
-                    todo.status_id = status_id.ToString();
                     todo.issue_number = "";
                     todo.todo_text = text;
-                    todo.added_on = System.DateTime.Now;
-                    todo.modified_on = System.DateTime.Now;
                     todo.is_active = "Y";
 
-                    todo_statuses status = te.todo_statuses.SingleOrDefault(x=>x.status_id == status_id.ToString());
+                    todo_projects_todos tpd = new todo_projects_todos();
+                    tpd.project_id = project_id.ToString();
+                    tpd.todo_id = todo.todo_id;
+                    tpd.added_on = System.DateTime.Now;
+
+                    // @ set all other existing ones into not latest
+                    string todo_id_text = todo.todo_id.ToString();
+                    foreach (todo_todos_statuses ids in te.todo_todos_statuses.Where(x=>x.todo_id == todo_id_text))
+                    {
+                        ids.is_latest = "N";
+                    }
+
+                    todo_todos_statuses ts = new todo_todos_statuses();
+                    ts.todo_status_id = Guid.NewGuid().ToString();
+                    ts.todo_id = todo.todo_id;
+                    ts.status_id = dtos.defaults.statuses.NEW.ToString();
+                    ts.added_on = System.DateTime.Now;
+                    ts.is_latest = "Y";
 
                     te.todo_todos.Add(todo);
-                    te.todo_statuses.Add(status);
+                    te.todo_projects_todos.Add(tpd);
+                    te.todo_todos_statuses.Add(ts);
+
                     te.SaveChanges();
                 }
             }
@@ -65,7 +80,7 @@ namespace database
             // @todo read from api, instead of sql
 
             List<TodosDTO> lv = new List<TodosDTO>();
-            foreach (v_todos t in te.v_todos.OrderByDescending(x => x.added_on))
+            foreach (v_todos t in te.v_todos) //.OrderByDescending(x => x.added_on)
             {
                 TodosDTO todo = new TodosDTO();
 
@@ -99,33 +114,26 @@ namespace database
         }
 
         /**
-         * Mark the item as completed
+         * Patch only: Mark the item as completed
          */
         public bool done(Guid todo_id, Guid status_id)
         {
-            bool found = false;
-
-            string todo_id_string = todo_id.ToString();
-            todo_todos todo = te.todo_todos.SingleOrDefault(x => x.todo_id == todo_id_string);
-            if (null != todo)
+            string todo_id_text = todo_id.ToString();
+            foreach (todo_todos_statuses ids in te.todo_todos_statuses.Where(x => x.todo_id == todo_id_text))
             {
-                todo.status_id = status_id.ToString();
-                todo.modified_on = System.DateTime.Now;
-                //todo.is_active = "N";
-
-                todo_projects_statuses history = new todo_projects_statuses();
-                history.history_id = Guid.NewGuid().ToString();
-                history.user_id = dtos.defaults.users.UserID.ToString();
-                history.project_id = todo.project_id;
-                history.status_id = status_id.ToString(); // new Guid(status_id).ToString(); // temp deleted
-                history.modified_on = System.DateTime.Now;
-                te.todo_projects_statuses.Add(history);
-
-                found = true;
+                ids.is_latest = "N";
             }
 
+            todo_todos_statuses ts = new todo_todos_statuses();
+            ts.todo_status_id = Guid.NewGuid().ToString();
+            ts.todo_id = todo_id_text;
+            ts.status_id = status_id.ToString(); //  dtos.defaults.statuses.NEW.ToString();
+            ts.added_on = System.DateTime.Now;
+            ts.is_latest = "Y";
+            te.todo_todos_statuses.Add(ts);
+
             int total = te.SaveChanges();
-            return found && total >= 1;
+            return total >= 1;
         }
     }
 }

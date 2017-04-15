@@ -20,7 +20,7 @@ namespace database
         public List<NameValueDTO> all_statuses()
         {
             List<NameValueDTO> l = new List<NameValueDTO>();
-            foreach(todo_statuses status in this.te.todo_statuses.Where(x=>x.in_menu =="Y"))
+            foreach(todo_statuses status in this.te.todo_statuses.Where(x=>x.in_menu == "Y"))
             {
                 NameValueDTO st = new NameValueDTO();
                 st.id = new Guid(status.status_id);

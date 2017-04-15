@@ -26,9 +26,12 @@ namespace database.mysql
         }
     
         public DbSet<todo_projects> todo_projects { get; set; }
+        public DbSet<todo_projects_todos> todo_projects_todos { get; set; }
         public DbSet<todo_statuses> todo_statuses { get; set; }
         public DbSet<todo_todos> todo_todos { get; set; }
+        public DbSet<todo_todos_statuses> todo_todos_statuses { get; set; }
         public DbSet<todo_users> todo_users { get; set; }
+        public DbSet<todo_users_projects> todo_users_projects { get; set; }
         public DbSet<v_todos> v_todos { get; set; }
     }
 }

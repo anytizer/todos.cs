@@ -16,7 +16,7 @@ namespace database.mysql
     {
         public todo_statuses()
         {
-            this.todo_todos = new HashSet<todo_todos>();
+            this.todo_todos_statuses = new HashSet<todo_todos_statuses>();
         }
     
         public string status_id { get; set; }
@@ -28,6 +28,6 @@ namespace database.mysql
         public string in_list { get; set; }
         public long status_priority { get; set; }
     
-        public virtual ICollection<todo_todos> todo_todos { get; set; }
+        public virtual ICollection<todo_todos_statuses> todo_todos_statuses { get; set; }
     }
 }

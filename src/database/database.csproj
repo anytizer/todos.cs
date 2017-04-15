@@ -67,13 +67,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>todosModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="mysql\todo_messages.cs">
-      <DependentUpon>todosModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="mysql\todo_projects.cs">
       <DependentUpon>todosModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="mysql\todo_projects_statuses.cs">
+    <Compile Include="mysql\todo_projects_todos.cs">
       <DependentUpon>todosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="mysql\todo_statuses.cs">
@@ -82,7 +79,13 @@
     <Compile Include="mysql\todo_todos.cs">
       <DependentUpon>todosModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="mysql\todo_todos_statuses.cs">
+      <DependentUpon>todosModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="mysql\todo_users.cs">
+      <DependentUpon>todosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="mysql\todo_users_projects.cs">
       <DependentUpon>todosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="mysql\v_todos.cs">

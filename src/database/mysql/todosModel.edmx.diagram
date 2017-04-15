@@ -4,17 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d06698efcecd41538e1cdaf01277c55b" Name="Diagram1" ZoomLevel="108">
-        <EntityTypeShape EntityType="todosModel.todo_projects" Width="1.5" PointX="0.625" PointY="5.625" />
-        <EntityTypeShape EntityType="todosModel.todo_statuses" Width="1.5" PointX="5.5" PointY="4.625" />
-        <EntityTypeShape EntityType="todosModel.todo_todos" Width="1.5" PointX="3" PointY="4.5" />
-        <EntityTypeShape EntityType="todosModel.todo_users" Width="1.5" PointX="1" PointY="2.75" />
-        <EntityTypeShape EntityType="todosModel.v_todos" Width="1.5" PointX="7.375" PointY="4.625" />
-        <AssociationConnector Association="todosModel.todo_todos_ibfk_1" />
-        <AssociationConnector Association="todosModel.todo_todos_ibfk_2" />
-        <AssociationConnector Association="todosModel.todo_projects_todos" />
-        <AssociationConnector Association="todosModel.todo_todos_statuses" />
-        <AssociationConnector Association="todosModel.todo_users_projects" />
+      <Diagram DiagramId="d06698efcecd41538e1cdaf01277c55b" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="todosModel.todo_projects" Width="1.5" PointX="0.75" PointY="7" />
+        <EntityTypeShape EntityType="todosModel.todo_projects_todos" Width="1.5" PointX="3" PointY="7" />
+        <EntityTypeShape EntityType="todosModel.todo_statuses" Width="1.5" PointX="0.75" PointY="14.25" />
+        <EntityTypeShape EntityType="todosModel.todo_todos" Width="1.5" PointX="0.75" PointY="3.875" />
+        <EntityTypeShape EntityType="todosModel.todo_todos_statuses" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="todosModel.todo_users" Width="1.5" PointX="0.75" PointY="10.625" />
+        <EntityTypeShape EntityType="todosModel.todo_users_projects" Width="1.5" PointX="3" PointY="4" />
+        <EntityTypeShape EntityType="todosModel.v_todos" Width="1.5" PointX="5.75" PointY="5.25" />
+        <AssociationConnector Association="todosModel.FK_todo_projects_todos_project_id" />
+        <AssociationConnector Association="todosModel.todo_users_projects_ibfk_2" />
+        <AssociationConnector Association="todosModel.FK_todo_projects_todos_todo_id" />
+        <AssociationConnector Association="todosModel.todo_todos_statuses_ibfk_2" />
+        <AssociationConnector Association="todosModel.todo_todos_statuses_ibfk_1" />
+        <AssociationConnector Association="todosModel.todo_users_projects_ibfk_1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

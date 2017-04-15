@@ -116,6 +116,10 @@ namespace todo
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             // @todo Make sure the row was selected in the grid
+            // @todo Proceed why when there are records
+            // @todo Delete only if item is pre selected
+            if (this.dataGridView1.SelectedRows.Count <= 0)
+                return false;
 
             // Delete Key - Delete Selected Row!
             if (keyData == Keys.Delete)

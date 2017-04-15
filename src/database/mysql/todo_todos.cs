@@ -14,16 +14,18 @@ namespace database.mysql
     
     public partial class todo_todos
     {
+        public todo_todos()
+        {
+            this.todo_projects_todos = new HashSet<todo_projects_todos>();
+            this.todo_todos_statuses = new HashSet<todo_todos_statuses>();
+        }
+    
         public string todo_id { get; set; }
-        public string project_id { get; set; }
-        public string status_id { get; set; }
         public string issue_number { get; set; }
         public string todo_text { get; set; }
-        public System.DateTime added_on { get; set; }
-        public System.DateTime modified_on { get; set; }
         public string is_active { get; set; }
     
-        public virtual todo_projects todo_projects { get; set; }
-        public virtual todo_statuses todo_statuses { get; set; }
+        public virtual ICollection<todo_projects_todos> todo_projects_todos { get; set; }
+        public virtual ICollection<todo_todos_statuses> todo_todos_statuses { get; set; }
     }
 }
