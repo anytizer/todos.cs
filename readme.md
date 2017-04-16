@@ -5,8 +5,7 @@ ToDo list manager using C# and MySQL
 
 ## Installation
 
- - Install MySQL Server
- - Define connection parameters
+ - Define [connection parameters](src/todo/App.config)
  - Install [database structures](sql/structures.dmp)
  - Install [views](sql/views.sql) - optional (included with structures)
  - Install [sample data](sql/sample.sql)
@@ -27,5 +26,6 @@ ToDo list manager using C# and MySQL
 
 ## Status
 
- - Unfinished
- - Do not contact me back for a support.
+ - Unfinished, work in progress
+ - Functional release as is
+ - Do not contact me back for a support
