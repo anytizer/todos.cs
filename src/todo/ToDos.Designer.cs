@@ -46,7 +46,9 @@ namespace todo
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.onTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.filterByStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -66,15 +68,14 @@ namespace todo
             this.status,
             this.todo});
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 60);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 65);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(894, 574);
+            this.dataGridView1.Size = new System.Drawing.Size(895, 569);
             this.dataGridView1.TabIndex = 2;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseClick);
             // 
             // ToDoID
@@ -126,7 +127,7 @@ namespace todo
             // textBox1
             // 
             this.textBox1.BackColor = System.Drawing.Color.Beige;
-            this.textBox1.Location = new System.Drawing.Point(393, 31);
+            this.textBox1.Location = new System.Drawing.Point(397, 38);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(460, 20);
             this.textBox1.TabIndex = 3;
@@ -134,7 +135,7 @@ namespace todo
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(859, 29);
+            this.button1.Location = new System.Drawing.Point(863, 36);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(44, 23);
             this.button1.TabIndex = 4;
@@ -148,7 +149,8 @@ namespace todo
             this.menuStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.onTopToolStripMenuItem,
-            this.refreshToolStripMenuItem});
+            this.refreshToolStripMenuItem,
+            this.filterByStatusToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(919, 24);
@@ -170,6 +172,13 @@ namespace todo
             this.refreshToolStripMenuItem.Text = "Refresh";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
+            // filterByStatusToolStripMenuItem
+            // 
+            this.filterByStatusToolStripMenuItem.Name = "filterByStatusToolStripMenuItem";
+            this.filterByStatusToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
+            this.filterByStatusToolStripMenuItem.Text = "Filter by Status";
+            this.filterByStatusToolStripMenuItem.Click += new System.EventHandler(this.filterByStatusToolStripMenuItem_Click);
+            // 
             // notifyIcon1
             // 
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
@@ -177,12 +186,23 @@ namespace todo
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(204, 38);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(187, 21);
+            this.comboBox1.TabIndex = 7;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // ToDos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(919, 646);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.dataGridView1);
@@ -219,6 +239,8 @@ namespace todo
         private System.Windows.Forms.DataGridViewTextBoxColumn todo;
         private NotifyIcon notifyIcon1;
         private ToolStripMenuItem refreshToolStripMenuItem;
+        private ComboBox comboBox1;
+        private ToolStripMenuItem filterByStatusToolStripMenuItem;
     }
 }
 

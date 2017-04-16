@@ -21,9 +21,11 @@ WHERE
 	AND s.in_list='Y'
 	AND ts.is_latest='Y'
 ORDER BY
-	-- s.status_priority,
+	s.status_priority,
 	ts.added_on DESC
 ;
+
+/*
 -- SELECT * FROM v_todos;
 
  p.project_id = pd.project_id
@@ -39,3 +41,4 @@ ORDER BY
 -- UPDATE todo_todos SET is_active='Y';
 
 SELECT * FROM todo_todos WHERE todo_id='24a93e76-a675-4ad4-9d8f-0bc975249cae';
+*/

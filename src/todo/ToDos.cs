@@ -34,12 +34,12 @@ namespace todo
             // combo projects
 
             //reloadProjects(); // list of projects
-            //combo(); // list of projects, ... remove
-            /*
-            // https://msdn.microsoft.com/en-us/library/ms229625(v=vs.110).aspx
+            combo(); // list of projects, ... remove
+            
+            // menus
             foreach (NameValueDTO s in this.statuses)
             {
-                MenuItem mi = new MenuItem(s.name);
+                ToolStripMenuItem mi = new ToolStripMenuItem(s.name);
                 int status_index = this.status.Index;
                 string current_status = dataGridView1.Rows[currentContextRowIndex].Cells[status_index].Value.ToString();
                 if (current_status == s.name)
@@ -47,100 +47,9 @@ namespace todo
                     // @todo skipped re-selecting on current status
                     mi.Enabled = false;
                 }
-                mi.Click += new EventHandler(this.menu_selected);
-                //toolStripMenuItem1.Add(mi);
-
-                ToolStripDropDownButton fruitToolStripDropDownButton = new ToolStripDropDownButton("Fruit", null, null, "Fruit");
-                //toolStripMenuItem1.Items.Add(fruitToolStripDropDownButton);
-            }*/
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            /**
-             * ToDo has something typed in
-             */
-            if (textBox1.Text.Length >= 1)
-            {
-                database.api td = new database.api();
-                /**
-                 * @todo Pickup from dropdown lists
-                 */
-                settingsmanager.ids id = new settingsmanager.ids();
-                Guid project_id = id.ProjectID;
-
-                StatusIDs s = new StatusIDs();
-                Guid status_id = s.NEW;
-                td.add(project_id, status_id, textBox1.Text);
-
-                reload();
-            }
-        }
-
-        private void reload()
-        {
-            this.SuspendLayout();
-            this.dataGridView1.Rows.Clear();
-            this.dataGridView1.Enabled = false;
-
-            // alternate color
-            // little padding
-            // row level selection
-            int selectedIndex = 0;
-            if (this.dataGridView1.SelectedRows.Count >= 1)
-            {
-                selectedIndex = this.dataGridView1.SelectedRows[0].Index;
-            }
-
-            textBox1.Text = "";
-            database.api t = new database.api();
-            List<TodosDTO> lv = t.todos();
-
-            foreach (TodosDTO v in lv)
-            {
-                // add to grid
-                // dataGridView1.row
-                // @xee http://stackoverflow.com/questions/10063770/how-to-add-a-new-row-to-datagridview-programmatically
-                // @see https://msdn.microsoft.com/en-us/library/system.windows.forms.datagridview.selectionchanged(v=vs.110).aspx
-                DataGridViewRow row = (DataGridViewRow)dataGridView1.RowTemplate.Clone();
-                row.CreateCells(dataGridView1, v.todo_id, v.added_on, "", v.project_name, v.status_name, v.todo_text);
-                this.dataGridView1.Rows.Add(row);
-
-                // flickering
-                // http://stackoverflow.com/questions/2041782/how-to-prevent-rows-in-datagrid-from-flickering-while-application-is-running
-            }
-
-            if (selectedIndex >=0 && this.dataGridView1.Rows.Count >= 1)
-            {
-                this.dataGridView1.Rows[selectedIndex].Selected = true;
-            }
-
-            this.ResumeLayout();
-            this.dataGridView1.Enabled = true;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void combo()
-        {
-            //this.comboBox1.Items.Clear();
-
-            database.api t = new database.api();
-            List<ProjectsDTO> lp = t.projects();
-            foreach (ProjectsDTO p in lp)
-            {
-                NameValueDTO pi = new NameValueDTO();
-                pi.id = new Guid(p.project_id);
-                pi.name = p.project_name;
-                pi.value = p.project_name;
-                //this.comboBox1.Items.Add(pi);
-            };
-
-            //this.SuspendLayout();
-            //this.ResumeLayout();
+                mi.Click += new EventHandler(this.menu_filter_status);
+                this.filterByStatusToolStripMenuItem.DropDownItems.Add(mi);
+            }            
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -180,7 +89,103 @@ namespace todo
             reload();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            save();
+            reload();
+        }
+
+        private void reload()
+        {
+            this.SuspendLayout();
+            this.dataGridView1.Rows.Clear();
+            this.dataGridView1.Enabled = false;
+
+            // alternate color
+            // little padding
+            // row level selection
+            int selectedIndex = 0;
+            if (this.dataGridView1.SelectedRows.Count >= 1)
+            {
+                selectedIndex = this.dataGridView1.SelectedRows[0].Index;
+            }
+
+            textBox1.Text = "";
+            database.api t = new database.api();
+            List<TodosDTO> lv = t.todos();
+
+            foreach (TodosDTO v in lv)
+            {
+                // add to grid
+                // dataGridView1.row
+                // @xee http://stackoverflow.com/questions/10063770/how-to-add-a-new-row-to-datagridview-programmatically
+                // @see https://msdn.microsoft.com/en-us/library/system.windows.forms.datagridview.selectionchanged(v=vs.110).aspx
+                DataGridViewRow row = (DataGridViewRow)dataGridView1.RowTemplate.Clone();
+                row.CreateCells(dataGridView1, v.todo_id, v.added_on, "", v.project_name, v.status_name, v.todo_text);
+                this.dataGridView1.Rows.Add(row);
+
+                // flickering
+                // http://stackoverflow.com/questions/2041782/how-to-prevent-rows-in-datagrid-from-flickering-while-application-is-running
+            }
+
+            if (selectedIndex >= 0 && this.dataGridView1.Rows.Count >= 1)
+            {
+                this.dataGridView1.Rows[selectedIndex].Selected = true;
+            }
+
+            this.ResumeLayout();
+            this.dataGridView1.Enabled = true;
+        }
+
+        private void combo()
+        {
+            this.SuspendLayout();
+            this.comboBox1.Items.Clear();
+
+            database.api t = new database.api();
+            List<ProjectsDTO> lp = t.projects();
+            foreach (ProjectsDTO p in lp)
+            {
+                NameValueDTO pi = new NameValueDTO();
+                pi.id = new Guid(p.project_id);
+                pi.name = p.project_name;
+                pi.value = p.project_name;
+                this.comboBox1.Items.Add(pi);
+            };
+            this.ResumeLayout();
+        }
+
+        private void save()
+        {
+            /**
+             * ToDo has something typed in
+             */
+            if (textBox1.Text.Length >= 1)
+            {
+                database.api td = new database.api();
+                /**
+                 * @todo Pickup from dropdown lists
+                 */
+                settingsmanager.ids id = new settingsmanager.ids();
+                Guid project_id = id.ProjectID;
+
+                StatusIDs s = new StatusIDs();
+                Guid status_id = s.NEW;
+                td.add(project_id, status_id, textBox1.Text);
+            }
+        }
+
+        private void filterByStatusToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // child filter by status
+        }
+
+        private void m2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }

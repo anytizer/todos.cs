@@ -147,5 +147,11 @@ namespace todo
             reload();
             // MessageBox.Show(todo_id.ToString());
         }
+
+        void menu_filter_status(object sender, System.EventArgs e)
+        {
+            // filter view list
+            MessageBox.Show("Filter");
+        }
     }
 }
