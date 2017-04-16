@@ -1,4 +1,4 @@
-# todo.net
+# ToDo.net
 
 ToDo list manager using C# and MySQL
 
@@ -7,7 +7,9 @@ ToDo list manager using C# and MySQL
 
  - Install MySQL Server
  - Define connection parameters
- - Install sample data
+ - Install [database structures](sql/structures.dmp)
+ - Install [views](sql/views.sql) - optional (included with structures)
+ - Install [sample data](sql/sample.sql)
 
 
 ## Features
@@ -19,6 +21,8 @@ ToDo list manager using C# and MySQL
  - Date time format to YYYY-MM-DD HH:MM:SS
  - ~~Single instance only~~ Window opening
  - Suitable for dual-screen display
+ - Suitable for large screens - 27"+
+ - Confirmation Dialogs
 
 
 ## Status
