@@ -19,7 +19,7 @@ namespace todo
         public ToDos()
         {
             InitializeComponent();
-            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.MistyRose; // Color.Beige;
+            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
             dataGridView1.AreAllCellsSelected(false);
             // row.DefaultCellStyle.BackColor = Color.Red;
 

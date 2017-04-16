@@ -30,6 +30,7 @@ namespace database
                 st.id = new Guid(status.status_id);
                 st.name = status.status_shortname;
                 st.value = status.status_code;
+                st.confirm = status.confirmation_required == "Y";
 
                 l.Add(st);
             }

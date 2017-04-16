@@ -21,7 +21,7 @@ WHERE
 	AND s.in_list='Y'
 	AND ts.is_latest='Y'
 ORDER BY
-	s.status_priority,
+	-- s.status_priority,
 	ts.added_on DESC
 ;
 -- SELECT * FROM v_todos;

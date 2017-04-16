@@ -7,7 +7,7 @@
       <Diagram DiagramId="d06698efcecd41538e1cdaf01277c55b" Name="Diagram1" ZoomLevel="97">
         <EntityTypeShape EntityType="todosModel.todo_projects" Width="1.5" PointX="0.75" PointY="6.875" />
         <EntityTypeShape EntityType="todosModel.todo_projects_todos" Width="1.5" PointX="3" PointY="7" />
-        <EntityTypeShape EntityType="todosModel.todo_statuses" Width="1.5" PointX="0.75" PointY="13.625" />
+        <EntityTypeShape EntityType="todosModel.todo_statuses" Width="1.5" PointX="0.75" PointY="13.875" />
         <EntityTypeShape EntityType="todosModel.todo_todos" Width="1.5" PointX="0.75" PointY="3.875" />
         <EntityTypeShape EntityType="todosModel.todo_todos_statuses" Width="1.5" PointX="3" PointY="0.75" />
         <EntityTypeShape EntityType="todosModel.todo_users" Width="1.5" PointX="0.75" PointY="10" />

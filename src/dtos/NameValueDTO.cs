@@ -11,6 +11,7 @@ namespace dtos
         public Guid id;
         public string name;
         public string value;
+        public bool confirm;
 
         public override string ToString()
         {

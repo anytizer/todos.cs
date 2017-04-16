@@ -121,9 +121,24 @@ namespace todo
             {
                 if (s.name.Equals(new_staus_name))
                 {
-                    todoer td = new todoer();
-                    td.done(todo_id, s.id);
-                    // MessageBox.Show(string.Format("{0} @ {1}", todo_id, new_staus_name));
+                    if (s.confirm)
+                    {
+                       if(MessageBox.Show("Are you sure?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        {
+                            todoer td = new todoer();
+                            td.done(todo_id, s.id);
+                        }
+                       else
+                        {
+                            // confirmation said no
+                        }
+                    }
+                    else
+                    {
+                        todoer td = new todoer();
+                        td.done(todo_id, s.id);
+                        // MessageBox.Show(string.Format("{0} @ {1}", todo_id, new_staus_name));
+                    }
 
                     break;
                 }

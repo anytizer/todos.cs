@@ -27,6 +27,7 @@ namespace database.mysql
         public string in_menu { get; set; }
         public string in_list { get; set; }
         public string on_top { get; set; }
+        public string confirmation_required { get; set; }
         public long status_priority { get; set; }
         public string status_color { get; set; }
     

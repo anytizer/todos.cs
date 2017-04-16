@@ -35,6 +35,7 @@
           <Property Name="in_menu" Type="enum" Nullable="false" />
           <Property Name="in_list" Type="enum" Nullable="false" />
           <Property Name="on_top" Type="enum" Nullable="false" />
+          <Property Name="confirmation_required" Type="enum" />
           <Property Name="status_priority" Type="uint" Nullable="false" />
           <Property Name="status_color" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
@@ -300,6 +301,7 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           <Property Name="in_menu" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
           <Property Name="in_list" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
           <Property Name="on_top" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
+          <Property Name="confirmation_required" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
           <Property Name="status_priority" Type="Int64" Nullable="false" />
           <Property Name="status_color" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="todo_todos_statuses" Relationship="todosModel.todo_todos_statuses_ibfk_2" FromRole="todo_statuses" ToRole="todo_todos_statuses" />
@@ -484,6 +486,7 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
               <MappingFragment StoreEntitySet="todo_statuses">
                 <ScalarProperty Name="status_color" ColumnName="status_color" />
                 <ScalarProperty Name="status_priority" ColumnName="status_priority" />
+                <ScalarProperty Name="confirmation_required" ColumnName="confirmation_required" />
                 <ScalarProperty Name="on_top" ColumnName="on_top" />
                 <ScalarProperty Name="in_list" ColumnName="in_list" />
                 <ScalarProperty Name="in_menu" ColumnName="in_menu" />
