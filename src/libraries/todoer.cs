@@ -14,14 +14,14 @@ namespace libraries
             this.api = new database.api();
         }
 
-        public void add(Guid project_id, Guid status_id, string text)
+        public void add(Guid user_id, Guid project_id, Guid status_id, string text)
         {
-            this.api.add(project_id, status_id, text);
+            this.api.add(user_id, project_id, status_id, text);
         }
 
-        public List<ProjectsDTO> projects()
+        public List<ProjectsDTO> all_projects(Guid user_id)
         {
-            return this.api.projects();
+            return this.api.all_projects(user_id);
         }
 
         public List<TodosDTO> todos()
@@ -29,9 +29,9 @@ namespace libraries
             return this.api.todos();
         }
 
-        public bool done(Guid todo_id, Guid status_id)
+        public bool done(Guid user_id, Guid todo_id, Guid status_id)
         {
-            return this.api.done(todo_id, status_id);
+            return this.api.done(user_id, todo_id, status_id);
         }
 
         public List<NameValueDTO> all_statuses()

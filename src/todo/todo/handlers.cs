@@ -1,4 +1,5 @@
 ﻿using configurations;
+using database;
 using dtos;
 using libraries;
 using settingsmanager;
@@ -17,6 +18,9 @@ namespace todo
         private int currentContextRowIndex = 0;
         private void onTopToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            /**
+             * Always on top
+             */
             ToolStripMenuItem menu = (sender as ToolStripMenuItem);
 
             if (menu.Text != "")
@@ -41,7 +45,7 @@ namespace todo
             database.api td = new database.api();
             Guid todo_id = new Guid(this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString());
             Guid status_id = td.delete_status();
-            if (td.done(todo_id, status_id))
+            if (td.done(limiter.defaultUserID, todo_id, status_id))
             {
                 reload();
             }
@@ -60,7 +64,7 @@ namespace todo
 
             StatusIDs ts = new StatusIDs();
             Guid status_id = ts.LOWPRIORITY;
-            if (td.done(todo_id, status_id))
+            if (td.done(limiter.defaultUserID, todo_id, status_id))
             {
                 reload();
             }
@@ -107,51 +111,28 @@ namespace todo
             }
         }
 
-        /**
-         * Right click context menu on toto items.
-         */
-        void menu_selected(object sender, System.EventArgs e)
+
+
+        private void save_status()
         {
-            MenuItem mi = sender as MenuItem;
-            string new_staus_name = mi.Text;
-            //MessageBox.Show(new_staus_name);
-            Guid todo_id = new Guid(dataGridView1.Rows[currentContextRowIndex].Cells[this.ToDoID.Index].Value.ToString());
-            //Guid todo_id = new Guid(dataGridView1.Rows[currentContextRowIndex].Cells[this.ToDoID.Index].Value.ToString());
-            foreach (NameValueDTO s in this.statuses)
+            /**
+             * ToDo has something typed in
+             */
+            if (textBox1.Text.Length >= 1)
             {
-                if (s.name.Equals(new_staus_name))
-                {
-                    if (s.confirm)
-                    {
-                       if(MessageBox.Show("Are you sure?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                        {
-                            todoer td = new todoer();
-                            td.done(todo_id, s.id);
-                        }
-                       else
-                        {
-                            // confirmation said no
-                        }
-                    }
-                    else
-                    {
-                        todoer td = new todoer();
-                        td.done(todo_id, s.id);
-                        // MessageBox.Show(string.Format("{0} @ {1}", todo_id, new_staus_name));
-                    }
+                database.api td = new database.api();
 
-                    break;
-                }
+                /**
+                 * @todo Pickup from dropdown lists
+                 */
+                settingsmanager.ids id = new settingsmanager.ids();
+                Guid project_id = id.ProjectID;
+                Guid user_id = id.UserID;
+
+                StatusIDs s = new StatusIDs();
+                Guid status_id = s.NEW;
+                td.add(user_id, project_id, status_id, textBox1.Text);
             }
-
-            reload();
-            // MessageBox.Show(todo_id.ToString());
-        }
-
-        void menu_filter_status(object sender, System.EventArgs e)
-        {
-            // filter view list
-            MessageBox.Show("Filter");
         }
     }
 }

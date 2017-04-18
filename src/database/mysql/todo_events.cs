@@ -12,17 +12,17 @@ namespace database.mysql
     using System;
     using System.Collections.Generic;
     
-    public partial class todo_todos_statuses
+    public partial class todo_events
     {
-        public string todo_status_id { get; set; }
-        public string user_id { get; set; }
-        public string todo_id { get; set; }
-        public string status_id { get; set; }
-        public System.DateTime added_on { get; set; }
-        public string is_latest { get; set; }
+        public todo_events()
+        {
+            this.todo_logs = new HashSet<todo_logs>();
+        }
     
-        public virtual todo_statuses todo_statuses { get; set; }
-        public virtual todo_todos todo_todos { get; set; }
-        public virtual todo_users todo_users { get; set; }
+        public string event_id { get; set; }
+        public string event_code { get; set; }
+        public string event_name { get; set; }
+    
+        public virtual ICollection<todo_logs> todo_logs { get; set; }
     }
 }

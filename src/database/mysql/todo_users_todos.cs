@@ -12,18 +12,13 @@ namespace database.mysql
     using System;
     using System.Collections.Generic;
     
-    public partial class v_todos
+    public partial class todo_users_todos
     {
         public string user_id { get; set; }
-        public string user_username { get; set; }
-        public string user_fullname { get; set; }
         public string todo_id { get; set; }
-        public string project_id { get; set; }
-        public string project_name { get; set; }
-        public string status_id { get; set; }
-        public string status_name { get; set; }
         public System.DateTime added_on { get; set; }
-        public string issue_number { get; set; }
-        public string todo_text { get; set; }
+    
+        public virtual todo_todos todo_todos { get; set; }
+        public virtual todo_users todo_users { get; set; }
     }
 }

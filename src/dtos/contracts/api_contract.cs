@@ -8,13 +8,13 @@ namespace dtos.contracts
 {
     public interface api_contract
     {
-        void add(Guid project_id, Guid status_id, string text);
-
-        List<ProjectsDTO> projects();
+        void add(Guid user_id, Guid project_id, Guid status_id, string text);
 
         List<TodosDTO> todos();
 
-        bool done(Guid todo_id, Guid status_id);
+        bool done(Guid use_id, Guid todo_id, Guid status_id);
+
+        List<ProjectsDTO> all_projects(Guid user_id);
 
         List<NameValueDTO> all_statuses();
     }

@@ -24,5 +24,6 @@ namespace settingsmanager
          * The default project
          */
         public readonly Guid ProjectID = new Guid("6F39DA75-EE09-44EA-80DB-23087F0C555D");
+        // // = new Guid("C50EF177-16A1-4B0C-A8EA-5F985355E7A1");
     }
 }

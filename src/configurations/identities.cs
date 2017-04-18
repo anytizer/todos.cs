@@ -17,7 +17,7 @@ namespace configurations
                  * @todo Project: configurations.identities (separate project)
                  * @see identity.dll
                  */
-                identities i = new identities();
+                ids i = new ids();
                 return i.ProjectID;
             }
             private set { }

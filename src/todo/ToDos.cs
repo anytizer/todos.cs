@@ -14,48 +14,33 @@ namespace todo
 {
     public partial class ToDos : Form
     {
-        private List<NameValueDTO> statuses;
+        private LimiterDTO limiter;
+
+        private List<NameValueDTO> statuses = new List<NameValueDTO>();
+        private List<ProjectsDTO> projects = new List<ProjectsDTO>();
 
         public ToDos()
         {
             InitializeComponent();
+
+            /**
+             * @see https://msdn.microsoft.com/en-us/library/system.windows.forms.datagridviewcellstyle.selectionbackcolor(v=vs.110).aspx
+             */
             dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
+            dataGridView1.DefaultCellStyle.BackColor = Color.SkyBlue;
+            dataGridView1.DefaultCellStyle.BackColor = Color.White; // sky blue
+            //dataGridView1.CurrentRow.DefaultCellStyle.BackColor = Color.Maroon;
+            //dataGridView1.CurrentRow.DefaultCellStyle.ForeColor = Color.White;
+            dataGridView1.MultiSelect = false;
+            dataGridView1.AllowUserToResizeRows = false;
             dataGridView1.AreAllCellsSelected(false);
-            // row.DefaultCellStyle.BackColor = Color.Red;
-
-            libraries.todoer td = new libraries.todoer();
-            this.statuses = td.all_statuses();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            reload(); // reload list of todos
-
-            // combo projects
-
-            //reloadProjects(); // list of projects
-            combo(); // list of projects, ... remove
-            
-            // menus
-            foreach (NameValueDTO s in this.statuses)
-            {
-                ToolStripMenuItem mi = new ToolStripMenuItem(s.name);
-                int status_index = this.status.Index;
-                string current_status = dataGridView1.Rows[currentContextRowIndex].Cells[status_index].Value.ToString();
-                if (current_status == s.name)
-                {
-                    // @todo skipped re-selecting on current status
-                    mi.Enabled = false;
-                }
-                mi.Click += new EventHandler(this.menu_filter_status);
-                this.filterByStatusToolStripMenuItem.DropDownItems.Add(mi);
-            }            
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            // nothing
-            // do not entertain DELETE key
+            dataGridView1.BackgroundColor = Color.LightGray;
+            dataGridView1.BorderStyle = BorderStyle.Fixed3D;
+            dataGridView1.ReadOnly = true;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToOrderColumns = false;
+            dataGridView1.AllowUserToResizeColumns = false;
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -63,131 +48,82 @@ namespace todo
             // nothing
         }
 
-        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            /*
-            this.Visible = !this.Visible;
-            if (this.Visible == false)
-            {
-                //this.Hide();
-                this.TopMost = true;
-                this.WindowState = FormWindowState.Minimized;
-                notifyIcon1.Visible = true;
-            }
-            else
-            {
-                this.Show();
-                //this.TopMost = true;
-                this.WindowState = FormWindowState.Normal;
-                notifyIcon1.Visible = false;
-            }
-            */
-        }
-
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
             reload();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
-            save();
+            save_status();
             reload();
         }
 
-        private void reload()
-        {
-            this.SuspendLayout();
-            this.dataGridView1.Rows.Clear();
-            this.dataGridView1.Enabled = false;
-
-            // alternate color
-            // little padding
-            // row level selection
-            int selectedIndex = 0;
-            if (this.dataGridView1.SelectedRows.Count >= 1)
-            {
-                selectedIndex = this.dataGridView1.SelectedRows[0].Index;
-            }
-
-            textBox1.Text = "";
-            database.api t = new database.api();
-            List<TodosDTO> lv = t.todos();
-
-            foreach (TodosDTO v in lv)
-            {
-                // add to grid
-                // dataGridView1.row
-                // @xee http://stackoverflow.com/questions/10063770/how-to-add-a-new-row-to-datagridview-programmatically
-                // @see https://msdn.microsoft.com/en-us/library/system.windows.forms.datagridview.selectionchanged(v=vs.110).aspx
-                DataGridViewRow row = (DataGridViewRow)dataGridView1.RowTemplate.Clone();
-                row.CreateCells(dataGridView1, v.todo_id, v.added_on, "", v.project_name, v.status_name, v.todo_text);
-                this.dataGridView1.Rows.Add(row);
-
-                // flickering
-                // http://stackoverflow.com/questions/2041782/how-to-prevent-rows-in-datagrid-from-flickering-while-application-is-running
-            }
-
-            if (selectedIndex >= 0 && this.dataGridView1.Rows.Count >= 1)
-            {
-                this.dataGridView1.Rows[selectedIndex].Selected = true;
-            }
-
-            this.ResumeLayout();
-            this.dataGridView1.Enabled = true;
-        }
-
-        private void combo()
-        {
-            this.SuspendLayout();
-            this.comboBox1.Items.Clear();
-
-            database.api t = new database.api();
-            List<ProjectsDTO> lp = t.projects();
-            foreach (ProjectsDTO p in lp)
-            {
-                NameValueDTO pi = new NameValueDTO();
-                pi.id = new Guid(p.project_id);
-                pi.name = p.project_name;
-                pi.value = p.project_name;
-                this.comboBox1.Items.Add(pi);
-            };
-            this.ResumeLayout();
-        }
-
-        private void save()
+        private void projectsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             /**
-             * ToDo has something typed in
+             * Project chosen
              */
-            if (textBox1.Text.Length >= 1)
+            ToolStripMenuItemCustomProjects mis = sender as ToolStripMenuItemCustomProjects;
+            if (null != mis)
             {
-                database.api td = new database.api();
-                /**
-                 * @todo Pickup from dropdown lists
-                 */
-                settingsmanager.ids id = new settingsmanager.ids();
-                Guid project_id = id.ProjectID;
-
-                StatusIDs s = new StatusIDs();
-                Guid status_id = s.NEW;
-                td.add(project_id, status_id, textBox1.Text);
+                this.limiter.defaultProjectID = new Guid(mis.Tag.ToString());
+                reload();
             }
         }
-
-        private void filterByStatusToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            // child filter by status
+            identities id = new identities();
+            this.limiter = new LimiterDTO();
+            this.limiter.defaultProjectID = id.ProjectID;
+            this.limiter.defaultUserID = id.UserID;
+
+            reload(); // reload list of todos            
         }
 
-        private void m2ToolStripMenuItem_Click(object sender, EventArgs e)
+        /**
+         * Load list of available status in the menu
+         */
+        public void main_menu_statuses()
         {
+            //int status_index = this.status.Index;
+            this.filterByStatusToolStripMenuItem.DropDownItems.Clear();
+            List<ToolStripMenuItem> mis = new List<ToolStripMenuItem>();
 
+            // status menus
+            foreach (NameValueDTO s in this.statuses)
+            {
+                ToolStripMenuItem mi = new ToolStripMenuItem(s.name);
+                //string current_status = dataGridView1.Rows[currentContextRowIndex].Cells[status_index].Value.ToString();
+                mi.Click += new EventHandler(this.menu_filter_status);
+                mis.Add(mi);
+
+            }
+            //this.filterByStatusToolStripMenuItem.DropDownItems.Add(mi);
+            this.filterByStatusToolStripMenuItem.DropDownItems.AddRange(mis.ToArray());
+        }
+
+        /**
+         * Load list of available projects in the menu
+         */
+        public void main_menu_projects()
+        {
+            this.projectsToolStripMenuItem.DropDownItems.Clear();
+
+            // status menus
+            List<ToolStripMenuItemCustomProjects> ms = new List<ToolStripMenuItemCustomProjects>();
+            foreach (ProjectsDTO p in this.projects)
+            {
+                ToolStripMenuItemCustomProjects mi = new ToolStripMenuItemCustomProjects();
+                mi.id = p.id;
+                mi.Tag = p.id.ToString();
+                mi.Name = p.name;
+                mi.Text = p.name;
+                mi.Click += new EventHandler(this.projectsToolStripMenuItem_Click);
+                ms.Add(mi);
+            }
+
+            this.projectsToolStripMenuItem.DropDownItems.AddRange(ms.ToArray());
         }
     }
 }

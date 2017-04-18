@@ -16,5 +16,7 @@ namespace settingsmanager
         public readonly Guid NOTNEEDED = new Guid("E827C910-5235-4C87-9F13-DAF960682D55");
         public readonly Guid CANNOTBEDONE = new Guid("E827C910-5235-4C87-9F13-DAF960682D56");
         public readonly Guid DELETED = new Guid("E827C910-5235-4C87-9F13-DAF960682D57");
+
+        //  // = new Guid("E827C910-5235-4C87-9F13-DAF960682D51"); // New
     }
 }

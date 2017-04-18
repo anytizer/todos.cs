@@ -1,5 +1,6 @@
 ﻿using database.mysql;
 using dtos;
+using dtos.contracts;
 using settingsmanager;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Linq;
 
 namespace database
 {
-    public partial class api : BaseAPI
+    public partial class api : BaseAPI, api_contract
     {
         private bool project_exists(Guid project_id)
         {
@@ -33,7 +34,7 @@ namespace database
             return success;
         }
 
-        public void add(Guid project_id, Guid status_id, string text)
+        public void add(Guid user_id, Guid project_id, Guid status_id, string text)
         {
             /**
              * Pre-verify that the project id and status id exist
@@ -42,6 +43,8 @@ namespace database
             {
                 if (this.status_exists(status_id))
                 {
+                    DateTime now = System.DateTime.Now;
+
                     database.mysql.todo_todos todo = new database.mysql.todo_todos();
                     todo.todo_id = Guid.NewGuid().ToString();
                     todo.issue_number = "";
@@ -51,7 +54,7 @@ namespace database
                     todo_projects_todos tpd = new todo_projects_todos();
                     tpd.project_id = project_id.ToString();
                     tpd.todo_id = todo.todo_id;
-                    tpd.added_on = System.DateTime.Now;
+                    tpd.added_on = now;
 
                     // @ set all other existing ones into not latest
                     string todo_id_text = todo.todo_id.ToString();
@@ -60,14 +63,20 @@ namespace database
                         ids.is_latest = "N";
                     }
 
+                    StatusIDs s = new StatusIDs();
+
                     todo_todos_statuses ts = new todo_todos_statuses();
                     ts.todo_status_id = Guid.NewGuid().ToString();
+                    ts.user_id = user_id.ToString();
                     ts.todo_id = todo.todo_id;
-
-                    StatusIDs s = new StatusIDs();
                     ts.status_id = s.NEW.ToString();
                     ts.added_on = System.DateTime.Now;
                     ts.is_latest = "Y";
+
+                    todo_users_todos tut = new todo_users_todos();
+                    tut.user_id = user_id.ToString();
+                    tut.todo_id = todo.todo_id;
+                    tut.added_on = now;
 
                     te.todo_todos.Add(todo);
                     te.todo_projects_todos.Add(tpd);
@@ -101,15 +110,20 @@ namespace database
             return lv;
         }
 
-        public List<ProjectsDTO> projects()
+        /**
+         * @todo List the projects limited to the user
+         * @todo read from api, instead of sql
+         */
+        public List<ProjectsDTO> all_projects(Guid user_id)
         {
-            // @todo read from api, instead of sql
             List<ProjectsDTO> projects = new List<ProjectsDTO>();
+            string user_id_text = user_id.ToString();
             foreach (todo_projects p in te.todo_projects)
+            //foreach (todo_projects p in te.todo_users_projects.Where(x=>x.user_id == user_id_text))
             {
                 ProjectsDTO pd = new ProjectsDTO();
-                pd.project_id = p.project_id;
-                pd.project_name = p.project_name;
+                pd.id = p.project_id;
+                pd.name = p.project_name;
                 projects.Add(pd);
             }
 
@@ -119,7 +133,7 @@ namespace database
         /**
          * Patch only: Mark the item as completed
          */
-        public bool done(Guid todo_id, Guid status_id)
+        public bool done(Guid user_id, Guid todo_id, Guid status_id)
         {
             string todo_id_text = todo_id.ToString();
             foreach (todo_todos_statuses ids in te.todo_todos_statuses.Where(x => x.todo_id == todo_id_text))
@@ -129,6 +143,7 @@ namespace database
 
             todo_todos_statuses ts = new todo_todos_statuses();
             ts.todo_status_id = Guid.NewGuid().ToString();
+            ts.user_id = user_id.ToString();
             ts.todo_id = todo_id_text;
             ts.status_id = status_id.ToString(); //  dtos.defaults.statuses.NEW.ToString();
             ts.added_on = System.DateTime.Now;

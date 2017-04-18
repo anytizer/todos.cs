@@ -3,8 +3,29 @@
   <Class Name="todo.ToDos">
     <Position X="4.75" Y="0.5" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AQQAAAAAICQIABFQAACAYAgCAAwYAAQAUHUAAYUhAAA=</HashCode>
-      <FileName>handlers.cs</FileName>
+      <HashCode>AIQAAAIAICQABENAAgCAAAgCAIwIEAQBEFQBEQQhAAA=</HashCode>
+      <FileName>todo\handlers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="todo.LoginForm">
+    <Position X="1" Y="5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAiAAABAAAACAAAECAAAAAAACAAAAAgAAEAA=</HashCode>
+      <FileName>LoginForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="todo.Program">
+    <Position X="8" Y="5.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAIAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="todo.MyRenderer" Collapsed="true">
+    <Position X="1" Y="8.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MyRenderer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

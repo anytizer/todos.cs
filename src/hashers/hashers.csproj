@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8E8A0CAE-A318-489F-B134-06C5ABC1C530}</ProjectGuid>
+    <ProjectGuid>{A2172605-A045-4C37-BA8C-896D01FEE913}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>libraries</RootNamespace>
-    <AssemblyName>libraries</AssemblyName>
+    <RootNamespace>hashers</RootNamespace>
+    <AssemblyName>hashers</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,14 +29,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,25 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="hasher.cs" />
+    <Compile Include="SimpleEncrypter.cs" />
+    <Compile Include="EncryptionInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="todoer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\database\database.csproj">
-      <Project>{7CB44C34-0271-4D9A-8810-94F31F9ED853}</Project>
-      <Name>database</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\dtos\dtos.csproj">
-      <Project>{B0A21E12-1844-4A03-BBDD-1E4869404A7A}</Project>
-      <Name>dtos</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="favicon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
