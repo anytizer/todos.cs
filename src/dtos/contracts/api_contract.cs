@@ -10,7 +10,7 @@ namespace dtos.contracts
     {
         void add(Guid user_id, Guid project_id, Guid status_id, string text);
 
-        List<TodosDTO> todos();
+        List<TodosDTO> todos(LimiterDTO limiter);
 
         bool done(Guid use_id, Guid todo_id, Guid status_id);
 

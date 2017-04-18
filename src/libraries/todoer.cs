@@ -24,9 +24,9 @@ namespace libraries
             return this.api.all_projects(user_id);
         }
 
-        public List<TodosDTO> todos()
+        public List<TodosDTO> todos(LimiterDTO limiter)
         {
-            return this.api.todos();
+            return this.api.todos(limiter);
         }
 
         public bool done(Guid user_id, Guid todo_id, Guid status_id)

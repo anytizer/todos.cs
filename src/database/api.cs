@@ -81,15 +81,19 @@ namespace database
                     te.todo_todos.Add(todo);
                     te.todo_projects_todos.Add(tpd);
                     te.todo_todos_statuses.Add(ts);
+                    te.todo_users_todos.Add(tut);
 
                     te.SaveChanges();
                 }
             }
         }
 
-        public List<TodosDTO> todos()
+        public List<TodosDTO> todos(LimiterDTO limiter)
         {
             // @todo read from api, instead of sql
+            // SELECT * FROM v_todos WHERE project_id='6F39DA75-EE09-44EA-80DB-23087F0C555D';
+
+            //v_todos todos = te.v_todos.Where(x=>x.project_id == "6F39DA75-EE09-44EA-80DB-23087F0C555D");
 
             List<TodosDTO> lv = new List<TodosDTO>();
             foreach (v_todos t in te.v_todos) //.OrderByDescending(x => x.added_on)

@@ -17,9 +17,12 @@ namespace database.mysql
         public string log_id { get; set; }
         public string user_id { get; set; }
         public string event_id { get; set; }
+        public string action_name { get; set; }
+        public string table_name { get; set; }
         public string field_name { get; set; }
         public string data_id { get; set; }
-        public string action_name { get; set; }
+        public string data_old { get; set; }
+        public string data_new { get; set; }
         public System.DateTime added_on { get; set; }
     
         public virtual todo_events todo_events { get; set; }

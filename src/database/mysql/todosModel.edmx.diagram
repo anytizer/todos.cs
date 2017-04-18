@@ -5,18 +5,18 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="d06698efcecd41538e1cdaf01277c55b" Name="Diagram1" ZoomLevel="88">
-        <EntityTypeShape EntityType="todosModel.todo_events" Width="1.5" PointX="3.75" PointY="12.375" />
-        <EntityTypeShape EntityType="todosModel.todo_logs" Width="1.5" PointX="6" PointY="5.875" />
-        <EntityTypeShape EntityType="todosModel.todo_projects" Width="1.5" PointX="0.75" PointY="15.125" />
-        <EntityTypeShape EntityType="todosModel.todo_projects_todos" Width="1.5" PointX="6" PointY="9.875" />
-        <EntityTypeShape EntityType="todosModel.todo_statuses" Width="1.5" PointX="0.75" PointY="10.5" />
-        <EntityTypeShape EntityType="todosModel.todo_todos" Width="1.5" PointX="0.75" PointY="2.375" />
-        <EntityTypeShape EntityType="todosModel.todo_todos_statuses" Width="1.5" PointX="3" PointY="1.875" />
-        <EntityTypeShape EntityType="todosModel.todo_users" Width="1.5" PointX="0.75" PointY="5.75" />
-        <EntityTypeShape EntityType="todosModel.todo_users_projects" Width="1.5" PointX="3" PointY="9.25" />
-        <EntityTypeShape EntityType="todosModel.todo_users_todos" Width="1.5" PointX="3" PointY="6.25" />
-        <EntityTypeShape EntityType="todosModel.v_statuses" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="todosModel.v_todos" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="todosModel.todo_events" Width="1.5" PointX="0.75" PointY="15.625" />
+        <EntityTypeShape EntityType="todosModel.todo_logs" Width="1.5" PointX="3" PointY="11.875" />
+        <EntityTypeShape EntityType="todosModel.todo_projects" Width="1.5" PointX="0.75" PointY="12.375" />
+        <EntityTypeShape EntityType="todosModel.todo_projects_todos" Width="1.5" PointX="6" PointY="12.5" />
+        <EntityTypeShape EntityType="todosModel.todo_statuses" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="todosModel.todo_todos" Width="1.5" PointX="0.75" PointY="4.375" />
+        <EntityTypeShape EntityType="todosModel.todo_todos_statuses" Width="1.5" PointX="6" PointY="8.125" />
+        <EntityTypeShape EntityType="todosModel.todo_users" Width="1.5" PointX="0.75" PointY="8" />
+        <EntityTypeShape EntityType="todosModel.todo_users_projects" Width="1.5" PointX="3" PointY="8.5" />
+        <EntityTypeShape EntityType="todosModel.todo_users_todos" Width="1.5" PointX="3" PointY="5.5" />
+        <EntityTypeShape EntityType="todosModel.v_statuses" Width="1.5" PointX="5.75" PointY="2.625" />
+        <EntityTypeShape EntityType="todosModel.v_todos" Width="1.5" PointX="7.75" PointY="2.625" />
         <AssociationConnector Association="todosModel.todo_logs_ibfk_2" />
         <AssociationConnector Association="todosModel.todo_logs_ibfk_1" />
         <AssociationConnector Association="todosModel.FK_todo_projects_todos_project_id" />

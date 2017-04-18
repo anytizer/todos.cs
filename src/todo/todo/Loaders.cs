@@ -81,6 +81,10 @@ namespace todo
 
             main_menu_statuses();
             main_menu_projects();
+
+            /**
+             * @todo Use the values from limiters
+             */
             grid_todos();
         }
 
@@ -100,7 +104,7 @@ namespace todo
 
             textBox1.Text = "";
             database.api t = new database.api();
-            List<TodosDTO> lv = t.todos();
+            List<TodosDTO> lv = t.todos(limiter);
 
             foreach (TodosDTO v in lv)
             {

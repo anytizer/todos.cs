@@ -111,8 +111,6 @@ namespace todo
             }
         }
 
-
-
         private void save_status()
         {
             /**
