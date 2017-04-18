@@ -21,8 +21,8 @@ namespace helpers
 
         public string dsn()
         {
-            string dns_string = "inventories";
-            string ConnectionString = string.Format("DSN={0}.mysql;SERVER={1};DATABASE={2};UID={3};PASSWORD={4};OPTION=3", dns_string, settings.HOSTNAME, settings.PORTNUMBER, settings.DATABASE, settings.USERNAME, settings.PASSWORD);
+            string dsn_string = "dsn";
+            string ConnectionString = string.Format("DSN={0}.mysql;SERVER={1};DATABASE={2};UID={3};PASSWORD={4};OPTION=3", dsn_string, settings.HOSTNAME, settings.PORTNUMBER, settings.DATABASE, settings.USERNAME, settings.PASSWORD);
             return ConnectionString;
         }
 
@@ -51,10 +51,14 @@ namespace helpers
              * @file mysql-connector-odbc-5.3.6-winx64.msi
              * @see http://stackoverflow.com/questions/6567037/keyword-not-supported-exception-when-attempting-to-use-a-connection-string-that
              */
-            string ConnectionString = string.Format(@"DRIVER={MySQL ODBC 5.3 Unicode Driver};Server={0};Port={1};Database={2};Uid={3};Password={4};", settings.HOSTNAME, settings.PORTNUMBER, settings.DATABASE, settings.USERNAME, settings.PASSWORD);
+            string driver = "{MySQL ODBC 5.3 Unicode Driver}";
+            string ConnectionString = string.Format(@"DRIVER={0};Server={1};Port={2};Database={3};Uid={4};Password={5};", driver, settings.HOSTNAME, settings.PORTNUMBER, settings.DATABASE, settings.USERNAME, settings.PASSWORD);
             return ConnectionString;
         }
 
+        /**
+         * Auto determine which mode the use?
+         */
         public override string ToString()
         {
             return this.native();

@@ -15,19 +15,20 @@ namespace helpers.Tests
         public void dsnTest()
         {
             ConnectionString cs = new ConnectionString();
-
             string dsn = cs.dsn();
-            Assert.IsTrue(dsn.Contains("edmx"));
-            Assert.AreNotEqual("", dsn);
+
+            Assert.IsTrue(dsn.Contains("dsn"));
+            //Assert.AreNotEqual("", dsn);
         }
 
         [TestMethod()]
         public void edmxTest()
         {
             ConnectionString cs = new ConnectionString();
-
             string edmx = cs.edmx();
-            Assert.IsTrue(edmx.Contains("edmx"));
+
+            //Assert.IsTrue(edmx.Contains("edmx"));
+            Assert.IsTrue(edmx.Contains("metadata=res:"));
             Assert.AreNotEqual("", edmx);
         }
 
@@ -35,9 +36,10 @@ namespace helpers.Tests
         public void nativeTest()
         {
             ConnectionString cs = new ConnectionString();
-
             string native = cs.native();
-            Assert.IsTrue(native.Contains("native"));
+
+            //Assert.IsTrue(native.Contains("native"));
+            Assert.IsTrue(native.Contains("CHARSET"));
             Assert.AreNotEqual("", native);
         }
 
@@ -45,9 +47,9 @@ namespace helpers.Tests
         public void odbcTest()
         {
             ConnectionString cs = new ConnectionString();
-
             string odbc = cs.odbc();
-            Assert.IsTrue(odbc.Contains("odbc"));
+
+            Assert.IsTrue(odbc.Contains("ODBC"));
             Assert.AreNotEqual("", odbc);
         }
     }
