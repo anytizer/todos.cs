@@ -75,10 +75,6 @@ namespace todo
             //menuStrip1.Renderer = new MyRenderer();            
             libraries.todoer td = new libraries.todoer();
 
-            api a = new api();
-            this.statuses = a.all_statuses();
-            this.projects = a.all_proejcts();
-
             main_menu_statuses();
             main_menu_projects();
 

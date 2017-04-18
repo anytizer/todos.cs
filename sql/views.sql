@@ -4,6 +4,8 @@ CREATE VIEW v_todos AS
 -- EXPLAIN
 SELECT
 	-- *
+	-- ts.todo_status_id,
+	u.user_id, u.user_username, u.user_fullname,
 	t.todo_id,
 	p.project_id, p.project_name,
 	s.status_id, s.status_shortname status_name,

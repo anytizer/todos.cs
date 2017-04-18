@@ -77,6 +77,11 @@ namespace todo
             this.limiter = new LimiterDTO();
             this.limiter.defaultProjectID = id.ProjectID;
             this.limiter.defaultUserID = id.UserID;
+            this.limiter.defaultStatusID = id.status;
+
+            api a = new api();
+            this.statuses = a.all_statuses();
+            this.projects = a.all_proejcts();
 
             reload(); // reload list of todos            
         }

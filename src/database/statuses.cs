@@ -17,7 +17,7 @@ namespace database
         public Guid delete_status()
         {
             configurations.identities id = new configurations.identities();
-            StatusIDs status = id.status();
+            StatusIDs status = new StatusIDs();
             return status.DELETED;
         }
 

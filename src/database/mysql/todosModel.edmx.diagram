@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="todosModel.todo_logs" Width="1.5" PointX="3" PointY="11.875" />
         <EntityTypeShape EntityType="todosModel.todo_projects" Width="1.5" PointX="0.75" PointY="12.375" />
         <EntityTypeShape EntityType="todosModel.todo_projects_todos" Width="1.5" PointX="6" PointY="12.5" />
-        <EntityTypeShape EntityType="todosModel.todo_statuses" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="todosModel.todo_statuses" Width="1.5" PointX="8.75" PointY="6.875" />
         <EntityTypeShape EntityType="todosModel.todo_todos" Width="1.5" PointX="0.75" PointY="4.375" />
         <EntityTypeShape EntityType="todosModel.todo_todos_statuses" Width="1.5" PointX="6" PointY="8.125" />
         <EntityTypeShape EntityType="todosModel.todo_users" Width="1.5" PointX="0.75" PointY="8" />

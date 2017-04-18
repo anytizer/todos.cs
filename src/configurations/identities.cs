@@ -37,10 +37,15 @@ namespace configurations
             private set { }
         }
 
-        public StatusIDs status()
+        public Guid status
         {
-            StatusIDs st = new StatusIDs();
-            return st;
+            get
+            {
+                StatusIDs st = new StatusIDs();
+                return st.NEW;
+            }
+            private set { }
         }
     }
 }
+

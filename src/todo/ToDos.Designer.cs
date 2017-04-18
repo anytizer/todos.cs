@@ -44,9 +44,9 @@ namespace todo
             this.button1 = new System.Windows.Forms.Button();
             this.onTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.filterByStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.projectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu = new System.Windows.Forms.MenuStrip();
+            this.filterByStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
@@ -155,12 +155,6 @@ namespace todo
             this.refreshToolStripMenuItem.Text = "Refresh";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
-            // filterByStatusToolStripMenuItem
-            // 
-            this.filterByStatusToolStripMenuItem.Name = "filterByStatusToolStripMenuItem";
-            this.filterByStatusToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
-            this.filterByStatusToolStripMenuItem.Text = "Filter by Status";
-            // 
             // projectsToolStripMenuItem
             // 
             this.projectsToolStripMenuItem.Name = "projectsToolStripMenuItem";
@@ -174,14 +168,20 @@ namespace todo
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.onTopToolStripMenuItem,
             this.refreshToolStripMenuItem,
-            this.filterByStatusToolStripMenuItem,
-            this.projectsToolStripMenuItem});
+            this.projectsToolStripMenuItem,
+            this.filterByStatusToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
             this.mainMenu.Size = new System.Drawing.Size(919, 24);
             this.mainMenu.TabIndex = 6;
             this.mainMenu.Text = "menuStrip1";
             this.mainMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
+            // 
+            // filterByStatusToolStripMenuItem
+            // 
+            this.filterByStatusToolStripMenuItem.Name = "filterByStatusToolStripMenuItem";
+            this.filterByStatusToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
+            this.filterByStatusToolStripMenuItem.Text = "Filter by Status";
             // 
             // ToDos
             // 
@@ -223,9 +223,9 @@ namespace todo
         private System.Windows.Forms.DataGridViewTextBoxColumn todo;
         private ToolStripMenuItem onTopToolStripMenuItem;
         private ToolStripMenuItem refreshToolStripMenuItem;
-        private ToolStripMenuItem filterByStatusToolStripMenuItem;
         private ToolStripMenuItem projectsToolStripMenuItem;
         private MenuStrip mainMenu;
+        private ToolStripMenuItem filterByStatusToolStripMenuItem;
     }
 }
 
