@@ -14,28 +14,16 @@ namespace dtos
         public Guid defaultUserID;
     }
 
-    //public class ToolStripMenuItemCustom : ToolStripMenuItem
-    //{
-    //    string id { get; set; }
-    //    string Name { get; set; }
-    //    string Text { get; set; }
-    //
-    //    public ToolStripMenuItemCustom(string name): base(name)
-    //    {
-    //    }
-    //}
     public class ToolStripMenuItemCustomStatuses : ToolStripMenuItem
     {
         public string id { get; set; }
-        public string Value { get; set; }
     }
 
     public class ToolStripMenuItemCustomProjects : ToolStripMenuItem
     {
         public string id { get; set; }
-        //public string Name { get; set; }
-        //public string Text { get; set; }
-        public string Value { get; set; }
+    }
+}
 
         //public ToolStripMenuItemCustom(string name)
         //{
@@ -71,5 +59,3 @@ namespace dtos
             // Take some action based on the data in clickedItem
         }
         */
-    }
-}

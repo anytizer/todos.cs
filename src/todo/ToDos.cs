@@ -41,16 +41,26 @@ namespace todo
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToOrderColumns = false;
             dataGridView1.AllowUserToResizeColumns = false;
+
+            identities id = new identities();
+            this.limiter = new LimiterDTO();
+            this.limiter.defaultProjectID = id.ProjectID_default;
+            this.limiter.defaultUserID = id.UserID_default;
+            this.limiter.defaultStatusID = id.status_new;
+
+            api a = new api();
+            this.projects = a.all_proejcts();
+            this.statuses = a.all_statuses();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            reload(); // reload list of todos            
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             // nothing
-        }
-
-        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            reload();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -71,47 +81,11 @@ namespace todo
                 reload();
             }
         }
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            identities id = new identities();
-            this.limiter = new LimiterDTO();
-            this.limiter.defaultProjectID = id.ProjectID;
-            this.limiter.defaultUserID = id.UserID;
-            this.limiter.defaultStatusID = id.status;
-
-            api a = new api();
-            this.statuses = a.all_statuses();
-            this.projects = a.all_proejcts();
-
-            reload(); // reload list of todos            
-        }
-
-        /**
-         * Load list of available status in the menu
-         */
-        public void main_menu_statuses()
-        {
-            //int status_index = this.status.Index;
-            this.filterByStatusToolStripMenuItem.DropDownItems.Clear();
-            List<ToolStripMenuItem> mis = new List<ToolStripMenuItem>();
-
-            // status menus
-            foreach (NameValueDTO s in this.statuses)
-            {
-                ToolStripMenuItem mi = new ToolStripMenuItem(s.name);
-                //string current_status = dataGridView1.Rows[currentContextRowIndex].Cells[status_index].Value.ToString();
-                mi.Click += new EventHandler(this.menu_filter_status);
-                mis.Add(mi);
-
-            }
-            //this.filterByStatusToolStripMenuItem.DropDownItems.Add(mi);
-            this.filterByStatusToolStripMenuItem.DropDownItems.AddRange(mis.ToArray());
-        }
 
         /**
          * Load list of available projects in the menu
          */
-        public void main_menu_projects()
+        private void main_menu_projects()
         {
             this.projectsToolStripMenuItem.DropDownItems.Clear();
 
@@ -129,6 +103,27 @@ namespace todo
             }
 
             this.projectsToolStripMenuItem.DropDownItems.AddRange(ms.ToArray());
+        }
+
+        /**
+         * Load list of available status in the menu
+         */
+        private void main_menu_statuses()
+        {
+            //int status_index = this.status.Index;
+            this.filterByStatusToolStripMenuItem.DropDownItems.Clear();
+            List<ToolStripMenuItem> mis = new List<ToolStripMenuItem>();
+
+            // status menus
+            foreach (NameValueDTO s in this.statuses)
+            {
+                ToolStripMenuItem mi = new ToolStripMenuItem(s.name);
+                //string current_status = dataGridView1.Rows[currentContextRowIndex].Cells[status_index].Value.ToString();
+                mi.Click += new EventHandler(this.menu_filter_status_handler);
+                mis.Add(mi);
+            }
+
+            this.filterByStatusToolStripMenuItem.DropDownItems.AddRange(mis.ToArray());
         }
     }
 }
