@@ -54,20 +54,24 @@ namespace todo
             // MessageBox.Show(todo_id.ToString());
         }
 
-        void menu_filter_status(object sender, System.EventArgs e)
+        void menu_filter_status_handler(object sender, System.EventArgs e)
         {
             // filter view list
 
-            ToolStripMenuItemCustomStatuses mis = sender as ToolStripMenuItemCustomStatuses;
+            //ToolStripMenuItemCustomStatuses mis = sender as ToolStripMenuItemCustomStatuses;
+            MenuItem mis = sender as MenuItem;
+            MessageBox.Show(mis.Text);
             if (null != mis)
             {
                 MessageBox.Show("Filtering by Status: "+ mis.Tag.ToString());
 
                 this.limiter.defaultStatusID = new Guid(mis.Tag.ToString());
-                //reload();
+                reload();
             }
-
-            //reload();
+            else
+            {
+                MessageBox.Show("Invalid handler");
+            }
         }
 
         private void reload()
