@@ -55,12 +55,8 @@ namespace todo
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            reload(); // reload list of todos            
-        }
-
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            // nothing
+            // reload list of todos
+            reload();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -74,10 +70,23 @@ namespace todo
             /**
              * Project chosen
              */
-            ToolStripMenuItemCustomProjects mis = sender as ToolStripMenuItemCustomProjects;
-            if (null != mis)
+            ToolStripMenuItemCustomProjects ms = sender as ToolStripMenuItemCustomProjects;
+            if (null != ms)
             {
-                this.limiter.defaultProjectID = new Guid(mis.Tag.ToString());
+                this.limiter.defaultProjectID = new Guid(ms.Tag.ToString());
+                reload();
+            }
+        }
+
+        private void filterByStatusToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            /**
+             * Project chosen
+             */
+            ToolStripMenuItemCustomStatuses ms = sender as ToolStripMenuItemCustomStatuses;
+            if (null != ms)
+            {
+                this.limiter.defaultStatusID = new Guid(ms.Tag.ToString());
                 reload();
             }
         }
@@ -95,10 +104,11 @@ namespace todo
             {
                 ToolStripMenuItemCustomProjects mi = new ToolStripMenuItemCustomProjects();
                 mi.id = p.id;
-                mi.Tag = p.id.ToString();
+                mi.Tag = p.id;
                 mi.Name = p.name;
                 mi.Text = p.name;
                 mi.Click += new EventHandler(this.projectsToolStripMenuItem_Click);
+                mi.Checked = this.limiter.defaultProjectID.Equals(new Guid(p.id));
                 ms.Add(mi);
             }
 
@@ -112,18 +122,27 @@ namespace todo
         {
             //int status_index = this.status.Index;
             this.filterByStatusToolStripMenuItem.DropDownItems.Clear();
-            List<ToolStripMenuItem> mis = new List<ToolStripMenuItem>();
+            List<ToolStripMenuItemCustomStatuses> ms = new List<ToolStripMenuItemCustomStatuses>();
 
             // status menus
             foreach (NameValueDTO s in this.statuses)
             {
-                ToolStripMenuItem mi = new ToolStripMenuItem(s.name);
-                //string current_status = dataGridView1.Rows[currentContextRowIndex].Cells[status_index].Value.ToString();
-                mi.Click += new EventHandler(this.menu_filter_status_handler);
-                mis.Add(mi);
+                ToolStripMenuItemCustomStatuses mi = new ToolStripMenuItemCustomStatuses();
+                mi.id = s.id.ToString();
+                mi.Tag = s.id.ToString();
+                mi.Name = s.name;
+                mi.Text = s.name;
+                mi.Click += new EventHandler(this.filterByStatusToolStripMenuItem_Click);
+                mi.Checked = this.limiter.defaultStatusID.Equals(s.id);
+                ms.Add(mi);
             }
 
-            this.filterByStatusToolStripMenuItem.DropDownItems.AddRange(mis.ToArray());
+            this.filterByStatusToolStripMenuItem.DropDownItems.AddRange(ms.ToArray());
+        }
+
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            reload();
         }
     }
 }

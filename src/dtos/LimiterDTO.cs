@@ -9,33 +9,15 @@ namespace dtos
          * Limits the search results to these configurations
          * @todo Replace these items
          */
-        public Guid defaultProjectID { get; set; /** when setting, update the list of projects */}
-        public Guid defaultStatusID;
-        public Guid defaultUserID;
-    }
 
-    public class ToolStripMenuItemCustomStatuses : ToolStripMenuItem
-    {
-        public string id { get; set; }
-    }
-
-    public class ToolStripMenuItemCustomProjects : ToolStripMenuItem
-    {
-        public string id { get; set; }
+        /**
+         * when setting, update the list of projects
+         */
+        public Guid defaultProjectID { get; set; }
+        public Guid defaultStatusID { get; set; }
+        public Guid defaultUserID { get; set;  }
     }
 }
-
-        //public ToolStripMenuItemCustom(string name)
-        //{
-        //    //base(name);
-        //}
-        //public ToolStripMenuItemCustom(string text) : base(text) { }
-        //public ToolStripMenuItemCustom(Drawing.Image image) : base(image) { }
-        //public ToolStripMenuItemCustom(string text, Drawing.Image image);
-        //public ToolStripMenuItemCustom(string text, Drawing.Image image, EventHandler onClick);
-        //public ToolStripMenuItemCustom(string text, Drawing.Image image, params ToolStripItem[] dropDownItems);
-        //public ToolStripMenuItemCustom(string text, Drawing.Image image, EventHandler onClick, string name);
-        //public ToolStripMenuItemCustom(string text, Drawing.Image image, EventHandler onClick, Keys shortcutKeys);
 
         /*
         private void BuildMenuItems()

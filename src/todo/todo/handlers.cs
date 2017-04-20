@@ -77,7 +77,7 @@ namespace todo
         private int currentContextRowIndex = 0;
         private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
         {
-            int currentContextRowIndex = 0;
+            // int currentContextRowIndex = 0; // use global
 
             if (e.Button == MouseButtons.Right)
             {

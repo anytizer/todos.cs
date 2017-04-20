@@ -96,9 +96,16 @@ namespace database
             //v_todos todos = te.v_todos.Where(x=>x.project_id == "6F39DA75-EE09-44EA-80DB-23087F0C555D");
 
             List<TodosDTO> lv = new List<TodosDTO>();
-            foreach (v_todos t in te.v_todos) //.OrderByDescending(x => x.added_on)
+            //foreach (v_todos t in te.v_todos) //.OrderByDescending(x => x.added_on)
+            string defaultProjectID_text = limiter.defaultProjectID.ToString();
+            string defaultStatusID_text = limiter.defaultStatusID.ToString();
+            //foreach (v_todos t in te.v_todos.Where(x=>x.status_id == defaultStatusID_text)) //.OrderByDescending(x => x.added_on)
+            //foreach (v_todos t in te.v_todos.Where(x=>x.project_id == defaultProjectID_text))
+            foreach (v_todos t in te.v_todos.Where(x=>x.project_id == defaultProjectID_text && x.status_id == defaultStatusID_text))
             {
                 TodosDTO todo = new TodosDTO();
+
+                // apply limiters
 
                 todo.project_id = t.project_id;
                 todo.project_name = t.project_name;

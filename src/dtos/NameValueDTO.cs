@@ -8,15 +8,15 @@ namespace dtos
      */
     public class NameValueDTO
     {
-        public Guid id;
-        public string name;
-        public string value;
+        public Guid id { get; set;  }
+        public string name { get; set; }
+        public string value { get; set; }
 
         /**
          * Ask some questions before performing any action
          */
-        public bool confirm;
-        public string question;
+        public bool confirm { get; set; }
+        public string question { get; set; }
 
         public override string ToString()
         {
