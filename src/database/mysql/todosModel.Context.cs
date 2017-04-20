@@ -27,9 +27,8 @@ namespace database.mysql
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<todo_events> todo_events { get; set; }
-        public DbSet<todo_logs> todo_logs { get; set; }
         public DbSet<todo_projects> todo_projects { get; set; }
+        public DbSet<todo_projects_meta> todo_projects_meta { get; set; }
         public DbSet<todo_projects_todos> todo_projects_todos { get; set; }
         public DbSet<todo_statuses> todo_statuses { get; set; }
         public DbSet<todo_todos> todo_todos { get; set; }

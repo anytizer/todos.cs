@@ -14,15 +14,14 @@ namespace todo
     public partial class ToDos : Form
     {
         /**
- * Right click context menu on toto items.
- */
+         * Right click context menu on toto items.
+         */
         void menu_selected(object sender, System.EventArgs e)
         {
             MenuItem mi = sender as MenuItem;
             string new_staus_name = mi.Text;
             //MessageBox.Show(new_staus_name);
             Guid todo_id = new Guid(dataGridView1.Rows[currentContextRowIndex].Cells[this.ToDoID.Index].Value.ToString());
-            //Guid todo_id = new Guid(dataGridView1.Rows[currentContextRowIndex].Cells[this.ToDoID.Index].Value.ToString());
             foreach (NameValueDTO s in this.statuses)
             {
                 if (s.name.Equals(new_staus_name))
@@ -76,7 +75,6 @@ namespace todo
 
         private void reload()
         {
-            //menuStrip1.Renderer = new MyRenderer();            
             libraries.todoer td = new libraries.todoer();
 
             main_menu_statuses();

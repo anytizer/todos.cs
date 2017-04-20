@@ -15,7 +15,6 @@ namespace todo
 {
     public partial class ToDos : Form
     {
-        private int currentContextRowIndex = 0;
         private void onTopToolStripMenuItem_Click(object sender, EventArgs e)
         {
             /**
@@ -75,11 +74,14 @@ namespace todo
             MessageBox.Show("Doing");
         }
 
+        private int currentContextRowIndex = 0;
         private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
         {
+            int currentContextRowIndex = 0;
+
             if (e.Button == MouseButtons.Right)
             {
-                this.currentContextRowIndex = dataGridView1.HitTest(e.X, e.Y).RowIndex;
+                currentContextRowIndex = dataGridView1.HitTest(e.X, e.Y).RowIndex;
                 dataGridView1.ClearSelection();
 
                 ContextMenu m = new ContextMenu();
@@ -129,6 +131,7 @@ namespace todo
 
                 StatusIDs s = new StatusIDs();
                 Guid status_id = s.NEW;
+
                 td.add(user_id, project_id, status_id, textBox1.Text);
             }
         }

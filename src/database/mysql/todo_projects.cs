@@ -17,15 +17,16 @@ namespace database.mysql
         public todo_projects()
         {
             this.todo_projects_todos = new HashSet<todo_projects_todos>();
+            this.todo_projects_meta = new HashSet<todo_projects_meta>();
             this.todo_users_projects = new HashSet<todo_users_projects>();
         }
     
         public string project_id { get; set; }
         public string project_name { get; set; }
         public string is_active { get; set; }
-        public System.DateTime added_on { get; set; }
     
         public virtual ICollection<todo_projects_todos> todo_projects_todos { get; set; }
+        public virtual ICollection<todo_projects_meta> todo_projects_meta { get; set; }
         public virtual ICollection<todo_users_projects> todo_users_projects { get; set; }
     }
 }

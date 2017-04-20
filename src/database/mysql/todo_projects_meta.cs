@@ -12,17 +12,12 @@ namespace database.mysql
     using System;
     using System.Collections.Generic;
     
-    public partial class todo_events
+    public partial class todo_projects_meta
     {
-        public todo_events()
-        {
-            this.todo_logs = new HashSet<todo_logs>();
-        }
+        public string meta_id { get; set; }
+        public string project_id { get; set; }
+        public System.DateTime added_on { get; set; }
     
-        public string event_id { get; set; }
-        public string event_code { get; set; }
-        public string event_name { get; set; }
-    
-        public virtual ICollection<todo_logs> todo_logs { get; set; }
+        public virtual todo_projects todo_projects { get; set; }
     }
 }
