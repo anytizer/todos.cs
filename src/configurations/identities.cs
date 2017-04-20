@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 
 namespace configurations
 {
+    /**
+     * Repository of IDs
+     */
     public class identities
     {
-        public Guid ProjectID
+        public Guid ProjectID_default
         {
             get
             {
@@ -23,7 +26,10 @@ namespace configurations
             private set { }
         }
 
-        public Guid UserID
+        /**
+         * Default User ID to login internally
+         */
+        public Guid UserID_default
         {
             get
             {
@@ -37,7 +43,10 @@ namespace configurations
             private set { }
         }
 
-        public Guid status
+        /**
+         * GUID of a todo status just created
+         */
+        public Guid status_new
         {
             get
             {
