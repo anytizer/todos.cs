@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace todo
 {
-    public partial class ToDos : Form
+    public partial class ToDos
     {
         /**
          * Right click context menu on toto items.

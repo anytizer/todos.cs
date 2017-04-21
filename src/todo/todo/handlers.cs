@@ -14,7 +14,7 @@ using static settingsmanager.ids;
 
 namespace todo
 {
-    public partial class ToDos : Form
+    public partial class ToDos
     {
         private void onTopToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -130,7 +130,7 @@ namespace todo
                 Guid project_id = id.ProjectID;
                 Guid user_id = id.UserID;
 
-                ids.StatusIDs s = new ids.StatusIDs();
+                StatusIDs s = new StatusIDs();
                 Guid status_id = s.NEW;
 
                 td.add(user_id, project_id, status_id, textBox1.Text);

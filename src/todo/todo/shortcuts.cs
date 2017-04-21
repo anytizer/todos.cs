@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace todo
 {
-    public partial class ToDos : Form
+    public partial class ToDos
     {
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
