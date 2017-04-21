@@ -26,22 +26,6 @@ namespace todo
             /**
              * @see https://msdn.microsoft.com/en-us/library/system.windows.forms.datagridviewcellstyle.selectionbackcolor(v=vs.110).aspx
              */
-            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
-            dataGridView1.DefaultCellStyle.BackColor = Color.SkyBlue;
-            dataGridView1.DefaultCellStyle.BackColor = Color.White; // sky blue
-            //dataGridView1.CurrentRow.DefaultCellStyle.BackColor = Color.Maroon;
-            //dataGridView1.CurrentRow.DefaultCellStyle.ForeColor = Color.White;
-            dataGridView1.MultiSelect = false;
-            dataGridView1.AllowUserToResizeRows = false;
-            dataGridView1.AreAllCellsSelected(false);
-            dataGridView1.BackgroundColor = Color.LightGray;
-            dataGridView1.BorderStyle = BorderStyle.Fixed3D;
-            dataGridView1.ReadOnly = true;
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.AllowUserToOrderColumns = false;
-            dataGridView1.AllowUserToResizeColumns = false;
-
             identities id = new identities();
             this.limiter = new LimiterDTO();
             this.limiter.default_project_id = id.ProjectID_default.ToString();
@@ -55,11 +39,10 @@ namespace todo
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // reload list of todos
             reload();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void SaveButton_Click(object sender, EventArgs e)
         {
             save_status();
             reload();
@@ -107,8 +90,9 @@ namespace todo
                 mi.Tag = p.id;
                 mi.Name = p.name;
                 mi.Text = p.name;
-                mi.Click += new EventHandler(this.projectsToolStripMenuItem_Click);
                 mi.Checked = this.limiter.default_project_id.Equals(new Guid(p.id));
+                mi.Click += new EventHandler(this.projectsToolStripMenuItem_Click);
+
                 ms.Add(mi);
             }
 
@@ -132,8 +116,9 @@ namespace todo
                 mi.Tag = s.id.ToString();
                 mi.Name = s.name;
                 mi.Text = s.name;
-                mi.Click += new EventHandler(this.filterByStatusToolStripMenuItem_Click);
                 mi.Checked = this.limiter.default_status_id.Equals(s.id);
+                mi.Click += new EventHandler(this.filterByStatusToolStripMenuItem_Click);
+
                 ms.Add(mi);
             }
 
@@ -144,6 +129,7 @@ namespace todo
         {
             this.limiter.default_project_id = null;
             this.limiter.default_status_id = null;
+
             reload();
         }
     }

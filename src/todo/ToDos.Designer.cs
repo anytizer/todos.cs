@@ -41,7 +41,7 @@ namespace todo
             this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.todo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.SaveButton = new System.Windows.Forms.Button();
             this.onTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.projectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,29 +53,42 @@ namespace todo
             // 
             // dataGridView1
             // 
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+this.ToDoID,
+this.date,
+this.issue,
+this.project,
+this.status,
+this.todo});
+            this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToOrderColumns = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black;
+            this.dataGridView1.AreAllCellsSelected(false);
+            this.dataGridView1.BackgroundColor = Color.LightGray;
+            this.dataGridView1.BorderStyle = BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ToDoID,
-            this.date,
-            this.issue,
-            this.project,
-            this.status,
-            this.todo});
+            this.dataGridView1.DefaultCellStyle.BackColor = Color.White;
+            this.dataGridView1.DefaultCellStyle.ForeColor = Color.Black;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridView1.Location = new System.Drawing.Point(12, 65);
+            this.dataGridView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseClick);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 18;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(895, 569);
-            this.dataGridView1.TabIndex = 2;
-            this.dataGridView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseClick);
+            this.dataGridView1.TabIndex = 0;
             // 
             // ToDoID
             // 
@@ -131,15 +144,15 @@ namespace todo
             this.textBox1.Size = new System.Drawing.Size(460, 20);
             this.textBox1.TabIndex = 3;
             // 
-            // button1
+            // SaveButton
             // 
-            this.button1.Location = new System.Drawing.Point(863, 36);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(44, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.SaveButton.Location = new System.Drawing.Point(863, 36);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(44, 23);
+            this.SaveButton.TabIndex = 4;
+            this.SaveButton.Text = "Save";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // onTopToolStripMenuItem
             // 
@@ -188,7 +201,7 @@ namespace todo
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(919, 646);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.mainMenu);
@@ -213,7 +226,7 @@ namespace todo
         #endregion
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn ToDoID;
         private System.Windows.Forms.DataGridViewTextBoxColumn date;
         private System.Windows.Forms.DataGridViewTextBoxColumn issue;
