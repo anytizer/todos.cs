@@ -47,7 +47,6 @@ namespace helpers
             /**
              * @see https://www.connectionstrings.com/mysql/
              * @see https://dev.mysql.com/doc/connector-odbc/en/connector-odbc-configuration-connection-without-dsn.html
-             * 
              * @file mysql-connector-odbc-5.3.6-winx64.msi
              * @see http://stackoverflow.com/questions/6567037/keyword-not-supported-exception-when-attempting-to-use-a-connection-string-that
              */

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace helpers.Tests
+namespace HashsersTests
 {
     [TestClass()]
     public class ConnectionStringTests

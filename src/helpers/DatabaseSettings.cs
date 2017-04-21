@@ -23,21 +23,21 @@ namespace helpers
                 case 0:
                     // Shared on LAN
                     DRIVER = "MySQL";
-                    HOSTNAME = "192.168.1.94";
+                    HOSTNAME = "localhost";
                     PORTNUMBER = "3306"; // Direct connection
-                    DATABASE = "inventory";
-                    USERNAME = "inventory";
-                    PASSWORD = "inventory557";
+                    USERNAME = "awesome";
+                    PASSWORD = "awesome";
+                    DATABASE = "awesome_todos";
                     break;
                 case 1:
                 default:
                     // Traced with Proxy Server
                     DRIVER = "MySQL";
-                    HOSTNAME = "192.168.1.94";
+                    HOSTNAME = "localhost";
                     PORTNUMBER = "4040"; // Neor Profile SQL
-                    DATABASE = "inventory";
-                    USERNAME = "inventory";
-                    PASSWORD = "inventory557";
+                    USERNAME = "awesome";
+                    PASSWORD = "awesome";
+                    DATABASE = "awesome_todos";
                     break;
             }
         }

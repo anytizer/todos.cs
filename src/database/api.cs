@@ -5,6 +5,7 @@ using settingsmanager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static settingsmanager.ids;
 
 namespace database
 {
@@ -58,7 +59,7 @@ namespace database
 
                     // @ set all other existing ones into not latest
                     string todo_id_text = todo.todo_id.ToString();
-                    foreach (todo_todos_statuses ids in te.todo_todos_statuses.Where(x=>x.todo_id == todo_id_text))
+                    foreach (todo_todos_statuses ids in te.todo_todos_statuses.Where(x => x.todo_id == todo_id_text))
                     {
                         ids.is_latest = "N";
                     }
@@ -97,11 +98,15 @@ namespace database
 
             List<TodosDTO> lv = new List<TodosDTO>();
             //foreach (v_todos t in te.v_todos) //.OrderByDescending(x => x.added_on)
-            string defaultProjectID_text = limiter.defaultProjectID.ToString();
-            string defaultStatusID_text = limiter.defaultStatusID.ToString();
+            string defaultProjectID_text = limiter.default_project_id.ToString();
+            string defaultStatusID_text = limiter.default_status_id.ToString();
             //foreach (v_todos t in te.v_todos.Where(x=>x.status_id == defaultStatusID_text)) //.OrderByDescending(x => x.added_on)
             //foreach (v_todos t in te.v_todos.Where(x=>x.project_id == defaultProjectID_text))
-            foreach (v_todos t in te.v_todos.Where(x=>x.project_id == defaultProjectID_text && x.status_id == defaultStatusID_text))
+            //foreach (v_todos t in te.v_todos.Where(x => x.project_id == defaultProjectID_text && x.status_id == defaultStatusID_text))
+            foreach (v_todos t in te.v_todos.Where(x => (limiter.ProjectID != null && x.project_id == defaultProjectID_text) && (limiter.StatusID != null && x.status_id == defaultStatusID_text)))
+            //foreach (v_todos t in te.v_todos.Where(x => (limiter.defaultProjectID != null && x.project_id == defaultProjectID_text) && (limiter.defaultStatusID != null && x.status_id == defaultStatusID_text)))
+            //foreach (v_todos t in te.v_todos.Where(x => x.user_id == limiter.default_user_id))
+            //foreach (v_todos t in te.v_todos.OrderByDescending(x=>x.added_on))
             {
                 TodosDTO todo = new TodosDTO();
 

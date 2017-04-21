@@ -31,7 +31,7 @@ namespace todo
                         if (MessageBox.Show(s.question, "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
                             todoer td = new todoer();
-                            td.done(limiter.defaultUserID, todo_id, s.id);
+                            td.done(limiter.UserID, todo_id, s.id);
                         }
                         else
                         {
@@ -41,7 +41,7 @@ namespace todo
                     else
                     {
                         todoer td = new todoer();
-                        td.done(limiter.defaultUserID, todo_id, s.id);
+                        td.done(limiter.UserID, todo_id, s.id);
                         // MessageBox.Show(string.Format("{0} @ {1}", todo_id, new_staus_name));
                     }
 

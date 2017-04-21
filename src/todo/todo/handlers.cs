@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static settingsmanager.ids;
 
 namespace todo
 {
@@ -44,7 +45,7 @@ namespace todo
             database.api td = new database.api();
             Guid todo_id = new Guid(this.dataGridView1.Rows[this.dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString());
             Guid status_id = td.delete_status();
-            if (td.done(limiter.defaultUserID, todo_id, status_id))
+            if (td.done(limiter.UserID, todo_id, status_id))
             {
                 reload();
             }
@@ -63,7 +64,7 @@ namespace todo
 
             StatusIDs ts = new StatusIDs();
             Guid status_id = ts.LOWPRIORITY;
-            if (td.done(limiter.defaultUserID, todo_id, status_id))
+            if (td.done(limiter.UserID, todo_id, status_id))
             {
                 reload();
             }
@@ -129,7 +130,7 @@ namespace todo
                 Guid project_id = id.ProjectID;
                 Guid user_id = id.UserID;
 
-                StatusIDs s = new StatusIDs();
+                ids.StatusIDs s = new ids.StatusIDs();
                 Guid status_id = s.NEW;
 
                 td.add(user_id, project_id, status_id, textBox1.Text);

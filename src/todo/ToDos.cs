@@ -44,9 +44,9 @@ namespace todo
 
             identities id = new identities();
             this.limiter = new LimiterDTO();
-            this.limiter.defaultProjectID = id.ProjectID_default;
-            this.limiter.defaultUserID = id.UserID_default;
-            this.limiter.defaultStatusID = id.status_new;
+            this.limiter.default_project_id = id.ProjectID_default.ToString();
+            this.limiter.default_status_id = id.status_new.ToString();
+            this.limiter.default_user_id= id.UserID_default.ToString();
 
             api a = new api();
             this.projects = a.all_proejcts();
@@ -73,7 +73,7 @@ namespace todo
             ToolStripMenuItemCustomProjects ms = sender as ToolStripMenuItemCustomProjects;
             if (null != ms)
             {
-                this.limiter.defaultProjectID = new Guid(ms.Tag.ToString());
+                this.limiter.default_project_id = ms.Tag.ToString();
                 reload();
             }
         }
@@ -86,7 +86,7 @@ namespace todo
             ToolStripMenuItemCustomStatuses ms = sender as ToolStripMenuItemCustomStatuses;
             if (null != ms)
             {
-                this.limiter.defaultStatusID = new Guid(ms.Tag.ToString());
+                this.limiter.default_project_id = ms.Tag.ToString();
                 reload();
             }
         }
@@ -108,7 +108,7 @@ namespace todo
                 mi.Name = p.name;
                 mi.Text = p.name;
                 mi.Click += new EventHandler(this.projectsToolStripMenuItem_Click);
-                mi.Checked = this.limiter.defaultProjectID.Equals(new Guid(p.id));
+                mi.Checked = this.limiter.default_project_id.Equals(new Guid(p.id));
                 ms.Add(mi);
             }
 
@@ -133,7 +133,7 @@ namespace todo
                 mi.Name = s.name;
                 mi.Text = s.name;
                 mi.Click += new EventHandler(this.filterByStatusToolStripMenuItem_Click);
-                mi.Checked = this.limiter.defaultStatusID.Equals(s.id);
+                mi.Checked = this.limiter.default_status_id.Equals(s.id);
                 ms.Add(mi);
             }
 
@@ -142,6 +142,8 @@ namespace todo
 
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.limiter.default_project_id = null;
+            this.limiter.default_status_id = null;
             reload();
         }
     }

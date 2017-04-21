@@ -22,6 +22,4 @@ namespace helpers
             return connection_string;
         }
     }
-
-   
 }
