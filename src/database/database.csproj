@@ -67,6 +67,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>todosModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="mysql\todo_events.cs">
+      <DependentUpon>todosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="mysql\todo_logs.cs">
+      <DependentUpon>todosModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="mysql\todo_projects.cs">
       <DependentUpon>todosModel.tt</DependentUpon>
     </Compile>

@@ -114,7 +114,7 @@ namespace todo
             }
         }
 
-        private void save_status()
+        private void save_status(LimiterDTO limiter)
         {
             /**
              * ToDo has something typed in
@@ -122,12 +122,21 @@ namespace todo
             if (textBox1.Text.Length >= 1)
             {
                 database.api td = new database.api();
-
-                /**
-                 * @todo Pickup from dropdown lists
-                 */
                 settingsmanager.ids id = new settingsmanager.ids();
-                Guid project_id = id.ProjectID;
+
+                Guid project_id;
+                if (null != limiter.ProjectID && limiter.ProjectID != Guid.Empty)
+                {
+                    /**
+                     * @todo Pickup from project menu dropdown lists
+                     */
+                    project_id = limiter.ProjectID;
+                }
+                else
+                {
+                    project_id = id.ProjectID;
+                }
+
                 Guid user_id = id.UserID;
 
                 StatusIDs s = new StatusIDs();

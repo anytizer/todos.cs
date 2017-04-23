@@ -5,6 +5,29 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="todosModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="todo_events">
+          <Key>
+            <PropertyRef Name="event_id" />
+          </Key>
+          <Property Name="event_id" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="event_code" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="event_name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="todo_logs">
+          <Key>
+            <PropertyRef Name="log_id" />
+          </Key>
+          <Property Name="log_id" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="user_id" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="event_id" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="action_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="table_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="field_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="data_id" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="data_old" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="data_new" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="added_on" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
         <EntityType Name="todo_projects">
           <Key>
             <PropertyRef Name="project_id" />
@@ -12,6 +35,7 @@
           <Property Name="project_id" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="project_name" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="is_active" Type="enum" Nullable="false" />
+          <Property Name="added_on" Type="datetime" Precision="0" Nullable="false" />
         </EntityType>
         <EntityType Name="todo_projects_meta">
           <Key>
@@ -77,6 +101,7 @@
           <Property Name="user_password" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="user_salt" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="is_active" Type="enum" Nullable="false" />
+          <Property Name="added_on" Type="datetime" Precision="0" Nullable="false" />
         </EntityType>
         <EntityType Name="todo_users_projects">
           <Key>
@@ -161,6 +186,34 @@ warning 6002: The table/view 'def.awesome_todos.v_todos' does not have a primary
             </Principal>
             <Dependent Role="todo_projects_todos">
               <PropertyRef Name="todo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="todo_logs_ibfk_1">
+          <End Role="todo_users" Type="Self.todo_users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="todo_logs" Type="Self.todo_logs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="todo_users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="todo_logs">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="todo_logs_ibfk_2">
+          <End Role="todo_events" Type="Self.todo_events" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="todo_logs" Type="Self.todo_logs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="todo_events">
+              <PropertyRef Name="event_id" />
+            </Principal>
+            <Dependent Role="todo_logs">
+              <PropertyRef Name="event_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -277,6 +330,8 @@ warning 6002: The table/view 'def.awesome_todos.v_todos' does not have a primary
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="todosModelStoreContainer">
+          <EntitySet Name="todo_events" EntityType="Self.todo_events" Schema="awesome_todos" store:Type="Tables" />
+          <EntitySet Name="todo_logs" EntityType="Self.todo_logs" Schema="awesome_todos" store:Type="Tables" />
           <EntitySet Name="todo_projects" EntityType="Self.todo_projects" Schema="awesome_todos" store:Type="Tables" />
           <EntitySet Name="todo_projects_meta" EntityType="Self.todo_projects_meta" Schema="awesome_todos" store:Type="Tables" />
           <EntitySet Name="todo_projects_todos" EntityType="Self.todo_projects_todos" Schema="awesome_todos" store:Type="Tables" />
@@ -316,6 +371,14 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
             <End Role="todo_todos" EntitySet="todo_todos" />
             <End Role="todo_projects_todos" EntitySet="todo_projects_todos" />
           </AssociationSet>
+          <AssociationSet Name="todo_logs_ibfk_1" Association="Self.todo_logs_ibfk_1">
+            <End Role="todo_users" EntitySet="todo_users" />
+            <End Role="todo_logs" EntitySet="todo_logs" />
+          </AssociationSet>
+          <AssociationSet Name="todo_logs_ibfk_2" Association="Self.todo_logs_ibfk_2">
+            <End Role="todo_events" EntitySet="todo_events" />
+            <End Role="todo_logs" EntitySet="todo_logs" />
+          </AssociationSet>
           <AssociationSet Name="todo_projects_meta_ibfk_1" Association="Self.todo_projects_meta_ibfk_1">
             <End Role="todo_projects" EntitySet="todo_projects" />
             <End Role="todo_projects_meta" EntitySet="todo_projects_meta" />
@@ -354,6 +417,8 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
     <edmx:ConceptualModels>
       <Schema Namespace="todosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="todosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="todo_events" EntityType="todosModel.todo_events" />
+          <EntitySet Name="todo_logs" EntityType="todosModel.todo_logs" />
           <EntitySet Name="todo_projects" EntityType="todosModel.todo_projects" />
           <EntitySet Name="todo_projects_meta" EntityType="todosModel.todo_projects_meta" />
           <EntitySet Name="todo_projects_todos" EntityType="todosModel.todo_projects_todos" />
@@ -365,6 +430,14 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           <EntitySet Name="todo_users_todos" EntityType="todosModel.todo_users_todos" />
           <EntitySet Name="v_statuses" EntityType="todosModel.v_statuses" />
           <EntitySet Name="v_todos" EntityType="todosModel.v_todos" />
+          <AssociationSet Name="todo_logs_ibfk_2" Association="todosModel.todo_logs_ibfk_2">
+            <End Role="todo_events" EntitySet="todo_events" />
+            <End Role="todo_logs" EntitySet="todo_logs" />
+          </AssociationSet>
+          <AssociationSet Name="todo_logs_ibfk_1" Association="todosModel.todo_logs_ibfk_1">
+            <End Role="todo_users" EntitySet="todo_users" />
+            <End Role="todo_logs" EntitySet="todo_logs" />
+          </AssociationSet>
           <AssociationSet Name="FK_todo_projects_todos_project_id" Association="todosModel.FK_todo_projects_todos_project_id">
             <End Role="todo_projects" EntitySet="todo_projects" />
             <End Role="todo_projects_todos" EntitySet="todo_projects_todos" />
@@ -406,6 +479,32 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
             <End Role="todo_users_todos" EntitySet="todo_users_todos" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="todo_events">
+          <Key>
+            <PropertyRef Name="event_id" />
+          </Key>
+          <Property Name="event_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="event_code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="event_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="todo_logs" Relationship="todosModel.todo_logs_ibfk_2" FromRole="todo_events" ToRole="todo_logs" />
+        </EntityType>
+        <EntityType Name="todo_logs">
+          <Key>
+            <PropertyRef Name="log_id" />
+          </Key>
+          <Property Name="log_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="user_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="event_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="action_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="table_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="field_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="data_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="data_old" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="data_new" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="added_on" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="todo_events" Relationship="todosModel.todo_logs_ibfk_2" FromRole="todo_logs" ToRole="todo_events" />
+          <NavigationProperty Name="todo_users" Relationship="todosModel.todo_logs_ibfk_1" FromRole="todo_logs" ToRole="todo_users" />
+        </EntityType>
         <EntityType Name="todo_projects">
           <Key>
             <PropertyRef Name="project_id" />
@@ -413,6 +512,7 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           <Property Name="project_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="project_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="is_active" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
+          <Property Name="added_on" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="todo_projects_todos" Relationship="todosModel.FK_todo_projects_todos_project_id" FromRole="todo_projects" ToRole="todo_projects_todos" />
           <NavigationProperty Name="todo_projects_meta" Relationship="todosModel.todo_projects_meta_ibfk_1" FromRole="todo_projects" ToRole="todo_projects_meta" />
           <NavigationProperty Name="todo_users_projects" Relationship="todosModel.todo_users_projects_ibfk_2" FromRole="todo_projects" ToRole="todo_users_projects" />
@@ -491,6 +591,8 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           <Property Name="user_password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="user_salt" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="is_active" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
+          <Property Name="added_on" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="todo_logs" Relationship="todosModel.todo_logs_ibfk_1" FromRole="todo_users" ToRole="todo_logs" />
           <NavigationProperty Name="todo_todos_statuses" Relationship="todosModel.todo_todos_statuses_ibfk_3" FromRole="todo_users" ToRole="todo_todos_statuses" />
           <NavigationProperty Name="todo_users_projects" Relationship="todosModel.todo_users_projects_ibfk_1" FromRole="todo_users" ToRole="todo_users_projects" />
           <NavigationProperty Name="todo_users_todos" Relationship="todosModel.todo_users_todos_ibfk_1" FromRole="todo_users" ToRole="todo_users_todos" />
@@ -553,6 +655,34 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           <Property Name="issue_number" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="todo_text" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
         </EntityType>
+        <Association Name="todo_logs_ibfk_2">
+          <End Type="todosModel.todo_events" Role="todo_events" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="todosModel.todo_logs" Role="todo_logs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="todo_events">
+              <PropertyRef Name="event_id" />
+            </Principal>
+            <Dependent Role="todo_logs">
+              <PropertyRef Name="event_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="todo_logs_ibfk_1">
+          <End Type="todosModel.todo_users" Role="todo_users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="todosModel.todo_logs" Role="todo_logs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="todo_users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="todo_logs">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_todo_projects_todos_project_id">
           <End Type="todosModel.todo_projects" Role="todo_projects" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -699,9 +829,35 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="todosModelStoreContainer" CdmEntityContainer="todosEntities">
+          <EntitySetMapping Name="todo_events">
+            <EntityTypeMapping TypeName="todosModel.todo_events">
+              <MappingFragment StoreEntitySet="todo_events">
+                <ScalarProperty Name="event_name" ColumnName="event_name" />
+                <ScalarProperty Name="event_code" ColumnName="event_code" />
+                <ScalarProperty Name="event_id" ColumnName="event_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="todo_logs">
+            <EntityTypeMapping TypeName="todosModel.todo_logs">
+              <MappingFragment StoreEntitySet="todo_logs">
+                <ScalarProperty Name="added_on" ColumnName="added_on" />
+                <ScalarProperty Name="data_new" ColumnName="data_new" />
+                <ScalarProperty Name="data_old" ColumnName="data_old" />
+                <ScalarProperty Name="data_id" ColumnName="data_id" />
+                <ScalarProperty Name="field_name" ColumnName="field_name" />
+                <ScalarProperty Name="table_name" ColumnName="table_name" />
+                <ScalarProperty Name="action_name" ColumnName="action_name" />
+                <ScalarProperty Name="event_id" ColumnName="event_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="log_id" ColumnName="log_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="todo_projects">
             <EntityTypeMapping TypeName="todosModel.todo_projects">
               <MappingFragment StoreEntitySet="todo_projects">
+                <ScalarProperty Name="added_on" ColumnName="added_on" />
                 <ScalarProperty Name="is_active" ColumnName="is_active" />
                 <ScalarProperty Name="project_name" ColumnName="project_name" />
                 <ScalarProperty Name="project_id" ColumnName="project_id" />
@@ -769,6 +925,7 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           <EntitySetMapping Name="todo_users">
             <EntityTypeMapping TypeName="todosModel.todo_users">
               <MappingFragment StoreEntitySet="todo_users">
+                <ScalarProperty Name="added_on" ColumnName="added_on" />
                 <ScalarProperty Name="is_active" ColumnName="is_active" />
                 <ScalarProperty Name="user_salt" ColumnName="user_salt" />
                 <ScalarProperty Name="user_password" ColumnName="user_password" />

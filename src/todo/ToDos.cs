@@ -44,7 +44,7 @@ namespace todo
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            save_status();
+            save_status(this.limiter);
             reload();
         }
 

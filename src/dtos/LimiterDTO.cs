@@ -20,9 +20,9 @@ namespace dtos
         /**
          * String setup
          */
-        public string default_project_id { get { return this._ProjectID.ToString(); } set { this._ProjectID = new Guid(value); } }
-        public string default_status_id { get { return this._StatusID.ToString(); } set { this._StatusID = new Guid(value); } }
-        public string default_user_id { get { return this._UserID.ToString(); } set { this._UserID = new Guid(value); } }
+        public string default_project_id { get { return this._ProjectID.ToString(); } set { this._ProjectID = this.guidOrNull(value); } }
+        public string default_status_id { get { return this._StatusID.ToString(); } set { this._StatusID = this.guidOrNull(value); } }
+        public string default_user_id { get { return this._UserID.ToString(); } set { this._UserID = this.guidOrNull(value); } }
 
         /**
          * GUID setup
@@ -30,6 +30,21 @@ namespace dtos
         public Guid ProjectID { get { return _ProjectID; } private set { this._ProjectID = value; } }
         public Guid StatusID { get { return _StatusID; } private set { this._StatusID = value; } }
         public Guid UserID { get { return this._UserID; } private set { this._UserID = value; } }
+
+        private Guid guidOrNull(string g)
+        {
+            Guid value = Guid.Empty;
+
+            if(g!=null && g!="" && g.Length >= 30)
+            {
+                if(g.ToString() != Guid.Empty.ToString())
+                {
+                    value = new Guid(g);
+                }
+            }
+
+            return value;
+        }
     }
 }
 
