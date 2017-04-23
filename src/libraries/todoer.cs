@@ -34,9 +34,9 @@ namespace libraries
             return this.api.done(user_id, todo_id, status_id);
         }
 
-        public List<NameValueDTO> all_statuses()
+        public List<NameValueDTO> all_statuses(LimiterDTO limiter)
         {
-            return this.api.all_statuses();
+            return this.api.all_statuses(limiter);
         }
     }
 }

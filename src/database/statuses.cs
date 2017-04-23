@@ -22,7 +22,7 @@ namespace database
             return status.DELETED;
         }
 
-        public List<NameValueDTO> all_statuses()
+        public List<NameValueDTO> all_statuses(LimiterDTO limiter)
         {
             List<NameValueDTO> l = new List<NameValueDTO>();
             foreach (todo_statuses status in this.te.todo_statuses.Where(x => x.in_menu == "Y"))

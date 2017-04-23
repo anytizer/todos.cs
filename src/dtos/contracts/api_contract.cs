@@ -16,6 +16,6 @@ namespace dtos.contracts
 
         List<ProjectsDTO> all_projects(Guid user_id);
 
-        List<NameValueDTO> all_statuses();
+        List<NameValueDTO> all_statuses(LimiterDTO limiter);
     }
 }

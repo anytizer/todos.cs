@@ -34,7 +34,7 @@ namespace todo
 
             api a = new api();
             this.projects = a.all_proejcts();
-            this.statuses = a.all_statuses();
+            this.statuses = a.all_statuses(limiter);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -107,13 +107,14 @@ namespace todo
         /**
          * Load list of available status in the menu
          */
-        private void main_menu_statuses()
+        private void main_menu_statuses(LimiterDTO limiter)
         {
             //int status_index = this.status.Index;
             this.filterByStatusToolStripMenuItem.DropDownItems.Clear();
             List<ToolStripMenuItemCustomStatuses> ms = new List<ToolStripMenuItemCustomStatuses>();
 
             // status menus
+            // Limit statuses with todos counter
             foreach (NameValueDTO s in this.statuses)
             {
                 ToolStripMenuItemCustomStatuses mi = new ToolStripMenuItemCustomStatuses();
