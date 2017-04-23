@@ -75,18 +75,23 @@ namespace todo
 
         private void reload()
         {
+            this.SuspendLayout();
+
             libraries.todoer td = new libraries.todoer();
 
             main_menu_statuses();
             main_menu_projects();
 
-            /**
-             * @todo Use the values from limiters
-             */
-            grid_todos();
+            grid_todos(limiter);
+
+            this.Refresh();
+            this.ResumeLayout();
+
+            //MessageBox.Show("Test: "+limiter.ProjectID);
+            //MessageBox.Show("Test: "+limiter.StatusID);
         }
 
-        private void grid_todos()
+        private void grid_todos(LimiterDTO limiter)
         {
             this.dataGridView1.Rows.Clear();
             this.dataGridView1.Enabled = false;
@@ -114,7 +119,7 @@ namespace todo
                 row.CreateCells(dataGridView1, v.todo_id, v.added_on, "", v.project_name, v.status_name, v.todo_text);
                 this.dataGridView1.Rows.Add(row);
 
-                // flickering
+                // flickering control
                 // http://stackoverflow.com/questions/2041782/how-to-prevent-rows-in-datagrid-from-flickering-while-application-is-running
             }
 

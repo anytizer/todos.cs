@@ -89,6 +89,20 @@ namespace database
             }
         }
 
+        private bool applyLimitsByGuid(Guid id)
+        {
+            bool apply = false;
+            if(null != id)
+            {
+                if (id != Guid.Empty)
+                {
+                    apply = true;
+                }
+            }
+
+            return apply;
+        }
+
         public List<TodosDTO> todos(LimiterDTO limiter)
         {
             // @todo read from api, instead of sql
@@ -96,22 +110,38 @@ namespace database
 
             //v_todos todos = te.v_todos.Where(x=>x.project_id == "6F39DA75-EE09-44EA-80DB-23087F0C555D");
 
+            // no filter option
+            bool limitByProject = this.applyLimitsByGuid(limiter.ProjectID);
+            bool limitByStatus = this.applyLimitsByGuid(limiter.StatusID);
+
+            List<v_todos> todos = te.v_todos.OrderByDescending(x=>x.added_on).ToList();
+
             List<TodosDTO> lv = new List<TodosDTO>();
-            //foreach (v_todos t in te.v_todos) //.OrderByDescending(x => x.added_on)
             string defaultProjectID_text = limiter.default_project_id.ToString();
             string defaultStatusID_text = limiter.default_status_id.ToString();
-            //foreach (v_todos t in te.v_todos.Where(x=>x.status_id == defaultStatusID_text)) //.OrderByDescending(x => x.added_on)
-            //foreach (v_todos t in te.v_todos.Where(x=>x.project_id == defaultProjectID_text))
-            //foreach (v_todos t in te.v_todos.Where(x => x.project_id == defaultProjectID_text && x.status_id == defaultStatusID_text))
-            foreach (v_todos t in te.v_todos.Where(x => (limiter.ProjectID != null && x.project_id == defaultProjectID_text) && (limiter.StatusID != null && x.status_id == defaultStatusID_text)))
-            //foreach (v_todos t in te.v_todos.Where(x => (limiter.defaultProjectID != null && x.project_id == defaultProjectID_text) && (limiter.defaultStatusID != null && x.status_id == defaultStatusID_text)))
-            //foreach (v_todos t in te.v_todos.Where(x => x.user_id == limiter.default_user_id))
-            //foreach (v_todos t in te.v_todos.OrderByDescending(x=>x.added_on))
+            
+            foreach (v_todos t in te.v_todos.Where(x => (limiter.default_project_id != null && x.project_id == defaultProjectID_text) && (limiter.default_status_id != null && x.status_id == defaultStatusID_text)))
+            //foreach (v_todos t in todos)
             {
+                // Apply project limiter
+                if(limitByProject)
+                {
+                    if(t.project_id != defaultProjectID_text)
+                    {
+                        //continue;
+                    }
+                }
+
+                // Apply status limiter
+                if (limitByStatus)
+                {
+                    if (t.status_id != defaultStatusID_text)
+                    {
+                        //continue;
+                    }
+                }
+
                 TodosDTO todo = new TodosDTO();
-
-                // apply limiters
-
                 todo.project_id = t.project_id;
                 todo.project_name = t.project_name;
                 todo.status_id = t.status_id;

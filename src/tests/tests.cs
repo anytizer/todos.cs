@@ -23,5 +23,11 @@ namespace tests
             string guid2 = string.Format("{0}", guid1);
             Assert.AreEqual(guid1, guid2);
         }
+
+        // test defined default project id as an active user
+        // defined status id
+        // user has project
+        // no project is without user
+        // admin can list all projects
     }
 }

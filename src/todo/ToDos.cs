@@ -39,6 +39,9 @@ namespace todo
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // @todo test if project default IDs exist
+            // project_defaults();
+
             reload();
         }
 
@@ -64,12 +67,14 @@ namespace todo
         private void filterByStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
             /**
-             * Project chosen
+             * Status chosen
              */
             ToolStripMenuItemCustomStatuses ms = sender as ToolStripMenuItemCustomStatuses;
             if (null != ms)
             {
-                this.limiter.default_project_id = ms.Tag.ToString();
+                //this.limiter.default_project_id = ms.Tag.ToString();
+                this.limiter.default_status_id = ms.Tag.ToString();
+
                 reload();
             }
         }
@@ -127,8 +132,9 @@ namespace todo
 
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.limiter.default_project_id = null;
-            this.limiter.default_status_id = null;
+            // case 1: re-read default settings
+            // case 2: dynamically change the user modified values
+            //this.limiter.default_status_id = Guid.Empty.ToString();
 
             reload();
         }
