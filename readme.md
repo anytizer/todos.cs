@@ -1,6 +1,6 @@
-# ToDo.net
+# ToDos.net
 
-ToDo list manager using C# and MySQL
+ToDo list manager using C# and MySQL with [Entity Framework](https://en.wikipedia.org/wiki/Entity_Framework)
 
 
 ## Installation
@@ -12,15 +12,16 @@ ToDo list manager using C# and MySQL
 
 
 ## Features
+
  - Automatic sorting
- - Database based flags
- - Keyboard DELETE key
+ - Database driven flags
+ - ~~Keyboard DELETE key~~
  - Always on Top
  - Color banded display
  - Date time format to YYYY-MM-DD HH:MM:SS
  - ~~Single instance only~~ Window opening
  - Suitable for dual-screen display
- - Suitable for large screens - 27"+
+ - Suitable for large screen - 27"+ display
  - Confirmation Dialogs
 
 

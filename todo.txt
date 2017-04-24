@@ -1,0 +1,1 @@
+When project is selected, load the todos as outer join status
