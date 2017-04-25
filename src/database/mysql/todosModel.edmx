@@ -512,7 +512,7 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           <Property Name="project_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="project_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="is_active" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
-          <Property Name="added_on" Type="DateTime" Nullable="false" />
+          <Property Name="added_on" Type="DateTime" />
           <NavigationProperty Name="todo_projects_todos" Relationship="todosModel.FK_todo_projects_todos_project_id" FromRole="todo_projects" ToRole="todo_projects_todos" />
           <NavigationProperty Name="todo_projects_meta" Relationship="todosModel.todo_projects_meta_ibfk_1" FromRole="todo_projects" ToRole="todo_projects_meta" />
           <NavigationProperty Name="todo_users_projects" Relationship="todosModel.todo_users_projects_ibfk_2" FromRole="todo_projects" ToRole="todo_users_projects" />
@@ -591,7 +591,7 @@ FROM `v_todos` AS `v_todos`</DefiningQuery>
           <Property Name="user_password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="user_salt" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="is_active" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
-          <Property Name="added_on" Type="DateTime" Nullable="false" />
+          <Property Name="added_on" Type="DateTime" />
           <NavigationProperty Name="todo_logs" Relationship="todosModel.todo_logs_ibfk_1" FromRole="todo_users" ToRole="todo_logs" />
           <NavigationProperty Name="todo_todos_statuses" Relationship="todosModel.todo_todos_statuses_ibfk_3" FromRole="todo_users" ToRole="todo_todos_statuses" />
           <NavigationProperty Name="todo_users_projects" Relationship="todosModel.todo_users_projects_ibfk_1" FromRole="todo_users" ToRole="todo_users_projects" />

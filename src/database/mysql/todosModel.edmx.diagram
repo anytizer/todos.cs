@@ -14,8 +14,8 @@
         <EntityTypeShape EntityType="todosModel.todo_todos" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="todosModel.todo_todos_statuses" Width="1.5" PointX="3" PointY="3.25" />
         <EntityTypeShape EntityType="todosModel.todo_users" Width="1.5" PointX="0.75" PointY="7.125" />
-        <EntityTypeShape EntityType="todosModel.todo_users_projects" Width="1.5" PointX="6" PointY="7.625" />
-        <EntityTypeShape EntityType="todosModel.todo_users_todos" Width="1.5" PointX="6" PointY="4.625" />
+        <EntityTypeShape EntityType="todosModel.todo_users_projects" Width="1.5" PointX="6" PointY="4.625" />
+        <EntityTypeShape EntityType="todosModel.todo_users_todos" Width="1.5" PointX="6" PointY="7.625" />
         <EntityTypeShape EntityType="todosModel.v_statuses" Width="1.5" PointX="5.75" PointY="1.75" />
         <EntityTypeShape EntityType="todosModel.v_todos" Width="1.5" PointX="8.75" PointY="1.75" />
         <AssociationConnector Association="todosModel.todo_logs_ibfk_2" />

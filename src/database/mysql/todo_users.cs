@@ -28,7 +28,7 @@ namespace database.mysql
         public string user_password { get; set; }
         public string user_salt { get; set; }
         public string is_active { get; set; }
-        public System.DateTime added_on { get; set; }
+        public Nullable<System.DateTime> added_on { get; set; }
     
         public virtual ICollection<todo_logs> todo_logs { get; set; }
         public virtual ICollection<todo_todos_statuses> todo_todos_statuses { get; set; }

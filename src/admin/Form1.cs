@@ -20,14 +20,11 @@ namespace admin
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //todo_todos todo = new todo_todos();
+            string project_name = this.textBox1.Text;
+            projects p = new projects();
+            p.add(project_name);
 
-            //todosEntities te = new todosEntities();
-            //string project_name = this.textBox1.Text;
-            //projects p = new projects();
-            //p.add(project_name);
-
-            this.Close();
+            this.textBox1.Text = "";
         }
     }
 }
