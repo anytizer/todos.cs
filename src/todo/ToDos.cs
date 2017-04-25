@@ -1,13 +1,8 @@
 ﻿using configurations;
 using database;
-using database.mysql;
 using dtos;
-using settingsmanager;
-using libraries;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Globalization;
 using System.Windows.Forms;
 
 namespace todo

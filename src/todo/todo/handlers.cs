@@ -2,7 +2,6 @@
 using database;
 using dtos;
 using libraries;
-using settingsmanager;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

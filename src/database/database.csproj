@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseAPI.cs" />
+    <Compile Include="identities.cs" />
     <Compile Include="mysql\todosModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -133,7 +134,7 @@
       <Project>{B0A21E12-1844-4A03-BBDD-1E4869404A7A}</Project>
       <Name>dtos</Name>
     </ProjectReference>
-    <ProjectReference Include="..\settings\settingsmanager.csproj">
+    <ProjectReference Include="..\settingsmanager\settingsmanager.csproj">
       <Project>{CA8F300C-719A-4B05-B507-68453A435138}</Project>
       <Name>settingsmanager</Name>
     </ProjectReference>
