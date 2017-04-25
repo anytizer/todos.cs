@@ -2,7 +2,6 @@
 using database.mysql;
 using dtos;
 using dtos.contracts;
-using settingsmanager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +16,7 @@ namespace database
          */
         public Guid delete_status()
         {
-            configurations.identities id = new configurations.identities();
+            identities id = new identities();
             StatusIDs status = new StatusIDs();
             return status.DELETED;
         }
