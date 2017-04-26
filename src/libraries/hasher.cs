@@ -8,7 +8,7 @@ namespace libraries
 {
     public class hasher
     {
-       // private Simple encrypter;
+        //private Simple encrypter;
         public hasher()
         {
             //this.encrypter = new Encrypters.Simple();
@@ -16,14 +16,19 @@ namespace libraries
 
         public string encrypt(string data)
         {
-            // return this.encrypter.encrypt(data);
+            //return this.encrypter.encrypt(data);
             return "";
         }
 
         public string decrypt(string cipher)
         {
-            // return this.encrypter.decrypt(cipher);
+            //return this.encrypter.decrypt(cipher);
             return "";
         }
+    }
+
+    interface IEncrypter
+    {
+
     }
 }

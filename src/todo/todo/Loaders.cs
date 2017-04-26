@@ -79,7 +79,7 @@ namespace todo
 
             libraries.todoer td = new libraries.todoer();
 
-            this.main_menu_projects();
+            this.main_menu_projects(this.limiter);
             this.main_menu_statuses(this.limiter);
 
             this.grid_todos(limiter);

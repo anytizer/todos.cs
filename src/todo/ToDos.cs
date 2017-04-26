@@ -28,15 +28,12 @@ namespace todo
             this.limiter.default_user_id= id.UserID_default.ToString();
 
             api a = new api();
-            this.projects = a.all_proejcts();
+            this.projects = a.all_proejcts(limiter);
             this.statuses = a.all_statuses(limiter);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // @todo test if project default IDs exist
-            // project_defaults();
-
             reload();
         }
 
@@ -77,7 +74,7 @@ namespace todo
         /**
          * Load list of available projects in the menu
          */
-        private void main_menu_projects()
+        private void main_menu_projects(LimiterDTO limiter)
         {
             this.projectsToolStripMenuItem.DropDownItems.Clear();
 

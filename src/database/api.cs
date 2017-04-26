@@ -92,7 +92,7 @@ namespace database
         private bool applyLimitsByGuid(Guid id)
         {
             bool apply = false;
-            if(null != id)
+            if (null != id)
             {
                 if (id != Guid.Empty)
                 {
@@ -114,19 +114,19 @@ namespace database
             bool limitByProject = this.applyLimitsByGuid(limiter.ProjectID);
             bool limitByStatus = this.applyLimitsByGuid(limiter.StatusID);
 
-            List<v_todos> todos = te.v_todos.OrderByDescending(x=>x.added_on).ToList();
+            List<v_todos> todos = te.v_todos.OrderByDescending(x => x.added_on).ToList();
 
             List<TodosDTO> lv = new List<TodosDTO>();
             string defaultProjectID_text = limiter.default_project_id.ToString();
             string defaultStatusID_text = limiter.default_status_id.ToString();
-            
+
             foreach (v_todos t in te.v_todos.Where(x => (limiter.default_project_id != null && x.project_id == defaultProjectID_text) && (limiter.default_status_id != null && x.status_id == defaultStatusID_text)))
             //foreach (v_todos t in todos)
             {
                 // Apply project limiter
-                if(limitByProject)
+                if (limitByProject)
                 {
-                    if(t.project_id != defaultProjectID_text)
+                    if (t.project_id != defaultProjectID_text)
                     {
                         //continue;
                     }

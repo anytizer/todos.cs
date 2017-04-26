@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseAPI.cs" />
+    <Compile Include="ConnectionStrings.cs" />
     <Compile Include="identities.cs" />
     <Compile Include="mysql\todosModel.Context.cs">
       <AutoGen>True</AutoGen>
