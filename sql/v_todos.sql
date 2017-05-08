@@ -11,7 +11,7 @@ SELECT
 	s.status_id, s.status_shortname status_name,
 	ts.added_on, t.issue_number, t.todo_text
 FROM todo_todos t
-INNER JOIN todo_todos_statuses ts ON ts.todo_id = t.todo_id
+INNER JOIN todo_todos_statuses ts ON ts.todo_id = t.todo_id AND ts.is_latest='Y'
 INNER JOIN todo_statuses s ON s.status_id = ts.status_id
 INNER JOIN todo_projects_todos pd ON pd.todo_id = t.todo_id
 INNER JOIN todo_projects p ON p.project_id = pd.project_id
@@ -22,7 +22,13 @@ WHERE
 	AND s.is_active='Y'
 	AND s.in_list='Y'
 	AND ts.is_latest='Y'
+GROUP BY
+	t.todo_id
 ORDER BY
 	s.status_priority,
 	ts.added_on DESC
 ;
+SELECT * FROM v_todos;
+SELECT * FROM todo_todos WHERE todo_id = 'f3e550d5-8e48-41ce-88f4-885f4c10ee78';
+SELECT * FROM todo_todos_statuses WHERE todo_id = 'f3e550d5-8e48-41ce-88f4-885f4c10ee78';
+SELECT * FROM todo_projects_todos WHERE todo_id = 'f3e550d5-8e48-41ce-88f4-885f4c10ee78';

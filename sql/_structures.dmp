@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.19-MariaDB, for Win32 (AMD64)
+-- MySQL dump 10.16  Distrib 10.1.13-MariaDB, for Win32 (AMD64)
 --
--- Host: localhost    Database: localhost
+-- Host: localhost    Database: awesome_todos
 -- ------------------------------------------------------
--- Server version	10.1.19-MariaDB
+-- Server version	10.1.13-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,6 +16,47 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `todo_events`
+--
+
+DROP TABLE IF EXISTS `todo_events`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `todo_events` (
+  `event_id` varchar(255) NOT NULL COMMENT 'Event ID',
+  `event_code` varchar(255) NOT NULL COMMENT 'Event Code (programming)',
+  `event_name` varchar(255) NOT NULL COMMENT 'Event Name',
+  PRIMARY KEY (`event_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `todo_logs`
+--
+
+DROP TABLE IF EXISTS `todo_logs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `todo_logs` (
+  `log_id` varchar(255) NOT NULL COMMENT 'Log ID',
+  `user_id` varchar(255) NOT NULL COMMENT 'User ID',
+  `event_id` varchar(255) NOT NULL COMMENT 'Event ID',
+  `action_name` varchar(255) NOT NULL COMMENT 'Action Name',
+  `table_name` varchar(255) NOT NULL,
+  `field_name` varchar(255) NOT NULL COMMENT 'Field Name',
+  `data_id` varchar(255) NOT NULL COMMENT 'Data or Row ID',
+  `data_old` varchar(255) NOT NULL,
+  `data_new` varchar(255) NOT NULL,
+  `added_on` datetime NOT NULL COMMENT 'Added On',
+  PRIMARY KEY (`log_id`),
+  KEY `user_id` (`user_id`),
+  KEY `event_id` (`event_id`),
+  CONSTRAINT `todo_logs_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `todo_users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `todo_logs_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `todo_events` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `todo_projects`
 --
 
@@ -26,6 +67,7 @@ CREATE TABLE `todo_projects` (
   `project_id` varchar(255) NOT NULL DEFAULT '' COMMENT 'GUID Value',
   `project_name` varchar(255) NOT NULL DEFAULT '' COMMENT 'Project Name',
   `is_active` enum('N','Y') NOT NULL DEFAULT 'N' COMMENT 'Is active?',
+  `added_on` datetime NOT NULL COMMENT 'Added On',
   PRIMARY KEY (`project_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -143,6 +185,7 @@ CREATE TABLE `todo_users` (
   `user_password` varchar(255) NOT NULL DEFAULT '' COMMENT 'User Password',
   `user_salt` varchar(255) NOT NULL DEFAULT '' COMMENT 'Password Salt',
   `is_active` enum('N','Y') NOT NULL DEFAULT 'N' COMMENT 'Active user?',
+  `added_on` datetime NOT NULL COMMENT 'Added On',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `username_key` (`user_username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -239,7 +282,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013 DEFINER=`awesome`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `v_statuses` AS select `u`.`user_id` AS `user_id`,`s`.`status_name` AS `status_name`,count(`s`.`status_id`) AS `total` from ((((((`todo_todos` `t` join `todo_todos_statuses` `ts` on((`ts`.`todo_id` = `t`.`todo_id`))) join `todo_statuses` `s` on((`s`.`status_id` = `ts`.`status_id`))) join `todo_projects_todos` `pd` on((`pd`.`todo_id` = `t`.`todo_id`))) join `todo_projects` `p` on((`p`.`project_id` = `pd`.`project_id`))) join `todo_users_projects` `up` on((`p`.`project_id` = `up`.`project_id`))) join `todo_users` `u` on((`u`.`user_id` = `up`.`user_id`))) where ((`t`.`is_active` = 'Y') and (`s`.`is_active` = 'Y') and (`s`.`in_list` = 'Y') and (`ts`.`is_latest` = 'Y')) group by `s`.`status_id` order by `s`.`status_priority` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -273,4 +316,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-20  9:34:47
+-- Dump completed on 2017-04-23 22:29:05
