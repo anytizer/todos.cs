@@ -32,14 +32,10 @@ namespace todo
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ToDos));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ToDoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.issue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.project = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.todo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.SaveButton = new System.Windows.Forms.Button();
             this.onTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,39 +43,45 @@ namespace todo
             this.projectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.filterByStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToDoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.issue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.project = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.todo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-this.ToDoID,
-this.date,
-this.issue,
-this.project,
-this.status,
-this.todo});
-            this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToOrderColumns = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
-            this.dataGridView1.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black;
-            this.dataGridView1.AreAllCellsSelected(false);
-            this.dataGridView1.BackgroundColor = Color.LightGray;
-            this.dataGridView1.BorderStyle = BorderStyle.Fixed3D;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Beige;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.LightGray;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.DefaultCellStyle.BackColor = Color.White;
-            this.dataGridView1.DefaultCellStyle.ForeColor = Color.Black;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ToDoID,
+            this.date,
+            this.issue,
+            this.project,
+            this.status,
+            this.todo});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridView1.Location = new System.Drawing.Point(12, 65);
-            this.dataGridView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseClick);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -89,52 +91,7 @@ this.todo});
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(895, 569);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // ToDoID
-            // 
-            this.ToDoID.Frozen = true;
-            this.ToDoID.HeaderText = "ToDo ID";
-            this.ToDoID.Name = "ToDoID";
-            this.ToDoID.ReadOnly = true;
-            this.ToDoID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ToDoID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ToDoID.Visible = false;
-            // 
-            // date
-            // 
-            dataGridViewCellStyle1.Format = "yyyy-MM-dd HH:mm:ss";
-            this.date.DefaultCellStyle = dataGridViewCellStyle1;
-            this.date.Name = "date";
-            this.date.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.date.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.date.Width = 110;
-            // 
-            // issue
-            // 
-            this.issue.HeaderText = "Issue #";
-            this.issue.Name = "issue";
-            this.issue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.issue.Width = 80;
-            // 
-            // project
-            // 
-            this.project.HeaderText = "Project";
-            this.project.Name = "project";
-            this.project.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // status
-            // 
-            this.status.HeaderText = "Status";
-            this.status.Name = "status";
-            this.status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.status.Width = 90;
-            // 
-            // todo
-            // 
-            this.todo.HeaderText = "Todo Text";
-            this.todo.Name = "todo";
-            this.todo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.todo.Width = 495;
+            this.dataGridView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseClick);
             // 
             // textBox1
             // 
@@ -195,6 +152,58 @@ this.todo});
             this.filterByStatusToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
             this.filterByStatusToolStripMenuItem.Text = "Filter by Status";
             // 
+            // ToDoID
+            // 
+            this.ToDoID.Frozen = true;
+            this.ToDoID.HeaderText = "ToDo ID";
+            this.ToDoID.Name = "ToDoID";
+            this.ToDoID.ReadOnly = true;
+            this.ToDoID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ToDoID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ToDoID.Visible = false;
+            // 
+            // date
+            // 
+            dataGridViewCellStyle2.Format = "yyyy-MM-dd HH:mm:ss";
+            this.date.DefaultCellStyle = dataGridViewCellStyle2;
+            this.date.HeaderText = "Date/Time";
+            this.date.Name = "date";
+            this.date.ReadOnly = true;
+            this.date.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.date.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.date.Width = 110;
+            // 
+            // issue
+            // 
+            this.issue.HeaderText = "Issue #";
+            this.issue.Name = "issue";
+            this.issue.ReadOnly = true;
+            this.issue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.issue.Width = 80;
+            // 
+            // project
+            // 
+            this.project.HeaderText = "Project";
+            this.project.Name = "project";
+            this.project.ReadOnly = true;
+            this.project.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // status
+            // 
+            this.status.HeaderText = "Status";
+            this.status.Name = "status";
+            this.status.ReadOnly = true;
+            this.status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.status.Width = 90;
+            // 
+            // todo
+            // 
+            this.todo.HeaderText = "Todo Text";
+            this.todo.Name = "todo";
+            this.todo.ReadOnly = true;
+            this.todo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.todo.Width = 495;
+            // 
             // ToDos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -227,17 +236,17 @@ this.todo});
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button SaveButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ToDoID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn issue;
-        private System.Windows.Forms.DataGridViewTextBoxColumn project;
-        private System.Windows.Forms.DataGridViewTextBoxColumn status;
-        private System.Windows.Forms.DataGridViewTextBoxColumn todo;
         private ToolStripMenuItem onTopToolStripMenuItem;
         private ToolStripMenuItem refreshToolStripMenuItem;
         private ToolStripMenuItem projectsToolStripMenuItem;
         private MenuStrip mainMenu;
         private ToolStripMenuItem filterByStatusToolStripMenuItem;
+        private DataGridViewTextBoxColumn ToDoID;
+        private DataGridViewTextBoxColumn date;
+        private DataGridViewTextBoxColumn issue;
+        private DataGridViewTextBoxColumn project;
+        private DataGridViewTextBoxColumn status;
+        private DataGridViewTextBoxColumn todo;
     }
 }
 

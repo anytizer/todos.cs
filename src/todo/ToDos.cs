@@ -25,7 +25,7 @@ namespace todo
             this.limiter = new LimiterDTO();
             this.limiter.default_project_id = id.ProjectID_default.ToString();
             this.limiter.default_status_id = id.status_new.ToString();
-            this.limiter.default_user_id= id.UserID_default.ToString();
+            this.limiter.default_user_id = id.UserID_default.ToString();
 
             api a = new api();
             this.projects = a.all_proejcts(limiter);
